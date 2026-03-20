@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skill Matrix - Night Shift (DEBUG)</title>
+    <title>Skill Matrix - Night Shift</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -29,20 +29,6 @@
         .header h1 { font-size: 2.2em; margin-bottom: 8px; }
         .header p { font-size: 1em; opacity: 0.95; }
         .content { padding: 30px; }
-
-        .debug-section {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            border-left: 5px solid #dc3545;
-            color: white;
-        }
-        .debug-section h3 {
-            color: white;
-            margin-bottom: 10px;
-            font-size: 1.3em;
-        }
 
         .shift-info {
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
@@ -255,17 +241,12 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🌙 Skill Matrix - Night Shift (DEBUG)</h1>
+            <h1>🌙 Skill Matrix - Night Shift</h1>
             <p>Configuration des équipes et compétences | 21h00 - 5h00</p>
         </div>
 
         <div class="content">
             <a href="index.html" class="back-link">← Retour à l'accueil</a>
-
-            <div class="debug-section">
-                <h3>🔍 MODE DEBUG ACTIVÉ</h3>
-                <p>Cette version affiche des alertes à chaque étape pour identifier le problème. Suivez les instructions et notez les messages qui s'affichent.</p>
-            </div>
 
             <div class="alert alert-success" id="alertSuccess">
                 ✅ Données chargées avec succès !
@@ -396,9 +377,6 @@
     <script>
         var skills = ['CS', 'Vareo', 'Finalize', 'Lamination', 'WS', 'IX', 'IJ', 'PS', 'QC'];
 
-        // TEST AU CHARGEMENT
-        alert('🔍 DEBUG: Page chargée ! JavaScript fonctionne !');
-
         function updateCount(skill) {
             var textarea = document.getElementById('skill_' + skill);
             if (!textarea) return;
@@ -439,23 +417,16 @@
         }
 
         function parseConfigData(text) {
-            alert('🔍 DEBUG ÉTAPE 3: Début du parsing...');
-
             var data = {};
             var lines = text.trim().split('
 ');
-
-            alert('🔍 DEBUG: Nombre de lignes trouvées: ' + lines.length);
 
             for (var i = 0; i < lines.length; i++) {
                 var line = lines[i].trim();
                 if (line === '') continue;
 
                 var parts = line.split(':');
-                if (parts.length !== 2) {
-                    alert('⚠️ DEBUG: Ligne ' + (i+1) + ' ignorée (format incorrect): ' + line);
-                    continue;
-                }
+                if (parts.length !== 2) continue;
 
                 var skill = parts.trim();
                 var names = parts.trim().split(',').map(function(name) {
@@ -466,60 +437,39 @@
 
                 if (skills.indexOf(skill) !== -1 && names.length > 0) {
                     data[skill] = names;
-                    alert('✅ DEBUG: ' + skill + ' chargé avec ' + names.length + ' personne(s)');
-                } else {
-                    if (skills.indexOf(skill) === -1) {
-                        alert('⚠️ DEBUG: Compétence inconnue: ' + skill);
-                    }
                 }
             }
 
-            alert('🔍 DEBUG ÉTAPE 4: Parsing terminé ! Nombre de compétences: ' + Object.keys(data).length);
             return data;
         }
 
         function loadDataIntoFields(data) {
-            alert('🔍 DEBUG ÉTAPE 5: Chargement dans les champs...');
-
             var hasData = false;
 
             for (var i = 0; i < skills.length; i++) {
                 var skill = skills[i];
                 var textarea = document.getElementById('skill_' + skill);
-                if (!textarea) {
-                    alert('⚠️ DEBUG: Champ ' + skill + ' introuvable !');
-                    continue;
-                }
+                if (!textarea) continue;
 
                 if (data[skill] && data[skill].length > 0) {
                     textarea.value = data[skill].join('
 ');
                     hasData = true;
-                    alert('✅ DEBUG: ' + skill + ' rempli avec ' + data[skill].length + ' personne(s)');
                 } else {
                     textarea.value = '';
                 }
                 updateCount(skill);
             }
 
-            alert('🔍 DEBUG ÉTAPE 6: Chargement terminé ! Données chargées: ' + (hasData ? 'OUI' : 'NON'));
             return hasData;
         }
 
         function loadFromText() {
-            alert('🔍 DEBUG ÉTAPE 1: Bouton "Charger depuis le texte" cliqué !');
-
             var configText = document.getElementById('configText');
-            if (!configText) {
-                alert('❌ DEBUG: Zone de texte introuvable !');
-                return;
-            }
+            if (!configText) return;
 
             var text = configText.value.trim();
-            alert('🔍 DEBUG ÉTAPE 2: Texte récupéré ! Longueur: ' + text.length + ' caractères');
-
             if (text === '') {
-                alert('⚠️ DEBUG: Le texte est vide !');
                 showAlert('warning');
                 return;
             }
@@ -529,67 +479,46 @@
                 var hasData = loadDataIntoFields(data);
 
                 if (hasData) {
-                    alert('✅ DEBUG FINAL: Chargement réussi !');
                     showAlert('success');
                 } else {
-                    alert('⚠️ DEBUG FINAL: Aucune donnée chargée !');
                     showAlert('warning');
                 }
             } catch (e) {
-                alert('❌ DEBUG ERREUR: ' + e.message);
                 showAlert('error');
             }
         }
 
         function loadFromFile() {
-            alert('🔍 DEBUG ÉTAPE 1: Fichier sélectionné !');
-
             var fileInput = document.getElementById('configFile');
-            if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
-                alert('❌ DEBUG: Aucun fichier sélectionné !');
-                return;
-            }
+            if (!fileInput || !fileInput.files || fileInput.files.length === 0) return;
 
             var file = fileInput.files;
-            alert('🔍 DEBUG ÉTAPE 2: Fichier trouvé ! Nom: ' + file.name + ', Taille: ' + file.size + ' octets');
-
             var reader = new FileReader();
 
             reader.onload = function(e) {
-                alert('🔍 DEBUG ÉTAPE 3: Fichier lu avec succès !');
-
                 try {
                     var text = e.target.result;
-                    alert('🔍 DEBUG: Contenu du fichier récupéré ! Longueur: ' + text.length + ' caractères');
-
                     var data = parseConfigData(text);
                     var hasData = loadDataIntoFields(data);
 
                     if (hasData) {
-                        alert('✅ DEBUG FINAL: Chargement réussi !');
                         showAlert('success');
                     } else {
-                        alert('⚠️ DEBUG FINAL: Aucune donnée chargée !');
                         showAlert('warning');
                     }
                 } catch (err) {
-                    alert('❌ DEBUG ERREUR: ' + err.message);
                     showAlert('error');
                 }
             };
 
             reader.onerror = function() {
-                alert('❌ DEBUG: Erreur lors de la lecture du fichier !');
                 showAlert('error');
             };
 
-            alert('🔍 DEBUG: Début de la lecture du fichier...');
             reader.readAsText(file);
         }
 
         function goToStaffing() {
-            alert('🔍 DEBUG: Bouton "Aller au Staffing" cliqué !');
-
             var data = {};
             var hasData = false;
 
@@ -613,7 +542,6 @@
             }
 
             if (!hasData) {
-                alert('⚠️ DEBUG: Aucune donnée à envoyer !');
                 showAlert('warning');
                 return;
             }
@@ -623,10 +551,7 @@
                 params.push(key + '=' + encodeURIComponent(data[key]));
             }
 
-            var url = 'staffing_night.html?' + params.join('&');
-            alert('🔍 DEBUG: Redirection vers: ' + url);
-
-            window.location.href = url;
+            window.location.href = 'staffing_night.html?' + params.join('&');
         }
 
         function resetForm() {

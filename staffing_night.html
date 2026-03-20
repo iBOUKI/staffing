@@ -1,0 +1,1428 @@
+<!staffing html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staffing Night Shift</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            padding: 15px;
+            min-height: 100vh;
+            font-size: 13px;
+        }
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 18px;
+            text-align: center;
+        }
+        .header h1 { font-size: 1.8em; margin-bottom: 5px; }
+        .header p { font-size: 0.9em; opacity: 0.9; }
+        .content { padding: 18px; }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #43e97b;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .back-link:hover {
+            color: #38f9d7;
+            transform: translateX(-5px);
+        }
+
+        .shift-info {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            border-left: 5px solid #43e97b;
+        }
+        .shift-info h3 {
+            color: #43e97b;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        .shift-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+        }
+        .shift-info-item {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid #43e97b;
+            text-align: center;
+        }
+        .shift-info-item strong {
+            display: block;
+            color: #333;
+            font-size: 0.75em;
+            margin-bottom: 5px;
+        }
+        .shift-info-item span {
+            color: #43e97b;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px;
+            margin-bottom: 18px;
+            padding: 14px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 10px;
+            border-left: 5px solid #4472C4;
+        }
+        .dashboard-card {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid #4472C4;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .dashboard-card h3 {
+            color: #4472C4;
+            font-size: 0.7em;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .dashboard-card .value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+        }
+        .dashboard-card .label {
+            font-size: 0.65em;
+            color: #666;
+            margin-top: 3px;
+        }
+        .dashboard-card select, .dashboard-card input {
+            width: 100%;
+            padding: 5px;
+            border: 2px solid #4472C4;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .section {
+            margin-bottom: 18px;
+            padding: 14px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+        .checkbox-item:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        .checkbox-item.absent {
+            background: #ffebee;
+            border-color: #ef5350;
+        }
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+        .checkbox-item label {
+            cursor: pointer;
+            margin: 0;
+            font-weight: 500;
+            font-size: 0.8em;
+        }
+
+        .form-group { margin-bottom: 10px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.8em;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 7px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.85em;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .wip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .wip-card {
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid #4472C4;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .wip-card h3 {
+            color: #4472C4;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .volume-fait-section {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 14px;
+            border-radius: 10px;
+            border-left: 5px solid #70AD47;
+            margin-bottom: 18px;
+        }
+        .volume-fait-section h3 {
+            color: #70AD47;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+        .volume-fait-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+        }
+        .volume-fait-card {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid #70AD47;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .volume-fait-card label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 0.75em;
+        }
+        .volume-fait-card input {
+            width: 100%;
+            padding: 6px;
+            border: 2px solid #70AD47;
+            border-radius: 5px;
+            font-size: 0.95em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 9px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            margin: 7px;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        .btn-secondary { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .btn-success { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .btn-move { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .btn-swap { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
+        .btn-add { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .btn-delete { background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%); }
+
+        #results { display: none; }
+
+        .planning-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 15px;
+        }
+        .planning-section {
+            background: white;
+            border-radius: 10px;
+            padding: 14px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .planning-section h3 {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            color: white;
+            text-align: center;
+            font-size: 0.95em;
+        }
+        .planning-section.direct h3 { background: #4472C4; }
+        .planning-section.indirect h3 { background: #FFC000; color: #333; }
+
+        .planning-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            font-size: 0.8em;
+        }
+        .planning-table th {
+            background: #E7E6E6;
+            color: #333;
+            padding: 7px;
+            text-align: left;
+            font-weight: 600;
+            border: 1px solid #ddd;
+            font-size: 0.75em;
+        }
+        .planning-table td {
+            padding: 7px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .planning-table td:hover { background: #f0f0f0; }
+        .planning-table tr:hover { background: #f8f9fa; }
+
+        .process-vareo { background: #D9E1F2 !important; }
+        .process-cs { background: #E2EFDA !important; }
+        .process-finalize { background: #FCE4D6 !important; }
+        .process-lamination { background: #DDEBF7 !important; }
+        .process-ws { background: #E2EFDA !important; }
+        .process-ix { background: #E2F0D9 !important; }
+        .process-fixed { background: #FFE6E6 !important; }
+        .process-qc { background: #FFF3CD !important; }
+
+        .person-cell {
+            cursor: pointer;
+            padding: 2px 6px;
+            margin: 2px;
+            background: #70AD47;
+            color: white;
+            border-radius: 4px;
+            display: inline-block;
+            transition: all 0.3s;
+            font-size: 0.75em;
+        }
+        .person-cell:hover {
+            background: #507E32;
+            transform: scale(1.05);
+        }
+        .person-selected { background: #C00000 !important; }
+
+        .login-badge {
+            display: inline-block;
+            padding: 2px 5px;
+            background: #4472C4;
+            color: white;
+            border-radius: 3px;
+            font-size: 0.65em;
+            margin-right: 4px;
+        }
+
+        .add-modal, .move-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .add-modal.active, .move-modal.active { display: flex; }
+        .add-content, .move-content {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            max-width: 420px;
+            width: 90%;
+        }
+        .add-content h3, .move-content h3 {
+            color: #667eea;
+            margin-bottom: 14px;
+            font-size: 1.1em;
+        }
+        .add-content select, .move-content select {
+            width: 100%;
+            padding: 7px;
+            margin-bottom: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.85em;
+        }
+
+        .alert {
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 2px solid #ffeaa7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌙 Staffing Night Shift</h1>
+            <p>21h00 - 5h00 | Durée effective: 6h50 (6.83h) | 3 périodes</p>
+        </div>
+
+        <div class="content">
+            <a href="index.html" class="back-link">← Retour à l'accueil</a>
+            <a href="skill_matrix_night.html" class="back-link" style="margin-left: 15px;">📋 Modifier la Skill Matrix</a>
+
+            <div class="alert alert-warning" id="alertNoSkillMatrix">
+                ⚠️ Aucune Skill Matrix trouvée ! Veuillez d'abord configurer la Skill Matrix Night Shift.
+            </div>
+
+            <div class="shift-info">
+                <h3>📊 Informations du Shift Night</h3>
+                <div class="shift-info-grid">
+                    <div class="shift-info-item">
+                        <strong>Horaires</strong>
+                        <span>21h00 - 5h00</span>
+                    </div>
+                    <div class="shift-info-item">
+                        <strong>Durée totale</strong>
+                        <span>8h00</span>
+                    </div>
+                    <div class="shift-info-item">
+                        <strong>Pauses</strong>
+                        <span>1h10 total</span>
+                    </div>
+                    <div class="shift-info-item">
+                        <strong>Durée effective</strong>
+                        <span>6h50 (6.83h)</span>
+                    </div>
+                    <div class="shift-info-item">
+                        <strong>Équipe chargée</strong>
+                        <span id="equipeCount">0 pers</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard">
+                <div class="dashboard-card">
+                    <h3>📊 Plan S&OP</h3>
+                    <input type="number" id="planSOP" placeholder="Ex: 5000" min="0">
+                    <div class="label">livres</div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>📦 Plan à faire</h3>
+                    <div class="value" id="dashPlanAFaire">0</div>
+                    <div class="label">livres</div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>⚡ TPH</h3>
+                    <select id="dashTPH">
+                        <option value="65">65</option>
+                        <option value="70">70</option>
+                        <option value="75" selected>75</option>
+                        <option value="80">80</option>
+                    </select>
+                    <div class="label">Tasks/Hour</div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>📊 AAS</h3>
+                    <div class="value" id="dashAAS">0/0</div>
+                    <div class="label">dispo/abs</div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>🔄 WIP Total</h3>
+                    <div class="value" id="dashWIP">0</div>
+                    <div class="label">livres</div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>📋 Backlog</h3>
+                    <div class="value" id="dashBacklog">0</div>
+                    <div class="label">Prisma + WIP</div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>⏱️ Temps Écoulé</h3>
+                    <div class="value" id="dashTempsEcoule">0:00</div>
+                    <div class="label">depuis 21h00</div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>🎯 À Produire/h</h3>
+                    <div class="value" id="dashProdH">0</div>
+                    <div class="label">livres/h</div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>✅ Volume FAIT</h3>
+                    <div class="value" id="dashVolumeFait">0</div>
+                    <div class="label">livres</div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>📈 Reste à faire</h3>
+                    <div class="value" id="dashResteAFaire">0</div>
+                    <div class="label">livres</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📋 Gestion des Absences</h2>
+                <p style="margin-bottom: 10px; color: #666; font-size: 0.8em;">Cochez les personnes absentes (affichage en rouge automatique) :</p>
+                <div class="checkbox-grid" id="absenceGrid"></div>
+            </div>
+
+            <div class="section">
+                <h2>📦 WIP par Zone & Plan de Production</h2>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px;">
+                    <div class="wip-grid">
+                        <div class="wip-card">
+                            <h3>📄 CS</h3>
+                            <input type="number" id="wipCS" placeholder="Ex: 500" min="0" value="0">
+                        </div>
+                        <div class="wip-card">
+                            <h3>🔧 Vareo</h3>
+                            <input type="number" id="wipVareo" placeholder="Ex: 2000" min="0" value="0">
+                        </div>
+                        <div class="wip-card">
+                            <h3>✅ Finalize</h3>
+                            <input type="number" id="wipFinalize" placeholder="Ex: 50" min="0" value="0">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="planQuotidien">Plan :</label>
+                            <input type="number" id="planQuotidien" placeholder="Ex: 5000" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="backlogPrisma">Backlog Prisma :</label>
+                            <input type="number" id="backlogPrisma" placeholder="Ex: 2000" min="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="volume-fait-section">
+                <h3>✅ Volume FAIT - Saisie Interactive</h3>
+                <div class="volume-fait-grid">
+                    <div class="volume-fait-card">
+                        <label>Livres Finalisés :</label>
+                        <input type="number" id="livresFinalises" value="0" min="0" placeholder="Ex: 500">
+                    </div>
+                    <div class="volume-fait-card">
+                        <label>Livres Printed :</label>
+                        <input type="number" id="livresPrinted" value="0" min="0" placeholder="Ex: 300">
+                    </div>
+                    <div class="volume-fait-card">
+                        <label>Buffer Finalize :</label>
+                        <input type="number" id="bufferFinalize" value="0" min="0" placeholder="Ex: 200">
+                    </div>
+                    <div class="volume-fait-card">
+                        <label>Reste à imprimer :</label>
+                        <input type="number" id="resteImprimer" value="0" min="0" readonly style="background: #f0f0f0;">
+                    </div>
+                    <div class="volume-fait-card">
+                        <label>Livres déjà imprimés :</label>
+                        <input type="number" id="livresImprimes" value="0" min="0" readonly style="background: #f0f0f0;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📅 Jour de la semaine</h2>
+                <div class="form-group">
+                    <label for="jourSemaine">Sélectionnez le jour :</label>
+                    <select id="jourSemaine">
+                        <option value="Lundi">Lundi</option>
+                        <option value="Mardi">Mardi</option>
+                        <option value="Mercredi">Mercredi</option>
+                        <option value="Jeudi">Jeudi</option>
+                        <option value="Vendredi">Vendredi</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button class="btn" onclick="generatePlanning()">🚀 Générer le Planning</button>
+                <button class="btn btn-secondary" onclick="resetForm()">🔄 Réinitialiser</button>
+            </div>
+
+            <div id="results">
+                <div class="section">
+                    <h2>✅ Planning Généré - Night Shift</h2>
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <button class="btn btn-add" onclick="activateAddMode()">➕ Ajouter</button>
+                        <button class="btn btn-delete" onclick="activateDeleteMode()">🗑️ Effacer</button>
+                        <button class="btn btn-swap" onclick="activateSwapMode()">🔄 Swap</button>
+                        <button class="btn btn-move" onclick="activateMoveMode()">➡️ Déplacer</button>
+                        <p style="color: #666; margin-top: 8px; font-size: 0.8em;">Ajouter : Cliquez sur cellule vide | Effacer : Cliquez sur personne | Swap : Échangez 2 personnes | Déplacer : Déplacez 1 personne</p>
+                    </div>
+
+                    <div class="planning-container">
+                        <div class="planning-section direct">
+                            <h3>🔵 DIRECT - Production Principale</h3>
+                            <table class="planning-table" id="planningTableDirect"></table>
+                        </div>
+
+                        <div class="planning-section indirect">
+                            <h3>🟡 INDIRECT - Support</h3>
+                            <table class="planning-table" id="planningTableIndirect"></table>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 15px; text-align: center;">
+                        <button class="btn btn-success" onclick="savePlanning()">💾 Sauvegarder</button>
+                        <button class="btn btn-secondary" onclick="exportPDF()">📄 Export PDF</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" style="background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); border-left: 5px solid #FFC000;">
+                <h2 style="color: #FFC000;">🖨️ Gestion des Imprimantes - Statuts Colorés</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 10px;">
+                    <div style="background: white; padding: 12px; border-radius: 10px; border: 2px solid #FFC000; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <h4 style="color: #FFC000; margin-bottom: 10px; font-size: 0.9em; display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 1.2em;">🖨️</span> INKJET (IJ)
+                        </h4>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; padding: 6px; border-radius: 5px; font-size: 0.8em; background: #d4edda; border-left: 3px solid #28a745;">
+                            <label style="font-weight: 600; color: #333; flex: 1; font-size: 0.75em;">IJ 1 :</label>
+                            <input type="radio" name="ij1" value="ok" checked onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #28a745; font-weight: bold;">✓ OK</span>
+                            <input type="radio" name="ij1" value="ko" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #dc3545; font-weight: bold;">✗ KO</span>
+                            <input type="radio" name="ij1" value="maintenance" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #ffc107; font-weight: bold;">🔧 Maint.</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; padding: 6px; border-radius: 5px; font-size: 0.8em; background: #d4edda; border-left: 3px solid #28a745;">
+                            <label style="font-weight: 600; color: #333; flex: 1; font-size: 0.75em;">IJ 2 :</label>
+                            <input type="radio" name="ij2" value="ok" checked onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #28a745; font-weight: bold;">✓ OK</span>
+                            <input type="radio" name="ij2" value="ko" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #dc3545; font-weight: bold;">✗ KO</span>
+                            <input type="radio" name="ij2" value="maintenance" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #ffc107; font-weight: bold;">🔧 Maint.</span>
+                        </div>
+                        <label style="display: block; margin-top: 10px; font-weight: 600; color: #333; font-size: 0.75em;">Production/h :</label>
+                        <input type="number" style="width: 100%; padding: 8px; border: 2px solid #FFC000
+; border-radius: 5px; font-size: 1em; font-weight: bold; text-align: center; margin-top: 6px;" id="ijProduction" value="500" min="0" max="999" placeholder="Ex: 500">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #FFF9E6; border-radius: 5px; margin-top: 8px;">
+                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total/h :</span>
+                            <span style="font-size: 1.1em; font-weight: bold; color: #FFC000;" id="ijTotalH">1000</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #FFF9E6; border-radius: 5px; margin-top: 6px;">
+                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total shift :</span>
+                            <span style="font-size: 1.1em; font-weight: bold; color: #FFC000;" id="ijTotalShift">6830</span>
+                        </div>
+                    </div>
+
+                    <div style="background: white; padding: 12px; border-radius: 10px; border: 2px solid #FFC000; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <h4 style="color: #FFC000; margin-bottom: 10px; font-size: 0.9em; display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 1.2em;">⚫</span> B&W (11 printers)
+                        </h4>
+                        <div id="bwPrintersContainer"></div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #FFF9E6; border-radius: 5px; margin-top: 8px;">
+                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total/h :</span>
+                            <span style="font-size: 1.1em; font-weight: bold; color: #FFC000;" id="bwTotalH">0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #FFF9E6; border-radius: 5px; margin-top: 6px;">
+                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total shift :</span>
+                            <span style="font-size: 1.1em; font-weight: bold; color: #FFC000;" id="bwTotalShift">0</span>
+                        </div>
+                    </div>
+
+                    <div style="background: white; padding: 12px; border-radius: 10px; border: 2px solid #FFC000; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <h4 style="color: #FFC000; margin-bottom: 10px; font-size: 0.9em; display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 1.2em;">🔵</span> IX
+                        </h4>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; padding: 6px; border-radius: 5px; font-size: 0.8em; background: #d4edda; border-left: 3px solid #28a745;">
+                            <label style="font-weight: 600; color: #333; flex: 1; font-size: 0.75em;">IX 1 :</label>
+                            <input type="radio" name="ix1" value="ok" checked onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #28a745; font-weight: bold;">✓ OK</span>
+                            <input type="radio" name="ix1" value="ko" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #dc3545; font-weight: bold;">✗ KO</span>
+                            <input type="radio" name="ix1" value="maintenance" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #ffc107; font-weight: bold;">🔧 Maint.</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; padding: 6px; border-radius: 5px; font-size: 0.8em; background: #d4edda; border-left: 3px solid #28a745;">
+                            <label style="font-weight: 600; color: #333; flex: 1; font-size: 0.75em;">IX 2 :</label>
+                            <input type="radio" name="ix2" value="ok" checked onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #28a745; font-weight: bold;">✓ OK</span>
+                            <input type="radio" name="ix2" value="ko" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #dc3545; font-weight: bold;">✗ KO</span>
+                            <input type="radio" name="ix2" value="maintenance" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #ffc107; font-weight: bold;">🔧 Maint.</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #FFF9E6; border-radius: 5px; margin-top: 8px;">
+                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total/h :</span>
+                            <span style="font-size: 1.1em; font-weight: bold; color: #FFC000;" id="ixTotalH">300</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #FFF9E6; border-radius: 5px; margin-top: 6px;">
+                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total shift :</span>
+                            <span style="font-size: 1.1em; font-weight: bold; color: #FFC000;" id="ixTotalShift">2049</span>
+                        </div>
+                    </div>
+
+                    <div style="background: white; padding: 12px; border-radius: 10px; border: 2px solid #70AD47; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <h4 style="color: #70AD47; margin-bottom: 10px; font-size: 0.9em; display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 1.2em;">📊</span> Total Impression
+                        </h4>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #E6F4EA; border-radius: 5px; margin-top: 8px;">
+                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total/h :</span>
+                            <span style="font-size: 1.1em; font-weight: bold; color: #70AD47;" id="totalImpressionH">0</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #E6F4EA; border-radius: 5px; margin-top: 6px;">
+                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total shift :</span>
+                            <span style="font-size: 1.1em; font-weight: bold; color: #70AD47;" id="totalImpressionShift">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="add-modal" id="addModal">
+        <div class="add-content">
+            <h3>➕ Ajouter une personne</h3>
+            <p id="addInfo" style="margin-bottom: 12px; color: #666; font-size: 0.8em;"></p>
+            <label>Sélectionnez la personne :</label>
+            <select id="personToAdd">
+                <option value="">-- Sélectionnez --</option>
+            </select>
+            <div style="margin-top: 15px; text-align: center;">
+                <button class="btn" onclick="executeAdd()">✅ Ajouter</button>
+                <button class="btn btn-secondary" onclick="closeAddModal()">❌ Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="move-modal" id="moveModal">
+        <div class="move-content">
+            <h3>🔄 Déplacer une personne</h3>
+            <p id="moveInfo" style="margin-bottom: 12px; color: #666; font-size: 0.8em;"></p>
+            <label>Vers quel poste ?</label>
+            <select id="targetProcess">
+                <option value="">-- Sélectionnez --</option>
+                <option value="CS">CS</option>
+                <option value="Vareo">Vareo</option>
+                <option value="Finalize">Finalize</option>
+                <option value="Lamination">Lamination</option>
+                <option value="WS">WS</option>
+            </select>
+            <label>Quelle période ?</label>
+            <select id="targetPeriode">
+                <option value="0">Période 1 (21h00-23h30)</option>
+                <option value="1">Période 2 (00h10-02h40)</option>
+                <option value="2">Période 3 (03h10-05h00)</option>
+            </select>
+            <div style="margin-top: 15px; text-align: center;">
+                <button class="btn" onclick="executeMove()">✅ Déplacer</button>
+                <button class="btn btn-secondary" onclick="closeMoveModal()">❌ Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const DUREE_SHIFT = 6.83;
+        const DUREE_TRAVAIL_EFFECTIF = 6.83;
+        const capacites = {CS: 220, Vareo: 350, Finalize: 345, BW: 100, IX: 150};
+        const periodes = [
+            { nom: "Période 1", debut: "21h00", fin: "23h30" },
+            { nom: "Période 2", debut: "00h10", fin: "02h40" },
+            { nom: "Période 3", debut: "03h10", fin: "05h00" }
+        ];
+
+        let equipe = [];
+        let formations = {};
+        let currentPlanning = null;
+        let weekHistory = JSON.parse(localStorage.getItem('weekHistory_night')) || {};
+        let swapMode = false, moveMode = false, addMode = false, deleteMode = false;
+        let swapSelection = { first: null, second: null };
+        let moveSelection = null, addSelection = null;
+
+        function loadSkillMatrix() {
+            const saved = localStorage.getItem('skillMatrix_night');
+            if (!saved) {
+                document.getElementById('alertNoSkillMatrix').style.display = 'block';
+                return false;
+            }
+
+            const data = JSON.parse(saved);
+            formations = data;
+
+            const allNames = new Set();
+            Object.values(data).forEach(names => {
+                names.forEach(name => allNames.add(name));
+            });
+            equipe = Array.from(allNames).sort();
+
+            document.getElementById('equipeCount').textContent = `${equipe.length} pers`;
+            console.log('Skill Matrix chargée:', equipe.length, 'personnes');
+            return true;
+        }
+
+        function initBWPrinters() {
+            const container = document.getElementById('bwPrintersContainer');
+            if (!container) return;
+
+            container.innerHTML = '';
+            for (let i = 1; i <= 11; i++) {
+                const div = document.createElement('div');
+                div.className = 'printer-status-bw';
+                div.style.cssText = 'display: flex; align-items: center; gap: 6px; margin-bottom: 6px; padding: 4px; border-radius: 4px; font-size: 0.75em; background: #d4edda; border-left: 3px solid #28a745;';
+                div.innerHTML = `
+                    <label style="font-weight: 600; color: #333; flex: 1; font-size: 0.7em;">BW ${i} :</label>
+                    <input type="radio" name="bw${i}" value="ok" checked onchange="updatePrintersCapacities()" style="width: 16px; height: 16px; cursor: pointer;"> <span style="color: #28a745; font-weight: bold; font-size: 0.8em;">✓</span>
+                    <input type="radio" name="bw${i}" value="ko" onchange="updatePrintersCapacities()" style="width: 16px; height: 16px; cursor: pointer;"> <span style="color: #dc3545; font-weight: bold; font-size: 0.8em;">✗</span>
+                    <input type="radio" name="bw${i}" value="maintenance" onchange="updatePrintersCapacities()" style="width: 16px; height: 16px; cursor: pointer;"> <span style="color: #ffc107; font-weight: bold; font-size: 0.8em;">🔧</span>
+                    <input type="radio" name="bw${i}" value="decommissioned" onchange="updatePrintersCapacities()" style="width: 16px; height: 16px; cursor: pointer;"> <span style="color: #6c757d; font-weight: bold; font-size: 0.8em;">🚫</span>
+                `;
+                container.appendChild(div);
+            }
+        }
+
+        function initAbsenceGrid() {
+            const grid = document.getElementById('absenceGrid');
+            if (!grid || equipe.length === 0) return;
+
+            grid.innerHTML = '';
+            equipe.forEach(personne => {
+                const div = document.createElement('div');
+                div.className = 'checkbox-item';
+                div.id = `checkbox_${personne}`;
+                div.innerHTML = `
+                    <input type="checkbox" id="absent_${personne}" value="${personne}" onchange="updateDashboardAAS(); toggleAbsentStyle('${personne}')">
+                    <label for="absent_${personne}">${personne}</label>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        function toggleAbsentStyle(personne) {
+            const checkbox = document.getElementById(`absent_${personne}`);
+            const checkboxItem = document.getElementById(`checkbox_${personne}`);
+            if (checkbox && checkboxItem) {
+                if (checkbox.checked) {
+                    checkboxItem.classList.add('absent');
+                } else {
+                    checkboxItem.classList.remove('absent');
+                }
+            }
+        }
+
+        function updateDashboardAAS() {
+            const absents = equipe.filter(p => {
+                const checkbox = document.getElementById(`absent_${p}`);
+                return checkbox && checkbox.checked;
+            }).length;
+            const disponibles = equipe.length - absents;
+            document.getElementById('dashAAS').textContent = `${disponibles}/${equipe.length}`;
+            updateResteAFaire();
+        }
+
+        function updateTempsEcoule() {
+            const now = new Date();
+            const shiftStart = new Date();
+            shiftStart.setHours(21, 0, 0, 0);
+            if (now.getHours() < 21) shiftStart.setDate(shiftStart.getDate() - 1);
+            const diff = now - shiftStart;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById('dashTempsEcoule').textContent = `${hours}:${minutes.toString().padStart(2, '0')}`;
+        }
+
+        function updateVolumeFait() {
+            const livresFinalises = parseInt(document.getElementById('livresFinalises').value) || 0;
+            const livresPrinted = parseInt(document.getElementById('livresPrinted').value) || 0;
+            const bufferFinalize = parseInt(document.getElementById('bufferFinalize').value) || 0;
+
+            const volumeFait = livresFinalises + livresPrinted + bufferFinalize;
+            document.getElementById('dashVolumeFait').textContent = volumeFait;
+
+            const livresImprimes = livresFinalises + livresPrinted + bufferFinalize;
+            document.getElementById('livresImprimes').value = livresImprimes;
+
+            const planQuotidien = parseInt(document.getElementById('planQuotidien').value) || 0;
+            const resteImprimer = Math.max(0, planQuotidien - livresImprimes);
+            document.getElementById('resteImprimer').value = resteImprimer;
+
+            const planSOP = parseInt(document.getElementById('planSOP').value) || 0;
+            const planAFaire = Math.max(0, planSOP - volumeFait);
+            document.getElementById('dashPlanAFaire').textContent = planAFaire;
+
+            updateResteAFaire();
+        }
+
+        function updateResteAFaire() {
+            const absents = equipe.filter(p => {
+                const checkbox = document.getElementById(`absent_${p}`);
+                return checkbox && checkbox.checked;
+            }).length;
+            const presents = equipe.length - absents;
+            const tph = parseInt(document.getElementById('dashTPH').value) || 75;
+            const livresFinalises = parseInt(document.getElementById('livresFinalises').value) || 0;
+            const bufferFinalize = parseInt(document.getElementById('bufferFinalize').value) || 0;
+
+            const capaciteTheorique = presents * tph * 6.83 * 0.92;
+            const resteAFaire = Math.max(0, Math.round(capaciteTheorique - (livresFinalises + bufferFinalize)));
+
+            document.getElementById('dashResteAFaire').textContent = resteAFaire;
+        }
+
+        function updatePrintersCapacities() {
+            let ijCount = 0;
+            const ijProduction = parseInt(document.getElementById('ijProduction').value) || 0;
+
+            for (let i = 1; i <= 2; i++) {
+                const status = document.querySelector(`input[name="ij${i}"]:checked`)?.value;
+                if (status === 'ok') ijCount++;
+            }
+
+            const ijTotalH = ijCount * ijProduction;
+            const ijTotalShift = Math.round(ijTotalH * DUREE_SHIFT);
+            document.getElementById('ijTotalH').textContent = ijTotalH;
+            document.getElementById('ijTotalShift').textContent = ijTotalShift;
+
+            let bwCount = 0;
+            for (let i = 1; i <= 11; i++) {
+                const status = document.querySelector(`input[name="bw${i}"]:checked`)?.value;
+                if (status === 'ok') bwCount++;
+
+                const statusDiv = document.querySelector(`input[name="bw${i}"]`)?.closest('.printer-status-bw');
+                if (statusDiv) {
+                    statusDiv.style.background = '#d4edda';
+                    statusDiv.style.borderLeft = '3px solid #28a745';
+
+                    if (status === 'ko') {
+                        statusDiv.style.background = '#f8d7da';
+                        statusDiv.style.borderLeft = '3px solid #dc3545';
+                    } else if (status === 'maintenance') {
+                        statusDiv.style.background = '#fff3cd';
+                        statusDiv.style.borderLeft = '3px solid #ffc107';
+                    } else if (status === 'decommissioned') {
+                        statusDiv.style.background = '#e2e3e5';
+                        statusDiv.style.borderLeft = '3px solid #6c757d';
+                    }
+                }
+            }
+
+            const bwTotalH = bwCount * capacites.BW;
+            const bwTotalShift = Math.round(bwTotalH * DUREE_SHIFT);
+            document.getElementById('bwTotalH').textContent = bwTotalH;
+            document.getElementById('bwTotalShift').textContent = bwTotalShift;
+
+            let ixCount = 0;
+            for (let i = 1; i <= 2; i++) {
+                const status = document.querySelector(`input[name="ix${i}"]:checked`)?.value;
+                if (status === 'ok') ixCount++;
+            }
+
+            const ixTotalH = ixCount * capacites.IX;
+            const ixTotalShift = Math.round(ixTotalH * DUREE_SHIFT);
+            document.getElementById('ixTotalH').textContent = ixTotalH;
+            document.getElementById('ixTotalShift').textContent = ixTotalShift;
+
+            const totalImpressionH = ijTotalH + bwTotalH + ixTotalH;
+            const totalImpressionShift = Math.round(totalImpressionH * DUREE_SHIFT);
+            document.getElementById('totalImpressionH').textContent = totalImpressionH;
+            document.getElementById('totalImpressionShift').textContent = totalImpressionShift;
+        }
+
+        function updateDashboard(plan, wipCS, wipVareo, wipFinalize, backlogPrisma, staffing) {
+            const totalWIP = wipCS + wipVareo + wipFinalize;
+            const volumeFait = parseInt(document.getElementById('dashVolumeFait').textContent) || 0;
+            document.getElementById('dashPlanAFaire').textContent = Math.max(0, plan - volumeFait);
+            document.getElementById('dashWIP').textContent = totalWIP;
+            document.getElementById('dashBacklog').textContent = backlogPrisma + totalWIP;
+            document.getElementById('dashProdH').textContent = Math.round((plan - volumeFait) / DUREE_TRAVAIL_EFFECTIF);
+            updatePrintersCapacities();
+        }
+
+        function calculerStaffingTotal(wipCS, wipVareo, wipFinalize, backlog, plan) {
+            const staffing = {};
+            const details = {};
+
+            const planCS = plan * 0.15;
+            const totalCS = wipCS + backlog + planCS;
+            const besoinCS = totalCS / (capacites.CS * DUREE_SHIFT);
+            staffing.CS = wipCS < 400 ? 1 : Math.min(2, Math.max(1, Math.ceil(besoinCS)));
+            details.CS = {wip: Math.round(totalCS), besoin: besoinCS.toFixed(2), note: wipCS < 400 ? '1 pers (WIP < 400)' : 'Max 2 pers', logins: staffing.CS};
+
+            const totalVareo = wipVareo + plan;
+            const besoinVareo = totalVareo / (capacites.Vareo * DUREE_SHIFT);
+            staffing.Vareo = Math.min(5, Math.max(1, Math.ceil(besoinVareo)));
+            details.Vareo = {wip: totalVareo, besoin: besoinVareo.toFixed(2), logins: staffing.Vareo};
+
+            const totalFinalize = wipFinalize + plan;
+            const besoinFinalize = totalFinalize / (capacites.Finalize * DUREE_SHIFT);
+            staffing.Finalize = Math.min(5, Math.max(2, Math.ceil(besoinFinalize)));
+            details.Finalize = {wip: totalFinalize, besoin: besoinFinalize.toFixed(2), note: 'Min 2 pers', logins: staffing.Finalize};
+
+            staffing.Lamination = 1;
+            staffing.WS = 1;
+            staffing.IX = 1;
+            staffing.IJ = 2;
+            staffing.PS = 1;
+            staffing.QC = 1;
+
+            return { staffing, details };
+        }
+
+        function assignerPostesFixes(absents) {
+            const disponibles = equipe.filter(p => !absents.includes(p));
+            const utilises = new Set();
+            const assignments = {};
+
+            assignments.IJ = (formations.IJ || []).filter(p => disponibles.includes(p)).slice(0, 2);
+            assignments.IJ.forEach(p => utilises.add(p));
+
+            assignments.IX = (formations.IX || []).filter(p => disponibles.includes(p) && !utilises.has(p)).slice(0, 1);
+            assignments.IX.forEach(p => utilises.add(p));
+
+            assignments.PS = (formations.PS || []).filter(p => disponibles.includes(p) && !utilises.has(p)).slice(0, 1);
+            assignments.PS.forEach(p => utilises.add(p));
+
+            assignments.QC = (formations.QC || []).filter(p => disponibles.includes(p) && !utilises.has(p)).slice(0, 1);
+
+            return { assignments, utilises };
+        }
+
+        function assignerPostesRotation(staffing, absents, utilisesFixe, periodeNum, assignmentsPrecedents, toutesLesAffectations) {
+            const disponibles = equipe.filter(p => !absents.includes(p));
+            const utilises = new Set([...utilisesFixe]);
+            const assignments = {};
+
+            if (periodeNum === 1 && assignmentsPrecedents?.QC) {
+                assignmentsPrecedents.QC.forEach(p => utilises.add(p));
+            }
+
+            const personnesQCLibres = periodeNum > 1 && assignmentsPrecedents ? assignmentsPrecedents.QC : [];
+            const processesRotation = ['WS', 'Lamination', 'CS', 'Vareo', 'Finalize'];
+
+            processesRotation.forEach(process => {
+                const besoin = staffing[process];
+                const dejaAffectes = new Set();
+                if (toutesLesAffectations) {
+                    toutesLesAffectations.forEach(periode => {
+                        if (periode.assignments[process]) {
+                            periode.assignments[process].forEach(p => dejaAffectes.add(p));
+                        }
+                    });
+                }
+
+                let candidats = (formations[process] || []).filter(p =>
+                    disponibles.includes(p) && !utilises.has(p) && !dejaAffectes.has(p)
+                );
+
+                if (personnesQCLibres.length > 0 && periodeNum > 1) {
+                    const qcFormes = personnesQCLibres.filter(p =>
+                        (formations[process] || []).includes(p) && !utilises.has(p) && !dejaAffectes.has(p)
+                    );
+                    candidats = [...qcFormes, ...candidats.filter(p => !qcFormes.includes(p))];
+                }
+
+                if (candidats.length < besoin) {
+                    const tousFormes = (formations[process] || []).filter(p => disponibles.includes(p) && !utilises.has(p));
+                    const candidatsAvecScore = tousFormes.map(p => {
+                        let score = 0;
+                        if (toutesLesAffectations) {
+                            toutesLesAffectations.forEach(periode => {
+                                if (periode.assignments[process]?.includes(p)) score++;
+                            });
+                        }
+                        return { personne: p, score };
+                    });
+                    candidatsAvecScore.sort((a, b) => a.score - b.score);
+                    candidats = [...candidats, ...candidatsAvecScore.map(c => c.personne).filter(p => !candidats.includes(p))];
+                }
+
+                assignments[process] = [...new Set(candidats)].slice(0, besoin);
+                assignments[process].forEach(p => utilises.add(p));
+            });
+
+            return assignments;
+        }
+
+        function generatePlanning() {
+            if (equipe.length === 0) {
+                alert('⚠️ Aucune équipe chargée ! Veuillez d\'abord configurer la Skill Matrix Night Shift.');
+                return;
+            }
+
+            const planQuotidien = parseInt(document.getElementById('planQuotidien').value) || 0;
+            const backlogPrisma = parseInt(document.getElementById('backlogPrisma').value) || 0;
+            const wipCS = parseInt(document.getElementById('wipCS').value) || 0;
+            const wipVareo = parseInt(document.getElementById('wipVareo').value) || 0;
+            const wipFinalize = parseInt(document.getElementById('wipFinalize').value) || 0;
+            const jour = document.getElementById('jourSemaine').value;
+
+            if (planQuotidien === 0) {
+                alert('⚠️ Veuillez entrer le plan !');
+                return;
+            }
+
+            const absents = equipe.filter(p => document.getElementById(`absent_${p}`)?.checked);
+
+            const { staffing: staffingTotal, details: calculDetails } = calculerStaffingTotal(wipCS, wipVareo, wipFinalize, backlogPrisma, planQuotidien);
+            const { assignments: assignmentsFixe, utilises: utilisesFixe } = assignerPostesFixes(absents);
+
+            const planningComplet = [];
+            let assignmentsPrecedents = { QC: assignmentsFixe.QC };
+
+            periodes.forEach((periode, index) => {
+                const assignments = {};
+                assignments.IJ = assignmentsFixe.IJ;
+                assignments.IX = assignmentsFixe.IX;
+                assignments.PS = assignmentsFixe.PS;
+                assignments.QC = index === 0 ? assignmentsFixe.QC : [];
+
+                const assignmentsRotation = assignerPostesRotation(staffingTotal, absents, utilisesFixe, index + 1, assignmentsPrecedents, planningComplet);
+                Object.assign(assignments, assignmentsRotation);
+
+                planningComplet.push({ periode, staffing: staffingTotal, assignments });
+                assignmentsPrecedents = assignments;
+            });
+
+            currentPlanning = {jour, date: new Date().toLocaleDateString('fr-FR'), planQuotidien, backlogPrisma, wipCS, wipVareo, wipFinalize, absents, planning: planningComplet, staffing: staffingTotal, details: calculDetails};
+
+            updateDashboard(planQuotidien, wipCS, wipVareo, wipFinalize, backlogPrisma, staffingTotal);
+            afficherResultats(planningComplet, absents, planQuotidien, wipCS, wipVareo, wipFinalize, backlogPrisma, staffingTotal, calculDetails);
+        }
+
+        function afficherResultats(planning, absents, plan, wipCS, wipVareo, wipFinalize, backlog, staffingTotal, calculDetails) {
+            document.getElementById('results').style.display = 'block';
+
+            const tableDirect = document.getElementById('planningTableDirect');
+            let htmlDirect = '<thead><tr><th>Process</th><th>Logins</th>';
+            planning.forEach(p => htmlDirect += `<th>${p.periode.nom}<br>${p.periode.debut}-${p.periode.fin}</th>`);
+            htmlDirect += '</tr></thead><tbody>';
+
+            const processesDirect = ['CS', 'Vareo', 'Finalize'];
+            processesDirect.forEach(process => {
+                const logins = calculDetails[process].logins;
+                htmlDirect += `<tr class="process-${process.toLowerCase()}"><td><strong>${process}</strong></td><td><strong>${logins}L</strong></td>`;
+                planning.forEach((p, periodeIdx) => {
+                    const personnes = p.assignments[process] || [];
+                    const personnesHTML = personnes.map((pers, idx) =>
+                        `<span class="login-badge">L${idx + 1}</span><span class="person-cell" onclick="selectPersonForAction('${pers}', '${process}', ${periodeIdx})">${pers}</span>`
+                    ).join(' ');
+                    htmlDirect += `<td onclick="selectCellForAdd('${process}', ${periodeIdx})">${personnesHTML || '-'}</td>`;
+                });
+                htmlDirect += '</tr>';
+            });
+            htmlDirect += '</tbody>';
+            tableDirect.innerHTML = htmlDirect;
+
+            const tableIndirect = document.getElementById('planningTableIndirect');
+            let htmlIndirect = '<thead><tr><th>Task</th><th>Staff</th>';
+            planning.forEach(p => htmlIndirect += `<th>${p.periode.nom}<br>${p.periode.debut}-${p.periode.fin}</th>`);
+            htmlIndirect += '</tr></thead><tbody>';
+
+            const processesIndirect = ['Lamination', 'IX', 'IJ', 'PS', 'QC', 'WS'];
+            processesIndirect.forEach(process => {
+                let rowClass = '';
+                if (['IJ', 'IX', 'PS'].includes(process)) rowClass = 'class="process-fixed"';
+                else if (process === 'QC') rowClass = 'class="process-qc"';
+                else rowClass = 'class="process-' + process.toLowerCase() + '"';
+
+                htmlIndirect += `<tr ${rowClass}><td><strong>${process}</strong></td><td><strong>${staffingTotal[process]}p</strong></td>`;
+                planning.forEach((p, periodeIdx) => {
+                    const personnes = p.assignments[process] || [];
+                    const personnesHTML = personnes.map(pers =>
+                        `<span class="person-cell" onclick="selectPersonForAction('${pers}', '${process}', ${periodeIdx})">${pers}</span>`
+                    ).join(', ');
+                    htmlIndirect += `<td onclick="selectCellForAdd('${process}', ${periodeIdx})">${personnesHTML || '-'}</td>`;
+                });
+                htmlIndirect += '</tr>';
+            });
+            htmlIndirect += '</tbody>';
+            tableIndirect.innerHTML = htmlIndirect;
+
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function activateAddMode() {
+            addMode = !addMode;
+            swapMode = false;
+            moveMode = false;
+            deleteMode = false;
+            if (addMode) alert('➕ Mode Ajouter activé !');
+            else alert('❌ Mode désactivé.');
+        }
+
+        function activateDeleteMode() {
+            deleteMode = !deleteMode;
+            swapMode = false;
+            moveMode = false;
+            addMode = false;
+            if (deleteMode) alert('🗑️ Mode Effacer activé !');
+            else alert('❌ Mode désactivé.');
+        }
+
+        function activateSwapMode() {
+            swapMode = !swapMode;
+            moveMode = false;
+            addMode = false;
+            deleteMode = false;
+            if (swapMode) {
+                alert('🔄 Mode Swap activé !');
+                swapSelection = { first: null, second: null };
+            } else {
+                alert('❌ Mode désactivé.');
+                swapSelection = { first: null, second: null };
+                document.querySelectorAll('.person-selected').forEach(el => el.classList.remove('person-selected'));
+            }
+        }
+
+        function activateMoveMode() {
+            moveMode = !moveMode;
+            swapMode = false;
+            addMode = false;
+            deleteMode = false;
+            if (moveMode) {
+                alert('➡️ Mode Déplacer activé !');
+                moveSelection = null;
+            } else {
+                alert('❌ Mode désactivé.');
+                moveSelection = null;
+            }
+        }
+
+        function selectCellForAdd(process, periodeIdx) {
+            if (addMode) {
+                addSelection = { process, periodeIdx };
+                const disponibles = equipe.filter(p => !currentPlanning.absents.includes(p));
+                const select = document.getElementById('personToAdd');
+                select.innerHTML = '<option value="">-- Sélectionnez --</option>';
+                disponibles.forEach(p => {
+                    select.innerHTML += `<option value="${p}">${p}</option>`;
+                });
+                document.getElementById('addInfo').textContent = `Ajouter à ${process} (Période ${periodeIdx + 1})`;
+                document.getElementById('addModal').classList.add('active');
+            }
+        }
+
+        function closeAddModal() {
+            document.getElementById('addModal').classList.remove('active');
+            addSelection = null;
+        }
+
+        function executeAdd() {
+            if (!addSelection) return;
+
+            const personToAdd = document.getElementById('personToAdd').value;
+            if (!personToAdd) {
+                alert('⚠️ Sélectionnez une personne !');
+                return;
+            }
+
+            const planning = currentPlanning.planning;
+            const targetAssignments = planning[addSelection.periodeIdx].assignments[addSelection.process];
+
+            if (!targetAssignments.includes(personToAdd)) {
+                targetAssignments.push(personToAdd);
+                alert(`✅ ${personToAdd} ajouté !`);
+            } else {
+                alert(`⚠️ ${personToAdd} déjà présent !`);
+            }
+
+            closeAddModal();
+            afficherResultats(currentPlanning.planning, currentPlanning.absents, currentPlanning.planQuotidien, currentPlanning.wipCS, currentPlanning.wipVareo, currentPlanning.wipFinalize, currentPlanning.backlogPrisma, currentPlanning.staffing, currentPlanning.details);
+            addMode = false;
+        }
+
+        function selectPersonForAction(personne, process, periodeIdx) {
+            if (deleteMode) {
+                const planning = currentPlanning.planning;
+                const assignments = planning[periodeIdx].assignments[process];
+                const idx = assignments.indexOf(personne);
+                if (idx !== -1) {
+                    assignments.splice(idx, 1);
+                    alert(`✅ ${personne} supprimé !`);
+                    afficherResultats(currentPlanning.planning, currentPlanning.absents, currentPlanning.planQuotidien, currentPlanning.wipCS, currentPlanning.wipVareo, currentPlanning.wipFinalize, currentPlanning.backlogPrisma, currentPlanning.staffing, currentPlanning.details);
+                }
+                deleteMode = false;
+            } else if (swapMode) {
+                selectPersonForSwap(personne, process, periodeIdx);
+            } else if (moveMode) {
+                selectPersonForMove(personne, process, periodeIdx);
+            }
+        }
+
+        function selectPersonForSwap(personne, process, periodeIdx) {
+            if (!swapSelection.first) {
+                swapSelection.first = { personne, process, periodeIdx };
+                event.target.classList.add('person-selected');
+                alert(`✅ 1ère sélection : ${personne}`);
+            } else if (!swapSelection.second) {
+                swapSelection.second = { personne, process, periodeIdx };
+                event.target.classList.add('person-selected');
+
+                const first = swapSelection.first;
+                const second = swapSelection.second;
+
+                const planning = currentPlanning.planning;
+                const firstAssignments = planning[first.periodeIdx].assignments[first.process];
+                const secondAssignments = planning[second.periodeIdx].assignments[second.process];
+
+                const firstIdx = firstAssignments.indexOf(first.personne);
+                const secondIdx = secondAssignments.indexOf(second.personne);
+
+                if (firstIdx !== -1 && secondIdx !== -1) {
+                    firstAssignments[firstIdx] = second.personne;
+                    secondAssignments[secondIdx] = first.personne;
+
+                    alert(`✅ Swap : ${first.personne} ↔️ ${second.personne}`);
+
+                    afficherResultats(currentPlanning.planning, currentPlanning.absents, currentPlanning.planQuotidien, currentPlanning.wipCS, currentPlanning.wipVareo, currentPlanning.wipFinalize, currentPlanning.backlogPrisma, currentPlanning.staffing, currentPlanning.details);
+                }
+
+                swapSelection = { first: null, second: null };
+                swapMode = false;
+            }
+        }
+
+        function selectPersonForMove(personne, process, periodeIdx) {
+            moveSelection = { personne, process, periodeIdx };
+            document.getElementById('moveInfo').textContent = `Déplacer ${personne} depuis ${process}`;
+            document.getElementById('moveModal').classList.add('active');
+        }
+
+        function closeMoveModal() {
+            document.getElementById('moveModal').classList.remove('active');
+            moveSelection = null;
+        }
+
+        function executeMove() {
+            if (!moveSelection) return;
+
+            const targetProcess = document.getElementById('targetProcess').value;
+            const targetPeriode = parseInt(document.getElementById('targetPeriode').value);
+
+            if (!targetProcess) {
+                alert('⚠️ Sélectionnez un poste !');
+                return;
+            }
+
+            const planning = currentPlanning.planning;
+            const sourceAssignments = planning[moveSelection.periodeIdx].assignments[moveSelection.process];
+            const targetAssignments = planning[targetPeriode].assignments[targetProcess];
+
+            const sourceIdx = sourceAssignments.indexOf(moveSelection.personne);
+            if (sourceIdx !== -1) {
+                sourceAssignments.splice(sourceIdx, 1);
+            }
+
+            if (!targetAssignments.includes(moveSelection.personne)) {
+                targetAssignments.push(moveSelection.personne);
+            }
+
+            alert(`✅ ${moveSelection.personne} déplacé !`);
+
+            closeMoveModal();
+            afficherResultats(currentPlanning.planning, currentPlanning.absents, currentPlanning.planQuotidien, currentPlanning.wipCS, currentPlanning.wipVareo, currentPlanning.wipFinalize, currentPlanning.backlogPrisma, currentPlanning.staffing, currentPlanning.details);
+
+            moveMode = false;
+        }
+
+        function savePlanning() {
+            if (!currentPlanning) {
+                alert('⚠️ Aucun planning à sauvegarder !');
+                return;
+            }
+            weekHistory[currentPlanning.jour] = currentPlanning;
+            localStorage.setItem('weekHistory_night', JSON.stringify(weekHistory));
+            alert(`✅ Planning du ${currentPlanning.jour} sauvegardé !`);
+        }
+
+        function resetForm() {
+            document.getElementById('planQuotidien').value = '';
+            document.getElementById('backlogPrisma').value = '';
+            document.getElementById('wipCS').value = '0';
+            document.getElementById('wipVareo').value = '0';
+            document.getElementById('wipFinalize').value = '0';
+            document.getElementById('livresFinalises').value = '0';
+            document.getElementById('livresPrinted').value = '0';
+            document.getElementById('bufferFinalize').value = '0';
+            document.getElementById('planSOP').value = '';
+            equipe.forEach(personne => {
+                const checkbox = document.getElementById(`absent_${personne}`);
+                if (checkbox) checkbox.checked = false;
+            });
+            document.getElementById('results').style.display = 'none';
+            currentPlanning = null;
+            updateDashboardAAS();
+            updateVolumeFait();
+        }
+
+        function exportPDF() {
+            alert('📄 Fonction Export PDF en développement !');
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initAll);
+        } else {
+            initAll();
+        }
+
+        function initAll() {
+            console.log('Initializing Night Shift staffing...');
+
+            if (!loadSkillMatrix()) {
+                console.error('Skill Matrix not found!');
+                return;
+            }
+
+            initBWPrinters();
+            initAbsenceGrid();
+            updatePrintersCapacities();
+            updateDashboardAAS();
+            updateVolumeFait();
+            updateTempsEcoule();
+
+            setInterval(updateTempsEcoule, 60000);
+
+            document.getElementById('livresFinalises').addEventListener('input', updateVolumeFait);
+            document.getElementById('livresPrinted').addEventListener('input', updateVolumeFait);
+            document.getElementById('bufferFinalize').addEventListener('input', updateVolumeFait);
+            document.getElementById('planQuotidien').addEventListener('input', updateVolumeFait);
+            document.getElementById('planSOP').addEventListener('input', updateVolumeFait);
+            document.getElementById('ijProduction').addEventListener('input', updatePrintersCapacities);
+            document.getElementById('dashTPH').addEventListener('change', updateResteAFaire);
+
+            console.log('Night Shift staffing initialized!');
+        }
+    </script>
+</body>
+</html>

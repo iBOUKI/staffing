@@ -30,64 +30,17 @@
         .header p { font-size: 1em; opacity: 0.95; }
         .content { padding: 30px; }
 
-        .shift-info {
+        .info-section {
             background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             padding: 20px;
             border-radius: 12px;
             margin-bottom: 30px;
             border-left: 5px solid #43e97b;
         }
-        .shift-info h2 {
+        .info-section h2 {
             color: #43e97b;
             margin-bottom: 12px;
             font-size: 1.5em;
-        }
-
-        .load-section {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            border-left: 5px solid #FFC000;
-        }
-        .load-section h3 {
-            color: #FFC000;
-            margin-bottom: 15px;
-            font-size: 1.4em;
-        }
-        .load-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .load-option {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #FFC000;
-        }
-        .load-option h4 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-        }
-        .load-option textarea {
-            width: 100%;
-            min-height: 150px;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            resize: vertical;
-        }
-        .load-option input[type="file"] {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            margin-bottom: 10px;
         }
 
         .section {
@@ -188,32 +141,6 @@
         .btn-success {
             background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
         }
-        .btn-warning {
-            background: linear-gradient(135deg, #FFC000 0%, #FF8C00 100%);
-        }
-
-        .alert {
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: none;
-            font-weight: bold;
-        }
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 2px solid #c3e6cb;
-        }
-        .alert-warning {
-            background: #fff3cd;
-            color: #856404;
-            border: 2px solid #ffeaa7;
-        }
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 2px solid #f5c6cb;
-        }
 
         .back-link {
             display: inline-block;
@@ -226,15 +153,22 @@
             color: #764ba2;
         }
 
-        .example-format {
+        .instructions {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #FFC000;
+        }
+        .instructions h3 {
+            color: #FFC000;
+            margin-bottom: 10px;
+        }
+        .instructions code {
             background: #f8f9fa;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
             font-family: 'Courier New', monospace;
-            font-size: 0.85em;
-            color: #333;
-            border-left: 3px solid #667eea;
         }
     </style>
 </head>
@@ -248,55 +182,20 @@
         <div class="content">
             <a href="index.html" class="back-link">← Retour à l'accueil</a>
 
-            <div class="alert alert-success" id="alertSuccess">
-                ✅ Données chargées avec succès !
+            <div class="instructions">
+                <h3>📝 Comment modifier les noms</h3>
+                <p style="color: #666; margin-top: 10px;">
+                    <strong>1.</strong> Ouvrez ce fichier avec Notepad<br>
+                    <strong>2.</strong> Cherchez (Ctrl+F) : <code>var equipeConfig</code><br>
+                    <strong>3.</strong> Modifiez les noms entre guillemets<br>
+                    <strong>4.</strong> Sauvegardez (Ctrl+S)<br>
+                    <strong>5.</strong> Rechargez la page (F5)
+                </p>
             </div>
 
-            <div class="alert alert-warning" id="alertWarning">
-                ⚠️ Veuillez remplir au moins une compétence.
-            </div>
-
-            <div class="alert alert-error" id="alertError">
-                ❌ Erreur lors du chargement des données !
-            </div>
-
-            <div class="shift-info">
+            <div class="info-section">
                 <h2>📊 Informations du Shift</h2>
                 <p style="color: #666; margin-top: 10px;">Horaires: 21h00 - 5h00 | Durée: 8h00 | Pauses: 1h10 | Effectif: 6h50 (6.83h) | 3 périodes</p>
-            </div>
-
-            <div class="load-section">
-                <h3>📁 Charger la configuration</h3>
-                <p style="color: #666; margin-bottom: 15px;">Choisissez l'une des deux méthodes pour charger vos données :</p>
-
-                <div class="load-options">
-                    <div class="load-option">
-                        <h4>📋 Option 1 : Copier-coller</h4>
-                        <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;">Copiez le contenu de votre fichier config_night.txt et collez-le ci-dessous :</p>
-                        <textarea id="configText" placeholder="Collez ici le contenu de config_night.txt..."></textarea>
-                        <div class="example-format">
-                            <strong>Format attendu :</strong><br>
-                            CS:Mariama,Sophie,Zola<br>
-                            Vareo:Ba,Elodie,Koumba<br>
-                            Finalize:Saidou,Oussmane<br>
-                            ...
-                        </div>
-                        <button class="btn btn-warning" onclick="loadFromText()" style="margin-top: 15px; width: 100%;">📋 Charger depuis le texte</button>
-                    </div>
-
-                    <div class="load-option">
-                        <h4>📁 Option 2 : Upload de fichier</h4>
-                        <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;">Sélectionnez votre fichier config_night.txt :</p>
-                        <input type="file" id="configFile" accept=".txt" onchange="loadFromFile()">
-                        <div class="example-format">
-                            <strong>Fichier attendu :</strong><br>
-                            config_night.txt<br>
-                            Format texte simple (.txt)<br>
-                            Une ligne par compétence
-                        </div>
-                        <p style="color: #666; font-size: 0.85em; margin-top: 10px;">💡 Le fichier sera chargé automatiquement après sélection</p>
-                    </div>
-                </div>
             </div>
 
             <div class="section direct-section">
@@ -375,7 +274,45 @@
     </div>
 
     <script>
+        // ========================================
+        // CONFIGURATION DE L'ÉQUIPE - MODIFIABLE
+        // ========================================
+        var equipeConfig = {
+            CS: ["Mariama", "Sophie", "Zola", "Ba", "Elodie", "Koumba", "Irene", "Ange", "Saidou", "Oussmane", "Abdoul", "Anouar", "Herve", "Diallo"],
+            Vareo: ["Mariama", "Hadari", "Sylla", "Thibaud", "Laurent", "Elodie", "Sophie", "Koumba", "Martine", "Zola", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Anouar", "Herve", "Diallo"],
+            Finalize: ["Mariama", "Hadari", "Sylla", "Thibaud", "Laurent", "Elodie", "Sophie", "Koumba", "Martine", "Zola", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Anouar", "Herve", "Diallo"],
+            Lamination: ["Mariama", "Hadari", "Sylla", "Thibaud", "Laurent", "Elodie", "Sophie", "Koumba", "Martine", "Zola", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Ange", "Anouar", "Herve", "Diallo"],
+            WS: ["Mariama", "Hadari", "Sylla", "Thibaud", "Laurent", "Elodie", "Sophie", "Koumba", "Martine", "Zola", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Ange", "Anouar", "Herve", "Diallo"],
+            IX: ["Mariama", "Sophie", "Martine"],
+            IJ: ["Hadari", "Sylla", "Shada"],
+            PS: ["Sophie", "Thibaud", "Laurent"],
+            QC: ["Zola", "Mariama", "Elodie", "Sophie", "Koumba", "Martine", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Ange", "Anouar", "Herve", "Diallo"]
+        };
+
         var skills = ['CS', 'Vareo', 'Finalize', 'Lamination', 'WS', 'IX', 'IJ', 'PS', 'QC'];
+
+        // ========================================
+        // CHARGEMENT AUTOMATIQUE AU DÉMARRAGE
+        // ========================================
+        window.onload = function() {
+            loadEquipeConfig();
+        };
+
+        function loadEquipeConfig() {
+            for (var i = 0; i < skills.length; i++) {
+                var skill = skills[i];
+                var textarea = document.getElementById('skill_' + skill);
+                if (!textarea) continue;
+
+                if (equipeConfig[skill] && equipeConfig[skill].length > 0) {
+                    textarea.value = equipeConfig[skill].join('
+');
+                } else {
+                    textarea.value = '';
+                }
+                updateCount(skill);
+            }
+        }
 
         function updateCount(skill) {
             var textarea = document.getElementById('skill_' + skill);
@@ -392,130 +329,6 @@
             if (countElement) {
                 countElement.textContent = count + ' personne(s)';
             }
-        }
-
-        function showAlert(type) {
-            var alertSuccess = document.getElementById('alertSuccess');
-            var alertWarning = document.getElementById('alertWarning');
-            var alertError = document.getElementById('alertError');
-
-            if (alertSuccess) alertSuccess.style.display = 'none';
-            if (alertWarning) alertWarning.style.display = 'none';
-            if (alertError) alertError.style.display = 'none';
-
-            var targetAlert = null;
-            if (type === 'success') targetAlert = alertSuccess;
-            else if (type === 'warning') targetAlert = alertWarning;
-            else if (type === 'error') targetAlert = alertError;
-
-            if (targetAlert) {
-                targetAlert.style.display = 'block';
-                setTimeout(function() {
-                    targetAlert.style.display = 'none';
-                }, 3000);
-            }
-        }
-
-        function parseConfigData(text) {
-            var data = {};
-            var lines = text.trim().split('
-');
-
-            for (var i = 0; i < lines.length; i++) {
-                var line = lines[i].trim();
-                if (line === '') continue;
-
-                var parts = line.split(':');
-                if (parts.length !== 2) continue;
-
-                var skill = parts.trim();
-                var names = parts.trim().split(',').map(function(name) {
-                    return name.trim();
-                }).filter(function(name) {
-                    return name !== '';
-                });
-
-                if (skills.indexOf(skill) !== -1 && names.length > 0) {
-                    data[skill] = names;
-                }
-            }
-
-            return data;
-        }
-
-        function loadDataIntoFields(data) {
-            var hasData = false;
-
-            for (var i = 0; i < skills.length; i++) {
-                var skill = skills[i];
-                var textarea = document.getElementById('skill_' + skill);
-                if (!textarea) continue;
-
-                if (data[skill] && data[skill].length > 0) {
-                    textarea.value = data[skill].join('
-');
-                    hasData = true;
-                } else {
-                    textarea.value = '';
-                }
-                updateCount(skill);
-            }
-
-            return hasData;
-        }
-
-        function loadFromText() {
-            var configText = document.getElementById('configText');
-            if (!configText) return;
-
-            var text = configText.value.trim();
-            if (text === '') {
-                showAlert('warning');
-                return;
-            }
-
-            try {
-                var data = parseConfigData(text);
-                var hasData = loadDataIntoFields(data);
-
-                if (hasData) {
-                    showAlert('success');
-                } else {
-                    showAlert('warning');
-                }
-            } catch (e) {
-                showAlert('error');
-            }
-        }
-
-        function loadFromFile() {
-            var fileInput = document.getElementById('configFile');
-            if (!fileInput || !fileInput.files || fileInput.files.length === 0) return;
-
-            var file = fileInput.files;
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                try {
-                    var text = e.target.result;
-                    var data = parseConfigData(text);
-                    var hasData = loadDataIntoFields(data);
-
-                    if (hasData) {
-                        showAlert('success');
-                    } else {
-                        showAlert('warning');
-                    }
-                } catch (err) {
-                    showAlert('error');
-                }
-            };
-
-            reader.onerror = function() {
-                showAlert('error');
-            };
-
-            reader.readAsText(file);
         }
 
         function goToStaffing() {
@@ -542,7 +355,7 @@
             }
 
             if (!hasData) {
-                showAlert('warning');
+                alert('⚠️ Veuillez remplir au moins une compétence.');
                 return;
             }
 
@@ -556,21 +369,8 @@
 
         function resetForm() {
             if (confirm('⚠️ Êtes-vous sûr de vouloir réinitialiser toutes les données ?')) {
-                for (var i = 0; i < skills.length; i++) {
-                    var skill = skills[i];
-                    var textarea = document.getElementById('skill_' + skill);
-                    if (textarea) {
-                        textarea.value = '';
-                        updateCount(skill);
-                    }
-                }
-                var configText = document.getElementById('configText');
-                if (configText) configText.value = '';
-
-                var fileInput = document.getElementById('configFile');
-                if (fileInput) fileInput.value = '';
-
-                alert('✅ Formulaire réinitialisé !');
+                loadEquipeConfig();
+                alert('✅ Formulaire réinitialisé avec la configuration par défaut !');
             }
         }
     </script>

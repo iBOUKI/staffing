@@ -1,4 +1,4 @@
-<!staffing html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 15px;
             min-height: 100vh;
             font-size: 13px;
@@ -22,392 +22,238 @@
             overflow: hidden;
         }
         .header {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 18px;
+            padding: 20px;
             text-align: center;
         }
         .header h1 { font-size: 1.8em; margin-bottom: 5px; }
-        .header p { font-size: 0.9em; opacity: 0.9; }
-        .content { padding: 18px; }
+        .header p { font-size: 0.9em; opacity: 0.95; }
+        .content { padding: 20px; }
 
         .back-link {
             display: inline-block;
             margin-bottom: 15px;
-            color: #43e97b;
+            color: #667eea;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s;
         }
-        .back-link:hover {
-            color: #38f9d7;
-            transform: translateX(-5px);
-        }
+        .back-link:hover { color: #764ba2; }
 
-        .shift-info {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 18px;
-            border-left: 5px solid #43e97b;
-        }
-        .shift-info h3 {
-            color: #43e97b;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        .shift-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 10px;
-        }
-        .shift-info-item {
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
-            border: 2px solid #43e97b;
-            text-align: center;
-        }
-        .shift-info-item strong {
-            display: block;
-            color: #333;
-            font-size: 0.75em;
-            margin-bottom: 5px;
-        }
-        .shift-info-item span {
-            color: #43e97b;
-            font-size: 1.1em;
-            font-weight: bold;
-        }
-
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 10px;
-            margin-bottom: 18px;
-            padding: 14px;
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-radius: 10px;
-            border-left: 5px solid #4472C4;
-        }
-        .dashboard-card {
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
-            border: 2px solid #4472C4;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .dashboard-card h3 {
-            color: #4472C4;
-            font-size: 0.7em;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-        .dashboard-card .value {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #333;
-        }
-        .dashboard-card .label {
-            font-size: 0.65em;
-            color: #666;
-            margin-top: 3px;
-        }
-        .dashboard-card select, .dashboard-card input {
-            width: 100%;
-            padding: 5px;
-            border: 2px solid #4472C4;
-            border-radius: 5px;
-            font-size: 1.2em;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 5px;
-        }
-
-        .section {
-            margin-bottom: 18px;
-            padding: 14px;
+        .input-section {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
             border-radius: 10px;
+            margin-bottom: 20px;
             border-left: 5px solid #667eea;
         }
-        .section h2 {
+        .input-section h3 {
             color: #667eea;
-            margin-bottom: 10px;
-            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-size: 1.3em;
         }
 
-        .checkbox-grid {
+        .input-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 8px;
-            margin-top: 10px;
-        }
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            padding: 8px;
-            background: white;
-            border-radius: 8px;
-            border: 2px solid #e0e0e0;
-            transition: all 0.3s;
-        }
-        .checkbox-item:hover {
-            border-color: #667eea;
-            transform: translateY(-2px);
-        }
-        .checkbox-item.absent {
-            background: #ffebee;
-            border-color: #ef5350;
-        }
-        .checkbox-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            margin-right: 8px;
-            cursor: pointer;
-        }
-        .checkbox-item label {
-            cursor: pointer;
-            margin: 0;
-            font-weight: 500;
-            font-size: 0.8em;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
-        .form-group { margin-bottom: 10px; }
-        .form-group label {
-            display: block;
-            margin-bottom: 4px;
-            font-weight: 600;
-            color: #333;
-            font-size: 0.8em;
+        .input-field {
+            display: flex;
+            flex-direction: column;
         }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 7px;
+        .input-field label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 0.9em;
+        }
+        .input-field input {
+            padding: 8px;
             border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 0.85em;
+            border-radius: 6px;
+            font-size: 0.95em;
             transition: border-color 0.3s;
         }
-        .form-group input:focus, .form-group select:focus {
+        .input-field input:focus {
             outline: none;
             border-color: #667eea;
         }
 
-        .wip-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .wip-card {
-            background: white;
-            padding: 10px;
+        .absence-section {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+            padding: 20px;
             border-radius: 10px;
-            border: 2px solid #4472C4;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border-left: 5px solid #FFC000;
         }
-        .wip-card h3 {
-            color: #4472C4;
-            margin-bottom: 8px;
-            font-size: 0.95em;
+        .absence-section h3 {
+            color: #FFC000;
+            margin-bottom: 15px;
+            font-size: 1.3em;
         }
 
-        .volume-fait-section {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            padding: 14px;
-            border-radius: 10px;
-            border-left: 5px solid #70AD47;
-            margin-bottom: 18px;
-        }
-        .volume-fait-section h3 {
-            color: #70AD47;
-            margin-bottom: 10px;
-            font-size: 0.95em;
-        }
-        .volume-fait-grid {
+        .absence-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             gap: 10px;
         }
-        .volume-fait-card {
+
+        .absence-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px;
+            background: white;
+            border-radius: 6px;
+            border: 2px solid #ddd;
+            transition: all 0.3s;
+        }
+        .absence-item:hover {
+            border-color: #FFC000;
+            transform: translateY(-2px);
+        }
+        .absence-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .absence-item label {
+            cursor: pointer;
+            font-size: 0.9em;
+            color: #333;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #43e97b;
+        }
+        .stat-card h3 {
+            color: #43e97b;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+        .stat-card p {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .planning-section {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #4472C4;
+        }
+        .planning-section h3 {
+            color: #4472C4;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .planning-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .planning-table th {
+            background: #4472C4;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+        .planning-table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            font-size: 0.85em;
+        }
+        .planning-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .printers-section {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 5px solid #9c27b0;
+        }
+        .printers-section h3 {
+            color: #9c27b0;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .printers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .printer-item {
             background: white;
             padding: 10px;
-            border-radius: 8px;
-            border: 2px solid #70AD47;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            border: 2px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
-        .volume-fait-card label {
-            display: block;
+        .printer-item label {
             font-weight: 600;
+            font-size: 0.9em;
             color: #333;
-            margin-bottom: 4px;
-            font-size: 0.75em;
         }
-        .volume-fait-card input {
-            width: 100%;
-            padding: 6px;
-            border: 2px solid #70AD47;
-            border-radius: 5px;
-            font-size: 0.95em;
-            font-weight: bold;
-            text-align: center;
+        .printer-item select {
+            padding: 5px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 9px 25px;
+            padding: 12px 30px;
             border: none;
             border-radius: 8px;
-            font-size: 0.95em;
+            font-size: 1em;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: inline-block;
-            margin: 7px;
+            transition: all 0.3s;
         }
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
-        .btn-secondary { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-        .btn-success { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-        .btn-move { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
-        .btn-swap { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
-        .btn-add { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
-        .btn-delete { background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%); }
-
-        #results { display: none; }
-
-        .planning-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            margin-top: 15px;
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
-        .planning-section {
-            background: white;
-            border-radius: 10px;
-            padding: 14px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .planning-section h3 {
-            margin-bottom: 10px;
-            padding: 8px;
-            border-radius: 5px;
-            color: white;
-            text-align: center;
-            font-size: 0.95em;
-        }
-        .planning-section.direct h3 { background: #4472C4; }
-        .planning-section.indirect h3 { background: #FFC000; color: #333; }
-
-        .planning-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 8px;
-            font-size: 0.8em;
-        }
-        .planning-table th {
-            background: #E7E6E6;
-            color: #333;
-            padding: 7px;
-            text-align: left;
-            font-weight: 600;
-            border: 1px solid #ddd;
-            font-size: 0.75em;
-        }
-        .planning-table td {
-            padding: 7px;
-            border: 1px solid #ddd;
-            cursor: pointer;
-        }
-        .planning-table td:hover { background: #f0f0f0; }
-        .planning-table tr:hover { background: #f8f9fa; }
-
-        .process-vareo { background: #D9E1F2 !important; }
-        .process-cs { background: #E2EFDA !important; }
-        .process-finalize { background: #FCE4D6 !important; }
-        .process-lamination { background: #DDEBF7 !important; }
-        .process-ws { background: #E2EFDA !important; }
-        .process-ix { background: #E2F0D9 !important; }
-        .process-fixed { background: #FFE6E6 !important; }
-        .process-qc { background: #FFF3CD !important; }
-
-        .person-cell {
-            cursor: pointer;
-            padding: 2px 6px;
-            margin: 2px;
-            background: #70AD47;
-            color: white;
-            border-radius: 4px;
-            display: inline-block;
-            transition: all 0.3s;
-            font-size: 0.75em;
-        }
-        .person-cell:hover {
-            background: #507E32;
-            transform: scale(1.05);
-        }
-        .person-selected { background: #C00000 !important; }
-
-        .login-badge {
-            display: inline-block;
-            padding: 2px 5px;
-            background: #4472C4;
-            color: white;
-            border-radius: 3px;
-            font-size: 0.65em;
-            margin-right: 4px;
-        }
-
-        .add-modal, .move-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-        .add-modal.active, .move-modal.active { display: flex; }
-        .add-content, .move-content {
-            background: white;
-            padding: 22px;
-            border-radius: 15px;
-            max-width: 420px;
-            width: 90%;
-        }
-        .add-content h3, .move-content h3 {
-            color: #667eea;
-            margin-bottom: 14px;
-            font-size: 1.1em;
-        }
-        .add-content select, .move-content select {
-            width: 100%;
-            padding: 7px;
-            margin-bottom: 10px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 0.85em;
-        }
-
-        .alert {
-            padding: 12px 18px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            display: none;
-        }
-        .alert-warning {
-            background: #fff3cd;
-            color: #856404;
-            border: 2px solid #ffeaa7;
+        .btn-success {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
         }
     </style>
 </head>
@@ -415,1013 +261,596 @@
     <div class="container">
         <div class="header">
             <h1>🌙 Staffing Night Shift</h1>
-            <p>21h00 - 5h00 | Durée effective: 6h50 (6.83h) | 3 périodes</p>
+            <p>Planning automatique | 21h00 - 5h00 | 3 périodes</p>
         </div>
 
         <div class="content">
-            <a href="index.html" class="back-link">← Retour à l'accueil</a>
-            <a href="skill_matrix_night.html" class="back-link" style="margin-left: 15px;">📋 Modifier la Skill Matrix</a>
+            <a href="skill_matrix_night.html" class="back-link">← Retour à la Skill Matrix</a>
 
-            <div class="alert alert-warning" id="alertNoSkillMatrix">
-                ⚠️ Aucune Skill Matrix trouvée ! Veuillez d'abord configurer la Skill Matrix Night Shift.
-            </div>
-
-            <div class="shift-info">
-                <h3>📊 Informations du Shift Night</h3>
-                <div class="shift-info-grid">
-                    <div class="shift-info-item">
-                        <strong>Horaires</strong>
-                        <span>21h00 - 5h00</span>
+            <div class="input-section">
+                <h3>📊 Données de Production</h3>
+                <div class="input-grid">
+                    <div class="input-field">
+                        <label>Plan S&OP</label>
+                        <input type="number" id="planSOP" placeholder="Ex: 5884">
                     </div>
-                    <div class="shift-info-item">
-                        <strong>Durée totale</strong>
-                        <span>8h00</span>
+                    <div class="input-field">
+                        <label>Volume FAIT</label>
+                        <input type="number" id="volumeFait" placeholder="Ex: 2100">
                     </div>
-                    <div class="shift-info-item">
-                        <strong>Pauses</strong>
-                        <span>1h10 total</span>
+                    <div class="input-field">
+                        <label>WIP CS</label>
+                        <input type="number" id="wipCS" placeholder="Ex: 500">
                     </div>
-                    <div class="shift-info-item">
-                        <strong>Durée effective</strong>
-                        <span>6h50 (6.83h)</span>
+                    <div class="input-field">
+                        <label>WIP Vareo</label>
+                        <input type="number" id="wipVareo" placeholder="Ex: 1500">
                     </div>
-                    <div class="shift-info-item">
-                        <strong>Équipe chargée</strong>
-                        <span id="equipeCount">0 pers</span>
+                    <div class="input-field">
+                        <label>WIP Finalize</label>
+                        <input type="number" id="wipFinalize" placeholder="Ex: 700">
                     </div>
-                </div>
-            </div>
-
-            <div class="dashboard">
-                <div class="dashboard-card">
-                    <h3>📊 Plan S&OP</h3>
-                    <input type="number" id="planSOP" placeholder="Ex: 5000" min="0">
-                    <div class="label">livres</div>
-                </div>
-                <div class="dashboard-card">
-                    <h3>📦 Plan à faire</h3>
-                    <div class="value" id="dashPlanAFaire">0</div>
-                    <div class="label">livres</div>
-                </div>
-                <div class="dashboard-card">
-                    <h3>⚡ TPH</h3>
-                    <select id="dashTPH">
-                        <option value="65">65</option>
-                        <option value="70">70</option>
-                        <option value="75" selected>75</option>
-                        <option value="80">80</option>
-                    </select>
-                    <div class="label">Tasks/Hour</div>
-                </div>
-                <div class="dashboard-card">
-                    <h3>📊 AAS</h3>
-                    <div class="value" id="dashAAS">0/0</div>
-                    <div class="label">dispo/abs</div>
-                </div>
-                <div class="dashboard-card">
-                    <h3>🔄 WIP Total</h3>
-                    <div class="value" id="dashWIP">0</div>
-                    <div class="label">livres</div>
-                </div>
-                <div class="dashboard-card">
-                    <h3>📋 Backlog</h3>
-                    <div class="value" id="dashBacklog">0</div>
-                    <div class="label">Prisma + WIP</div>
-                </div>
-                <div class="dashboard-card">
-                    <h3>⏱️ Temps Écoulé</h3>
-                    <div class="value" id="dashTempsEcoule">0:00</div>
-                    <div class="label">depuis 21h00</div>
-                </div>
-                <div class="dashboard-card">
-                    <h3>🎯 À Produire/h</h3>
-                    <div class="value" id="dashProdH">0</div>
-                    <div class="label">livres/h</div>
-                </div>
-                <div class="dashboard-card">
-                    <h3>✅ Volume FAIT</h3>
-                    <div class="value" id="dashVolumeFait">0</div>
-                    <div class="label">livres</div>
-                </div>
-                <div class="dashboard-card">
-                    <h3>📈 Reste à faire</h3>
-                    <div class="value" id="dashResteAFaire">0</div>
-                    <div class="label">livres</div>
-                </div>
-            </div>
-
-            <div class="section">
-                <h2>📋 Gestion des Absences</h2>
-                <p style="margin-bottom: 10px; color: #666; font-size: 0.8em;">Cochez les personnes absentes (affichage en rouge automatique) :</p>
-                <div class="checkbox-grid" id="absenceGrid"></div>
-            </div>
-
-            <div class="section">
-                <h2>📦 WIP par Zone & Plan de Production</h2>
-                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px;">
-                    <div class="wip-grid">
-                        <div class="wip-card">
-                            <h3>📄 CS</h3>
-                            <input type="number" id="wipCS" placeholder="Ex: 500" min="0" value="0">
-                        </div>
-                        <div class="wip-card">
-                            <h3>🔧 Vareo</h3>
-                            <input type="number" id="wipVareo" placeholder="Ex: 2000" min="0" value="0">
-                        </div>
-                        <div class="wip-card">
-                            <h3>✅ Finalize</h3>
-                            <input type="number" id="wipFinalize" placeholder="Ex: 50" min="0" value="0">
-                        </div>
-                    </div>
-                    <div>
-                        <div class="form-group">
-                            <label for="planQuotidien">Plan :</label>
-                            <input type="number" id="planQuotidien" placeholder="Ex: 5000" min="0">
-                        </div>
-                        <div class="form-group">
-                            <label for="backlogPrisma">Backlog Prisma :</label>
-                            <input type="number" id="backlogPrisma" placeholder="Ex: 2000" min="0">
-                        </div>
+                    <div class="input-field">
+                        <label>Jour (1-7)</label>
+                        <input type="number" id="jour" min="1" max="7" placeholder="Ex: 3">
                     </div>
                 </div>
             </div>
 
-            <div class="volume-fait-section">
-                <h3>✅ Volume FAIT - Saisie Interactive</h3>
-                <div class="volume-fait-grid">
-                    <div class="volume-fait-card">
-                        <label>Livres Finalisés :</label>
-                        <input type="number" id="livresFinalises" value="0" min="0" placeholder="Ex: 500">
-                    </div>
-                    <div class="volume-fait-card">
-                        <label>Livres Printed :</label>
-                        <input type="number" id="livresPrinted" value="0" min="0" placeholder="Ex: 300">
-                    </div>
-                    <div class="volume-fait-card">
-                        <label>Buffer Finalize :</label>
-                        <input type="number" id="bufferFinalize" value="0" min="0" placeholder="Ex: 200">
-                    </div>
-                    <div class="volume-fait-card">
-                        <label>Reste à imprimer :</label>
-                        <input type="number" id="resteImprimer" value="0" min="0" readonly style="background: #f0f0f0;">
-                    </div>
-                    <div class="volume-fait-card">
-                        <label>Livres déjà imprimés :</label>
-                        <input type="number" id="livresImprimes" value="0" min="0" readonly style="background: #f0f0f0;">
-                    </div>
+            <div class="absence-section">
+                <h3>⚠️ Gestion des Absences</h3>
+                <div class="absence-grid" id="absenceGrid">
+                    <!-- Généré dynamiquement par JavaScript -->
                 </div>
             </div>
 
-            <div class="section">
-                <h2>📅 Jour de la semaine</h2>
-                <div class="form-group">
-                    <label for="jourSemaine">Sélectionnez le jour :</label>
-                    <select id="jourSemaine">
-                        <option value="Lundi">Lundi</option>
-                        <option value="Mardi">Mardi</option>
-                        <option value="Mercredi">Mercredi</option>
-                        <option value="Jeudi">Jeudi</option>
-                        <option value="Vendredi">Vendredi</option>
-                    </select>
+            <div class="dashboard" id="dashboard">
+                <!-- Généré dynamiquement par JavaScript -->
+            </div>
+
+            <div class="planning-section">
+                <h3>📋 Planning Automatique - 3 Périodes</h3>
+                <table class="planning-table" id="planningTable">
+                    <thead>
+                        <tr>
+                            <th>Process</th>
+                            <th>Staffing</th>
+                            <th>Période 1<br>21h00 - 23h30</th>
+                            <th>Période 2<br>00h10 - 02h40</th>
+                            <th>Période 3<br>03h10 - 05h00</th>
+                        </tr>
+                    </thead>
+                    <tbody id="planningBody">
+                        <!-- Généré dynamiquement par JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="printers-section">
+                <h3>🖨️ Printers B&W (11 printers)</h3>
+                <div class="printers-grid" id="printersGrid">
+                    <!-- Généré dynamiquement par JavaScript -->
                 </div>
             </div>
 
-            <div style="text-align: center;">
-                <button class="btn" onclick="generatePlanning()">🚀 Générer le Planning</button>
+            <div class="buttons">
+                <button class="btn btn-success" onclick="generatePlanning()">🚀 Générer le Planning</button>
                 <button class="btn btn-secondary" onclick="resetForm()">🔄 Réinitialiser</button>
-            </div>
-
-            <div id="results">
-                <div class="section">
-                    <h2>✅ Planning Généré - Night Shift</h2>
-                    <div style="text-align: center; margin-bottom: 15px;">
-                        <button class="btn btn-add" onclick="activateAddMode()">➕ Ajouter</button>
-                        <button class="btn btn-delete" onclick="activateDeleteMode()">🗑️ Effacer</button>
-                        <button class="btn btn-swap" onclick="activateSwapMode()">🔄 Swap</button>
-                        <button class="btn btn-move" onclick="activateMoveMode()">➡️ Déplacer</button>
-                        <p style="color: #666; margin-top: 8px; font-size: 0.8em;">Ajouter : Cliquez sur cellule vide | Effacer : Cliquez sur personne | Swap : Échangez 2 personnes | Déplacer : Déplacez 1 personne</p>
-                    </div>
-
-                    <div class="planning-container">
-                        <div class="planning-section direct">
-                            <h3>🔵 DIRECT - Production Principale</h3>
-                            <table class="planning-table" id="planningTableDirect"></table>
-                        </div>
-
-                        <div class="planning-section indirect">
-                            <h3>🟡 INDIRECT - Support</h3>
-                            <table class="planning-table" id="planningTableIndirect"></table>
-                        </div>
-                    </div>
-
-                    <div style="margin-top: 15px; text-align: center;">
-                        <button class="btn btn-success" onclick="savePlanning()">💾 Sauvegarder</button>
-                        <button class="btn btn-secondary" onclick="exportPDF()">📄 Export PDF</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section" style="background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); border-left: 5px solid #FFC000;">
-                <h2 style="color: #FFC000;">🖨️ Gestion des Imprimantes - Statuts Colorés</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 10px;">
-                    <div style="background: white; padding: 12px; border-radius: 10px; border: 2px solid #FFC000; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                        <h4 style="color: #FFC000; margin-bottom: 10px; font-size: 0.9em; display: flex; align-items: center; gap: 8px;">
-                            <span style="font-size: 1.2em;">🖨️</span> INKJET (IJ)
-                        </h4>
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; padding: 6px; border-radius: 5px; font-size: 0.8em; background: #d4edda; border-left: 3px solid #28a745;">
-                            <label style="font-weight: 600; color: #333; flex: 1; font-size: 0.75em;">IJ 1 :</label>
-                            <input type="radio" name="ij1" value="ok" checked onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #28a745; font-weight: bold;">✓ OK</span>
-                            <input type="radio" name="ij1" value="ko" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #dc3545; font-weight: bold;">✗ KO</span>
-                            <input type="radio" name="ij1" value="maintenance" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #ffc107; font-weight: bold;">🔧 Maint.</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; padding: 6px; border-radius: 5px; font-size: 0.8em; background: #d4edda; border-left: 3px solid #28a745;">
-                            <label style="font-weight: 600; color: #333; flex: 1; font-size: 0.75em;">IJ 2 :</label>
-                            <input type="radio" name="ij2" value="ok" checked onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #28a745; font-weight: bold;">✓ OK</span>
-                            <input type="radio" name="ij2" value="ko" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #dc3545; font-weight: bold;">✗ KO</span>
-                            <input type="radio" name="ij2" value="maintenance" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #ffc107; font-weight: bold;">🔧 Maint.</span>
-                        </div>
-                        <label style="display: block; margin-top: 10px; font-weight: 600; color: #333; font-size: 0.75em;">Production/h :</label>
-                        <input type="number" style="width: 100%; padding: 8px; border: 2px solid #FFC000
-; border-radius: 5px; font-size: 1em; font-weight: bold; text-align: center; margin-top: 6px;" id="ijProduction" value="500" min="0" max="999" placeholder="Ex: 500">
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #FFF9E6; border-radius: 5px; margin-top: 8px;">
-                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total/h :</span>
-                            <span style="font-size: 1.1em; font-weight: bold; color: #FFC000;" id="ijTotalH">1000</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #FFF9E6; border-radius: 5px; margin-top: 6px;">
-                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total shift :</span>
-                            <span style="font-size: 1.1em; font-weight: bold; color: #FFC000;" id="ijTotalShift">6830</span>
-                        </div>
-                    </div>
-
-                    <div style="background: white; padding: 12px; border-radius: 10px; border: 2px solid #FFC000; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                        <h4 style="color: #FFC000; margin-bottom: 10px; font-size: 0.9em; display: flex; align-items: center; gap: 8px;">
-                            <span style="font-size: 1.2em;">⚫</span> B&W (11 printers)
-                        </h4>
-                        <div id="bwPrintersContainer"></div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #FFF9E6; border-radius: 5px; margin-top: 8px;">
-                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total/h :</span>
-                            <span style="font-size: 1.1em; font-weight: bold; color: #FFC000;" id="bwTotalH">0</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #FFF9E6; border-radius: 5px; margin-top: 6px;">
-                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total shift :</span>
-                            <span style="font-size: 1.1em; font-weight: bold; color: #FFC000;" id="bwTotalShift">0</span>
-                        </div>
-                    </div>
-
-                    <div style="background: white; padding: 12px; border-radius: 10px; border: 2px solid #FFC000; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                        <h4 style="color: #FFC000; margin-bottom: 10px; font-size: 0.9em; display: flex; align-items: center; gap: 8px;">
-                            <span style="font-size: 1.2em;">🔵</span> IX
-                        </h4>
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; padding: 6px; border-radius: 5px; font-size: 0.8em; background: #d4edda; border-left: 3px solid #28a745;">
-                            <label style="font-weight: 600; color: #333; flex: 1; font-size: 0.75em;">IX 1 :</label>
-                            <input type="radio" name="ix1" value="ok" checked onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #28a745; font-weight: bold;">✓ OK</span>
-                            <input type="radio" name="ix1" value="ko" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #dc3545; font-weight: bold;">✗ KO</span>
-                            <input type="radio" name="ix1" value="maintenance" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #ffc107; font-weight: bold;">🔧 Maint.</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; padding: 6px; border-radius: 5px; font-size: 0.8em; background: #d4edda; border-left: 3px solid #28a745;">
-                            <label style="font-weight: 600; color: #333; flex: 1; font-size: 0.75em;">IX 2 :</label>
-                            <input type="radio" name="ix2" value="ok" checked onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #28a745; font-weight: bold;">✓ OK</span>
-                            <input type="radio" name="ix2" value="ko" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #dc3545; font-weight: bold;">✗ KO</span>
-                            <input type="radio" name="ix2" value="maintenance" onchange="updatePrintersCapacities()" style="width: 18px; height: 18px; cursor: pointer;"> <span style="color: #ffc107; font-weight: bold;">🔧 Maint.</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #FFF9E6; border-radius: 5px; margin-top: 8px;">
-                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total/h :</span>
-                            <span style="font-size: 1.1em; font-weight: bold; color: #FFC000;" id="ixTotalH">300</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #FFF9E6; border-radius: 5px; margin-top: 6px;">
-                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total shift :</span>
-                            <span style="font-size: 1.1em; font-weight: bold; color: #FFC000;" id="ixTotalShift">2049</span>
-                        </div>
-                    </div>
-
-                    <div style="background: white; padding: 12px; border-radius: 10px; border: 2px solid #70AD47; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                        <h4 style="color: #70AD47; margin-bottom: 10px; font-size: 0.9em; display: flex; align-items: center; gap: 8px;">
-                            <span style="font-size: 1.2em;">📊</span> Total Impression
-                        </h4>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #E6F4EA; border-radius: 5px; margin-top: 8px;">
-                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total/h :</span>
-                            <span style="font-size: 1.1em; font-weight: bold; color: #70AD47;" id="totalImpressionH">0</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; background: #E6F4EA; border-radius: 5px; margin-top: 6px;">
-                            <span style="font-weight: 600; color: #666; font-size: 0.75em;">Total shift :</span>
-                            <span style="font-size: 1.1em; font-weight: bold; color: #70AD47;" id="totalImpressionShift">0</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="add-modal" id="addModal">
-        <div class="add-content">
-            <h3>➕ Ajouter une personne</h3>
-            <p id="addInfo" style="margin-bottom: 12px; color: #666; font-size: 0.8em;"></p>
-            <label>Sélectionnez la personne :</label>
-            <select id="personToAdd">
-                <option value="">-- Sélectionnez --</option>
-            </select>
-            <div style="margin-top: 15px; text-align: center;">
-                <button class="btn" onclick="executeAdd()">✅ Ajouter</button>
-                <button class="btn btn-secondary" onclick="closeAddModal()">❌ Annuler</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="move-modal" id="moveModal">
-        <div class="move-content">
-            <h3>🔄 Déplacer une personne</h3>
-            <p id="moveInfo" style="margin-bottom: 12px; color: #666; font-size: 0.8em;"></p>
-            <label>Vers quel poste ?</label>
-            <select id="targetProcess">
-                <option value="">-- Sélectionnez --</option>
-                <option value="CS">CS</option>
-                <option value="Vareo">Vareo</option>
-                <option value="Finalize">Finalize</option>
-                <option value="Lamination">Lamination</option>
-                <option value="WS">WS</option>
-            </select>
-            <label>Quelle période ?</label>
-            <select id="targetPeriode">
-                <option value="0">Période 1 (21h00-23h30)</option>
-                <option value="1">Période 2 (00h10-02h40)</option>
-                <option value="2">Période 3 (03h10-05h00)</option>
-            </select>
-            <div style="margin-top: 15px; text-align: center;">
-                <button class="btn" onclick="executeMove()">✅ Déplacer</button>
-                <button class="btn btn-secondary" onclick="closeMoveModal()">❌ Annuler</button>
             </div>
         </div>
     </div>
 
     <script>
-        const DUREE_SHIFT = 6.83;
-        const DUREE_TRAVAIL_EFFECTIF = 6.83;
-        const capacites = {CS: 220, Vareo: 350, Finalize: 345, BW: 100, IX: 150};
-        const periodes = [
-            { nom: "Période 1", debut: "21h00", fin: "23h30" },
-            { nom: "Période 2", debut: "00h10", fin: "02h40" },
-            { nom: "Période 3", debut: "03h10", fin: "05h00" }
-        ];
+        // ========================================
+        // RÉCUPÉRATION DES DONNÉES DEPUIS L'URL
+        // ========================================
+        var equipeData = {};
+        var skills = ['CS', 'Vareo', 'Finalize', 'Lamination', 'WS', 'IX', 'IJ', 'PS', 'QC'];
+        var absences = [];
 
-        let equipe = [];
-        let formations = {};
-        let currentPlanning = null;
-        let weekHistory = JSON.parse(localStorage.getItem('weekHistory_night')) || {};
-        let swapMode = false, moveMode = false, addMode = false, deleteMode = false;
-        let swapSelection = { first: null, second: null };
-        let moveSelection = null, addSelection = null;
+        function getUrlParams() {
+            var params = {};
+            var urlParams = new URLSearchParams(window.location.search);
 
-        function loadSkillMatrix() {
-            const saved = localStorage.getItem('skillMatrix_night');
-            if (!saved) {
-                document.getElementById('alertNoSkillMatrix').style.display = 'block';
-                return false;
-            }
-
-            const data = JSON.parse(saved);
-            formations = data;
-
-            const allNames = new Set();
-            Object.values(data).forEach(names => {
-                names.forEach(name => allNames.add(name));
-            });
-            equipe = Array.from(allNames).sort();
-
-            document.getElementById('equipeCount').textContent = `${equipe.length} pers`;
-            console.log('Skill Matrix chargée:', equipe.length, 'personnes');
-            return true;
-        }
-
-        function initBWPrinters() {
-            const container = document.getElementById('bwPrintersContainer');
-            if (!container) return;
-
-            container.innerHTML = '';
-            for (let i = 1; i <= 11; i++) {
-                const div = document.createElement('div');
-                div.className = 'printer-status-bw';
-                div.style.cssText = 'display: flex; align-items: center; gap: 6px; margin-bottom: 6px; padding: 4px; border-radius: 4px; font-size: 0.75em; background: #d4edda; border-left: 3px solid #28a745;';
-                div.innerHTML = `
-                    <label style="font-weight: 600; color: #333; flex: 1; font-size: 0.7em;">BW ${i} :</label>
-                    <input type="radio" name="bw${i}" value="ok" checked onchange="updatePrintersCapacities()" style="width: 16px; height: 16px; cursor: pointer;"> <span style="color: #28a745; font-weight: bold; font-size: 0.8em;">✓</span>
-                    <input type="radio" name="bw${i}" value="ko" onchange="updatePrintersCapacities()" style="width: 16px; height: 16px; cursor: pointer;"> <span style="color: #dc3545; font-weight: bold; font-size: 0.8em;">✗</span>
-                    <input type="radio" name="bw${i}" value="maintenance" onchange="updatePrintersCapacities()" style="width: 16px; height: 16px; cursor: pointer;"> <span style="color: #ffc107; font-weight: bold; font-size: 0.8em;">🔧</span>
-                    <input type="radio" name="bw${i}" value="decommissioned" onchange="updatePrintersCapacities()" style="width: 16px; height: 16px; cursor: pointer;"> <span style="color: #6c757d; font-weight: bold; font-size: 0.8em;">🚫</span>
-                `;
-                container.appendChild(div);
-            }
-        }
-
-        function initAbsenceGrid() {
-            const grid = document.getElementById('absenceGrid');
-            if (!grid || equipe.length === 0) return;
-
-            grid.innerHTML = '';
-            equipe.forEach(personne => {
-                const div = document.createElement('div');
-                div.className = 'checkbox-item';
-                div.id = `checkbox_${personne}`;
-                div.innerHTML = `
-                    <input type="checkbox" id="absent_${personne}" value="${personne}" onchange="updateDashboardAAS(); toggleAbsentStyle('${personne}')">
-                    <label for="absent_${personne}">${personne}</label>
-                `;
-                grid.appendChild(div);
-            });
-        }
-
-        function toggleAbsentStyle(personne) {
-            const checkbox = document.getElementById(`absent_${personne}`);
-            const checkboxItem = document.getElementById(`checkbox_${personne}`);
-            if (checkbox && checkboxItem) {
-                if (checkbox.checked) {
-                    checkboxItem.classList.add('absent');
-                } else {
-                    checkboxItem.classList.remove('absent');
+            for (var i = 0; i < skills.length; i++) {
+                var skill = skills[i];
+                var value = urlParams.get(skill);
+                if (value) {
+                    params[skill] = value.split(',').map(function(name) {
+                        return name.trim();
+                    }).filter(function(name) {
+                        return name !== '';
+                    });
                 }
             }
+
+            return params;
         }
 
-        function updateDashboardAAS() {
-            const absents = equipe.filter(p => {
-                const checkbox = document.getElementById(`absent_${p}`);
-                return checkbox && checkbox.checked;
-            }).length;
-            const disponibles = equipe.length - absents;
-            document.getElementById('dashAAS').textContent = `${disponibles}/${equipe.length}`;
-            updateResteAFaire();
-        }
+        // ========================================
+        // INITIALISATION AU CHARGEMENT
+        // ========================================
+        window.onload = function() {
+            equipeData = getUrlParams();
 
-        function updateTempsEcoule() {
-            const now = new Date();
-            const shiftStart = new Date();
-            shiftStart.setHours(21, 0, 0, 0);
-            if (now.getHours() < 21) shiftStart.setDate(shiftStart.getDate() - 1);
-            const diff = now - shiftStart;
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById('dashTempsEcoule').textContent = `${hours}:${minutes.toString().padStart(2, '0')}`;
-        }
-
-        function updateVolumeFait() {
-            const livresFinalises = parseInt(document.getElementById('livresFinalises').value) || 0;
-            const livresPrinted = parseInt(document.getElementById('livresPrinted').value) || 0;
-            const bufferFinalize = parseInt(document.getElementById('bufferFinalize').value) || 0;
-
-            const volumeFait = livresFinalises + livresPrinted + bufferFinalize;
-            document.getElementById('dashVolumeFait').textContent = volumeFait;
-
-            const livresImprimes = livresFinalises + livresPrinted + bufferFinalize;
-            document.getElementById('livresImprimes').value = livresImprimes;
-
-            const planQuotidien = parseInt(document.getElementById('planQuotidien').value) || 0;
-            const resteImprimer = Math.max(0, planQuotidien - livresImprimes);
-            document.getElementById('resteImprimer').value = resteImprimer;
-
-            const planSOP = parseInt(document.getElementById('planSOP').value) || 0;
-            const planAFaire = Math.max(0, planSOP - volumeFait);
-            document.getElementById('dashPlanAFaire').textContent = planAFaire;
-
-            updateResteAFaire();
-        }
-
-        function updateResteAFaire() {
-            const absents = equipe.filter(p => {
-                const checkbox = document.getElementById(`absent_${p}`);
-                return checkbox && checkbox.checked;
-            }).length;
-            const presents = equipe.length - absents;
-            const tph = parseInt(document.getElementById('dashTPH').value) || 75;
-            const livresFinalises = parseInt(document.getElementById('livresFinalises').value) || 0;
-            const bufferFinalize = parseInt(document.getElementById('bufferFinalize').value) || 0;
-
-            const capaciteTheorique = presents * tph * 6.83 * 0.92;
-            const resteAFaire = Math.max(0, Math.round(capaciteTheorique - (livresFinalises + bufferFinalize)));
-
-            document.getElementById('dashResteAFaire').textContent = resteAFaire;
-        }
-
-        function updatePrintersCapacities() {
-            let ijCount = 0;
-            const ijProduction = parseInt(document.getElementById('ijProduction').value) || 0;
-
-            for (let i = 1; i <= 2; i++) {
-                const status = document.querySelector(`input[name="ij${i}"]:checked`)?.value;
-                if (status === 'ok') ijCount++;
+            // Vérifier si des données ont été récupérées
+            var hasData = false;
+            for (var key in equipeData) {
+                if (equipeData[key] && equipeData[key].length > 0) {
+                    hasData = true;
+                    break;
+                }
             }
 
-            const ijTotalH = ijCount * ijProduction;
-            const ijTotalShift = Math.round(ijTotalH * DUREE_SHIFT);
-            document.getElementById('ijTotalH').textContent = ijTotalH;
-            document.getElementById('ijTotalShift').textContent = ijTotalShift;
+            if (!hasData) {
+                alert('⚠️ Aucune donnée récupérée depuis la Skill Matrix. Retour à la page précédente.');
+                window.location.href = 'skill_matrix_night.html';
+                return;
+            }
 
-            let bwCount = 0;
-            for (let i = 1; i <= 11; i++) {
-                const status = document.querySelector(`input[name="bw${i}"]:checked`)?.value;
-                if (status === 'ok') bwCount++;
+            // Générer la grille des absences
+            generateAbsenceGrid();
+        };
 
-                const statusDiv = document.querySelector(`input[name="bw${i}"]`)?.closest('.printer-status-bw');
-                if (statusDiv) {
-                    statusDiv.style.background = '#d4edda';
-                    statusDiv.style.borderLeft = '3px solid #28a745';
+        // ========================================
+        // GÉNÉRATION DE LA GRILLE DES ABSENCES
+        // ========================================
+        function generateAbsenceGrid() {
+            var absenceGrid = document.getElementById('absenceGrid');
+            if (!absenceGrid) return;
 
-                    if (status === 'ko') {
-                        statusDiv.style.background = '#f8d7da';
-                        statusDiv.style.borderLeft = '3px solid #dc3545';
-                    } else if (status === 'maintenance') {
-                        statusDiv.style.background = '#fff3cd';
-                        statusDiv.style.borderLeft = '3px solid #ffc107';
-                    } else if (status === 'decommissioned') {
-                        statusDiv.style.background = '#e2e3e5';
-                        statusDiv.style.borderLeft = '3px solid #6c757d';
+            absenceGrid.innerHTML = '';
+
+            // Récupérer tous les noms uniques
+            var allNames = [];
+            for (var i = 0; i < skills.length; i++) {
+                var skill = skills[i];
+                if (equipeData[skill]) {
+                    for (var j = 0; j < equipeData[skill].length; j++) {
+                        var name = equipeData[skill][j];
+                        if (allNames.indexOf(name) === -1) {
+                            allNames.push(name);
+                        }
                     }
                 }
             }
 
-            const bwTotalH = bwCount * capacites.BW;
-            const bwTotalShift = Math.round(bwTotalH * DUREE_SHIFT);
-            document.getElementById('bwTotalH').textContent = bwTotalH;
-            document.getElementById('bwTotalShift').textContent = bwTotalShift;
+            // Trier par ordre alphabétique
+            allNames.sort();
 
-            let ixCount = 0;
-            for (let i = 1; i <= 2; i++) {
-                const status = document.querySelector(`input[name="ix${i}"]:checked`)?.value;
-                if (status === 'ok') ixCount++;
+            // Créer les cases à cocher
+            for (var i = 0; i < allNames.length; i++) {
+                var name = allNames[i];
+
+                var div = document.createElement('div');
+                div.className = 'absence-item';
+
+                var checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = 'absence_' + name;
+                checkbox.onchange = function() {
+                    updateAbsences();
+                };
+
+                var label = document.createElement('label');
+                label.htmlFor = 'absence_' + name;
+                label.textContent = name;
+
+                div.appendChild(checkbox);
+                div.appendChild(label);
+                absenceGrid.appendChild(div);
+            }
+        }
+
+        // ========================================
+        // MISE À JOUR DES ABSENCES
+        // ========================================
+        function updateAbsences() {
+            absences = [];
+
+            var checkboxes = document.querySelectorAll('.absence-item input[type="checkbox"]');
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    var name = checkboxes[i].id.replace('absence_', '');
+                    absences.push(name);
+                }
+            }
+        }
+
+        // ========================================
+        // GÉNÉRATION DES PRINTERS B&W
+        // ========================================
+        function generatePrinters() {
+            var printersGrid = document.getElementById('printersGrid');
+            if (!printersGrid) return;
+
+            printersGrid.innerHTML = '';
+
+            for (var i = 1; i <= 11; i++) {
+                var div = document.createElement('div');
+                div.className = 'printer-item';
+
+                var label = document.createElement('label');
+                label.textContent = 'Printer ' + i;
+
+                var select = document.createElement('select');
+                select.id = 'printer_' + i;
+
+                var options = ['OK', 'KO', 'Maintenance', 'Décommissionné'];
+                for (var j = 0; j < options.length; j++) {
+                    var option = document.createElement('option');
+                    option.value = options[j];
+                    option.textContent = options[j];
+                    select.appendChild(option);
+                }
+
+                div.appendChild(label);
+                div.appendChild(select);
+                printersGrid.appendChild(div);
+            }
+        }
+
+        // ========================================
+        // CALCUL DU STAFFING BASÉ SUR WIP ET RATES
+        // ========================================
+        function calculateStaffing() {
+            var planSOP = parseInt(document.getElementById('planSOP').value) || 0;
+            var volumeFait = parseInt(document.getElementById('volumeFait').value) || 0;
+            var wipCS = parseInt(document.getElementById('wipCS').value) || 0;
+            var wipVareo = parseInt(document.getElementById('wipVareo').value) || 0;
+            var wipFinalize = parseInt(document.getElementById('wipFinalize').value) || 0;
+            var jour = parseInt(document.getElementById('jour').value) || 1;
+
+            // Calcul du reste à faire
+            var resteAFaire = planSOP - volumeFait;
+
+            // Temps effectif : 7.33h
+            var tempsEffectif = 7.33;
+
+            // Rates par zone (livres par personne par heure)
+            var rateCS = 220;
+            var rateVareo = 350;
+            var rateFinalize = 345;
+
+            // Calcul du staffing basé sur le WIP
+            var staffCS = Math.max(1, Math.ceil(wipCS / (rateCS * tempsEffectif)));
+            var staffVareo = Math.max(1, Math.ceil(wipVareo / (rateVareo * tempsEffectif)));
+            var staffFinalize = Math.max(1, Math.ceil(wipFinalize / (rateFinalize * tempsEffectif)));
+
+            // Postes fixes
+            var staffLamination = 1;
+            var staffWS = 1;
+            var staffIX = 1;
+            var staffIJ = 2;
+            var staffPS = 1;
+            var staffQC = 1; // QC uniquement en période 1
+
+            // Calcul du nombre de personnes disponibles
+            var totalEquipe = 0;
+            for (var i = 0; i < skills.length; i++) {
+                var skill = skills[i];
+                if (equipeData[skill]) {
+                    totalEquipe += equipeData[skill].length;
+                }
             }
 
-            const ixTotalH = ixCount * capacites.IX;
-            const ixTotalShift = Math.round(ixTotalH * DUREE_SHIFT);
-            document.getElementById('ixTotalH').textContent = ixTotalH;
-            document.getElementById('ixTotalShift').textContent = ixTotalShift;
+            // Retirer les absences
+            var totalDispo = totalEquipe - absences.length;
 
-            const totalImpressionH = ijTotalH + bwTotalH + ixTotalH;
-            const totalImpressionShift = Math.round(totalImpressionH * DUREE_SHIFT);
-            document.getElementById('totalImpressionH').textContent = totalImpressionH;
-            document.getElementById('totalImpressionShift').textContent = totalImpressionShift;
+            // Calcul du TPH (Throughput per Hour)
+            var tph = resteAFaire > 0 ? Math.round(resteAFaire / tempsEffectif) : 0;
+
+            return {
+                planSOP: planSOP,
+                volumeFait: volumeFait,
+                resteAFaire: resteAFaire,
+                wipCS: wipCS,
+                wipVareo: wipVareo,
+                wipFinalize: wipFinalize,
+                jour: jour,
+                tempsEffectif: tempsEffectif,
+                staffCS: staffCS,
+                staffVareo: staffVareo,
+                staffFinalize: staffFinalize,
+                staffLamination: staffLamination,
+                staffWS: staffWS,
+                staffIX: staffIX,
+                staffIJ: staffIJ,
+                staffPS: staffPS,
+                staffQC: staffQC,
+                totalEquipe: totalEquipe,
+                totalDispo: totalDispo,
+                totalAbsences: absences.length,
+                tph: tph
+            };
         }
 
-        function updateDashboard(plan, wipCS, wipVareo, wipFinalize, backlogPrisma, staffing) {
-            const totalWIP = wipCS + wipVareo + wipFinalize;
-            const volumeFait = parseInt(document.getElementById('dashVolumeFait').textContent) || 0;
-            document.getElementById('dashPlanAFaire').textContent = Math.max(0, plan - volumeFait);
-            document.getElementById('dashWIP').textContent = totalWIP;
-            document.getElementById('dashBacklog').textContent = backlogPrisma + totalWIP;
-            document.getElementById('dashProdH').textContent = Math.round((plan - volumeFait) / DUREE_TRAVAIL_EFFECTIF);
-            updatePrintersCapacities();
+        // ========================================
+        // AFFICHAGE DU DASHBOARD
+        // ========================================
+        function updateDashboard() {
+            var stats = calculateStaffing();
+            var dashboard = document.getElementById('dashboard');
+            if (!dashboard) return;
+
+            dashboard.innerHTML = `
+                <div class="stat-card">
+                    <h3>👥 AAS (Dispo/Abs)</h3>
+                    <p>${stats.totalDispo}/${stats.totalAbsences}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>📊 Plan S&OP</h3>
+                    <p>${stats.planSOP}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>✅ Volume FAIT</h3>
+                    <p>${stats.volumeFait}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>📦 Reste à faire</h3>
+                    <p>${stats.resteAFaire}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>⏱️ TPH (Target/h)</h3>
+                    <p>${stats.tph}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>🕐 Temps effectif</h3>
+                    <p>${stats.tempsEffectif}h</p>
+                </div>
+            `;
         }
 
-        function calculerStaffingTotal(wipCS, wipVareo, wipFinalize, backlog, plan) {
-            const staffing = {};
-            const details = {};
+        // ========================================
+        // GÉNÉRATION DU PLANNING AUTOMATIQUE
+        // ========================================
+        function generatePlanning() {
+            // Mettre à jour les absences
+            updateAbsences();
 
-            const planCS = plan * 0.15;
-            const totalCS = wipCS + backlog + planCS;
-            const besoinCS = totalCS / (capacites.CS * DUREE_SHIFT);
-            staffing.CS = wipCS < 400 ? 1 : Math.min(2, Math.max(1, Math.ceil(besoinCS)));
-            details.CS = {wip: Math.round(totalCS), besoin: besoinCS.toFixed(2), note: wipCS < 400 ? '1 pers (WIP < 400)' : 'Max 2 pers', logins: staffing.CS};
+            // Calculer le staffing
+            var stats = calculateStaffing();
 
-            const totalVareo = wipVareo + plan;
-            const besoinVareo = totalVareo / (capacites.Vareo * DUREE_SHIFT);
-            staffing.Vareo = Math.min(5, Math.max(1, Math.ceil(besoinVareo)));
-            details.Vareo = {wip: totalVareo, besoin: besoinVareo.toFixed(2), logins: staffing.Vareo};
+            // Mettre à jour le dashboard
+            updateDashboard();
 
-            const totalFinalize = wipFinalize + plan;
-            const besoinFinalize = totalFinalize / (capacites.Finalize * DUREE_SHIFT);
-            staffing.Finalize = Math.min(5, Math.max(2, Math.ceil(besoinFinalize)));
-            details.Finalize = {wip: totalFinalize, besoin: besoinFinalize.toFixed(2), note: 'Min 2 pers', logins: staffing.Finalize};
+            // Générer les printers
+            generatePrinters();
 
-            staffing.Lamination = 1;
-            staffing.WS = 1;
-            staffing.IX = 1;
-            staffing.IJ = 2;
-            staffing.PS = 1;
-            staffing.QC = 1;
+            // Créer le planning
+            var planning = [];
 
-            return { staffing, details };
-        }
-
-        function assignerPostesFixes(absents) {
-            const disponibles = equipe.filter(p => !absents.includes(p));
-            const utilises = new Set();
-            const assignments = {};
-
-            assignments.IJ = (formations.IJ || []).filter(p => disponibles.includes(p)).slice(0, 2);
-            assignments.IJ.forEach(p => utilises.add(p));
-
-            assignments.IX = (formations.IX || []).filter(p => disponibles.includes(p) && !utilises.has(p)).slice(0, 1);
-            assignments.IX.forEach(p => utilises.add(p));
-
-            assignments.PS = (formations.PS || []).filter(p => disponibles.includes(p) && !utilises.has(p)).slice(0, 1);
-            assignments.PS.forEach(p => utilises.add(p));
-
-            assignments.QC = (formations.QC || []).filter(p => disponibles.includes(p) && !utilises.has(p)).slice(0, 1);
-
-            return { assignments, utilises };
-        }
-
-        function assignerPostesRotation(staffing, absents, utilisesFixe, periodeNum, assignmentsPrecedents, toutesLesAffectations) {
-            const disponibles = equipe.filter(p => !absents.includes(p));
-            const utilises = new Set([...utilisesFixe]);
-            const assignments = {};
-
-            if (periodeNum === 1 && assignmentsPrecedents?.QC) {
-                assignmentsPrecedents.QC.forEach(p => utilises.add(p));
-            }
-
-            const personnesQCLibres = periodeNum > 1 && assignmentsPrecedents ? assignmentsPrecedents.QC : [];
-            const processesRotation = ['WS', 'Lamination', 'CS', 'Vareo', 'Finalize'];
-
-            processesRotation.forEach(process => {
-                const besoin = staffing[process];
-                const dejaAffectes = new Set();
-                if (toutesLesAffectations) {
-                    toutesLesAffectations.forEach(periode => {
-                        if (periode.assignments[process]) {
-                            periode.assignments[process].forEach(p => dejaAffectes.add(p));
-                        }
-                    });
-                }
-
-                let candidats = (formations[process] || []).filter(p =>
-                    disponibles.includes(p) && !utilises.has(p) && !dejaAffectes.has(p)
-                );
-
-                if (personnesQCLibres.length > 0 && periodeNum > 1) {
-                    const qcFormes = personnesQCLibres.filter(p =>
-                        (formations[process] || []).includes(p) && !utilises.has(p) && !dejaAffectes.has(p)
-                    );
-                    candidats = [...qcFormes, ...candidats.filter(p => !qcFormes.includes(p))];
-                }
-
-                if (candidats.length < besoin) {
-                    const tousFormes = (formations[process] || []).filter(p => disponibles.includes(p) && !utilises.has(p));
-                    const candidatsAvecScore = tousFormes.map(p => {
-                        let score = 0;
-                        if (toutesLesAffectations) {
-                            toutesLesAffectations.forEach(periode => {
-                                if (periode.assignments[process]?.includes(p)) score++;
-                            });
-                        }
-                        return { personne: p, score };
-                    });
-                    candidatsAvecScore.sort((a, b) => a.score - b.score);
-                    candidats = [...candidats, ...candidatsAvecScore.map(c => c.personne).filter(p => !candidats.includes(p))];
-                }
-
-                assignments[process] = [...new Set(candidats)].slice(0, besoin);
-                assignments[process].forEach(p => utilises.add(p));
+            // DIRECT - Production Principale
+            planning.push({
+                process: 'CS',
+                staffing: stats.staffCS,
+                type: 'direct',
+                skill: 'CS'
             });
+
+            planning.push({
+                process: 'Vareo',
+                staffing: stats.staffVareo,
+                type: 'direct',
+                skill: 'Vareo'
+            });
+
+            planning.push({
+                process: 'Finalize',
+                staffing: stats.staffFinalize,
+                type: 'direct',
+                skill: 'Finalize'
+            });
+
+            planning.push({
+                process: 'Lamination',
+                staffing: stats.staffLamination,
+                type: 'direct',
+                skill: 'Lamination'
+            });
+
+            planning.push({
+                process: 'WS',
+                staffing: stats.staffWS,
+                type: 'direct',
+                skill: 'WS'
+            });
+
+            // INDIRECT - Support
+            planning.push({
+                process: 'IX',
+                staffing: stats.staffIX,
+                type: 'indirect',
+                skill: 'IX'
+            });
+
+            planning.push({
+                process: 'IJ',
+                staffing: stats.staffIJ,
+                type: 'indirect',
+                skill: 'IJ'
+            });
+
+            planning.push({
+                process: 'PS',
+                staffing: stats.staffPS,
+                type: 'indirect',
+                skill: 'PS'
+            });
+
+            planning.push({
+                process: 'QC',
+                staffing: stats.staffQC,
+                type: 'indirect',
+                skill: 'QC',
+                periode1Only: true // QC uniquement en période 1
+            });
+
+            // Affecter les personnes aux postes avec rotation
+            var assignments = assignPeopleToPosts(planning, stats);
+
+            // Afficher le planning
+            displayPlanning(assignments);
+        }
+
+        // ========================================
+        // AFFECTATION DES PERSONNES AUX POSTES
+        // ========================================
+        function assignPeopleToPosts(planning, stats) {
+            var assignments = [];
+
+            for (var i = 0; i < planning.length; i++) {
+                var post = planning[i];
+                var skill = post.skill;
+                var staffing = post.staffing;
+
+                // Récupérer les personnes disponibles pour cette compétence
+                var availablePeople = [];
+                if (equipeData[skill]) {
+                    for (var j = 0; j < equipeData[skill].length; j++) {
+                        var person = equipeData[skill][j];
+                        // Exclure les absents
+                        if (absences.indexOf(person) === -1) {
+                            availablePeople.push(person);
+                        }
+                    }
+                }
+
+                // Affecter les personnes sur les 3 périodes avec rotation
+                var periode1 = [];
+                var periode2 = [];
+                var periode3 = [];
+
+                if (post.periode1Only) {
+                    // QC uniquement en période 1
+                    for (var k = 0; k < staffing && k < availablePeople.length; k++) {
+                        periode1.push(availablePeople[k]);
+                    }
+                    periode2.push('-');
+                    periode3.push('-');
+                } else {
+                    // Rotation sur les 3 périodes
+                    var totalNeeded = staffing * 3;
+                    var peopleToAssign = [];
+
+                    // Si pas assez de personnes, répéter la liste
+                    while (peopleToAssign.length < totalNeeded && availablePeople.length > 0) {
+                        for (var k = 0; k < availablePeople.length && peopleToAssign.length < totalNeeded; k++) {
+                            peopleToAssign.push(availablePeople[k]);
+                        }
+                    }
+
+                    // Affecter par période
+                    for (var k = 0; k < staffing && k < peopleToAssign.length; k++) {
+                        periode1.push(peopleToAssign[k]);
+                    }
+                    for (var k = staffing; k < staffing * 2 && k < peopleToAssign.length; k++) {
+                        periode2.push(peopleToAssign[k]);
+                    }
+                    for (var k = staffing * 2; k < staffing * 3 && k < peopleToAssign.length; k++) {
+                        periode3.push(peopleToAssign[k]);
+                    }
+
+                    // Si pas assez de personnes, mettre "-"
+                    if (periode1.length === 0) periode1.push('-');
+                    if (periode2.length === 0) periode2.push('-');
+                    if (periode3.length === 0) periode3.push('-');
+                }
+
+                assignments.push({
+                    process: post.process,
+                    staffing: staffing + ' pers',
+                    periode1: periode1.join(', '),
+                    periode2: periode2.join(', '),
+                    periode3: periode3.join(', '),
+                    type: post.type
+                });
+            }
 
             return assignments;
         }
 
-        function generatePlanning() {
-            if (equipe.length === 0) {
-                alert('⚠️ Aucune équipe chargée ! Veuillez d\'abord configurer la Skill Matrix Night Shift.');
-                return;
-            }
+        // ========================================
+        // AFFICHAGE DU PLANNING
+        // ========================================
+        function displayPlanning(assignments) {
+            var planningBody = document.getElementById('planningBody');
+            if (!planningBody) return;
 
-            const planQuotidien = parseInt(document.getElementById('planQuotidien').value) || 0;
-            const backlogPrisma = parseInt(document.getElementById('backlogPrisma').value) || 0;
-            const wipCS = parseInt(document.getElementById('wipCS').value) || 0;
-            const wipVareo = parseInt(document.getElementById('wipVareo').value) || 0;
-            const wipFinalize = parseInt(document.getElementById('wipFinalize').value) || 0;
-            const jour = document.getElementById('jourSemaine').value;
+            planningBody.innerHTML = '';
 
-            if (planQuotidien === 0) {
-                alert('⚠️ Veuillez entrer le plan !');
-                return;
-            }
+            for (var i = 0; i < assignments.length; i++) {
+                var assignment = assignments[i];
 
-            const absents = equipe.filter(p => document.getElementById(`absent_${p}`)?.checked);
+                var tr = document.createElement('tr');
 
-            const { staffing: staffingTotal, details: calculDetails } = calculerStaffingTotal(wipCS, wipVareo, wipFinalize, backlogPrisma, planQuotidien);
-            const { assignments: assignmentsFixe, utilises: utilisesFixe } = assignerPostesFixes(absents);
-
-            const planningComplet = [];
-            let assignmentsPrecedents = { QC: assignmentsFixe.QC };
-
-            periodes.forEach((periode, index) => {
-                const assignments = {};
-                assignments.IJ = assignmentsFixe.IJ;
-                assignments.IX = assignmentsFixe.IX;
-                assignments.PS = assignmentsFixe.PS;
-                assignments.QC = index === 0 ? assignmentsFixe.QC : [];
-
-                const assignmentsRotation = assignerPostesRotation(staffingTotal, absents, utilisesFixe, index + 1, assignmentsPrecedents, planningComplet);
-                Object.assign(assignments, assignmentsRotation);
-
-                planningComplet.push({ periode, staffing: staffingTotal, assignments });
-                assignmentsPrecedents = assignments;
-            });
-
-            currentPlanning = {jour, date: new Date().toLocaleDateString('fr-FR'), planQuotidien, backlogPrisma, wipCS, wipVareo, wipFinalize, absents, planning: planningComplet, staffing: staffingTotal, details: calculDetails};
-
-            updateDashboard(planQuotidien, wipCS, wipVareo, wipFinalize, backlogPrisma, staffingTotal);
-            afficherResultats(planningComplet, absents, planQuotidien, wipCS, wipVareo, wipFinalize, backlogPrisma, staffingTotal, calculDetails);
-        }
-
-        function afficherResultats(planning, absents, plan, wipCS, wipVareo, wipFinalize, backlog, staffingTotal, calculDetails) {
-            document.getElementById('results').style.display = 'block';
-
-            const tableDirect = document.getElementById('planningTableDirect');
-            let htmlDirect = '<thead><tr><th>Process</th><th>Logins</th>';
-            planning.forEach(p => htmlDirect += `<th>${p.periode.nom}<br>${p.periode.debut}-${p.periode.fin}</th>`);
-            htmlDirect += '</tr></thead><tbody>';
-
-            const processesDirect = ['CS', 'Vareo', 'Finalize'];
-            processesDirect.forEach(process => {
-                const logins = calculDetails[process].logins;
-                htmlDirect += `<tr class="process-${process.toLowerCase()}"><td><strong>${process}</strong></td><td><strong>${logins}L</strong></td>`;
-                planning.forEach((p, periodeIdx) => {
-                    const personnes = p.assignments[process] || [];
-                    const personnesHTML = personnes.map((pers, idx) =>
-                        `<span class="login-badge">L${idx + 1}</span><span class="person-cell" onclick="selectPersonForAction('${pers}', '${process}', ${periodeIdx})">${pers}</span>`
-                    ).join(' ');
-                    htmlDirect += `<td onclick="selectCellForAdd('${process}', ${periodeIdx})">${personnesHTML || '-'}</td>`;
-                });
-                htmlDirect += '</tr>';
-            });
-            htmlDirect += '</tbody>';
-            tableDirect.innerHTML = htmlDirect;
-
-            const tableIndirect = document.getElementById('planningTableIndirect');
-            let htmlIndirect = '<thead><tr><th>Task</th><th>Staff</th>';
-            planning.forEach(p => htmlIndirect += `<th>${p.periode.nom}<br>${p.periode.debut}-${p.periode.fin}</th>`);
-            htmlIndirect += '</tr></thead><tbody>';
-
-            const processesIndirect = ['Lamination', 'IX', 'IJ', 'PS', 'QC', 'WS'];
-            processesIndirect.forEach(process => {
-                let rowClass = '';
-                if (['IJ', 'IX', 'PS'].includes(process)) rowClass = 'class="process-fixed"';
-                else if (process === 'QC') rowClass = 'class="process-qc"';
-                else rowClass = 'class="process-' + process.toLowerCase() + '"';
-
-                htmlIndirect += `<tr ${rowClass}><td><strong>${process}</strong></td><td><strong>${staffingTotal[process]}p</strong></td>`;
-                planning.forEach((p, periodeIdx) => {
-                    const personnes = p.assignments[process] || [];
-                    const personnesHTML = personnes.map(pers =>
-                        `<span class="person-cell" onclick="selectPersonForAction('${pers}', '${process}', ${periodeIdx})">${pers}</span>`
-                    ).join(', ');
-                    htmlIndirect += `<td onclick="selectCellForAdd('${process}', ${periodeIdx})">${personnesHTML || '-'}</td>`;
-                });
-                htmlIndirect += '</tr>';
-            });
-            htmlIndirect += '</tbody>';
-            tableIndirect.innerHTML = htmlIndirect;
-
-            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function activateAddMode() {
-            addMode = !addMode;
-            swapMode = false;
-            moveMode = false;
-            deleteMode = false;
-            if (addMode) alert('➕ Mode Ajouter activé !');
-            else alert('❌ Mode désactivé.');
-        }
-
-        function activateDeleteMode() {
-            deleteMode = !deleteMode;
-            swapMode = false;
-            moveMode = false;
-            addMode = false;
-            if (deleteMode) alert('🗑️ Mode Effacer activé !');
-            else alert('❌ Mode désactivé.');
-        }
-
-        function activateSwapMode() {
-            swapMode = !swapMode;
-            moveMode = false;
-            addMode = false;
-            deleteMode = false;
-            if (swapMode) {
-                alert('🔄 Mode Swap activé !');
-                swapSelection = { first: null, second: null };
-            } else {
-                alert('❌ Mode désactivé.');
-                swapSelection = { first: null, second: null };
-                document.querySelectorAll('.person-selected').forEach(el => el.classList.remove('person-selected'));
-            }
-        }
-
-        function activateMoveMode() {
-            moveMode = !moveMode;
-            swapMode = false;
-            addMode = false;
-            deleteMode = false;
-            if (moveMode) {
-                alert('➡️ Mode Déplacer activé !');
-                moveSelection = null;
-            } else {
-                alert('❌ Mode désactivé.');
-                moveSelection = null;
-            }
-        }
-
-        function selectCellForAdd(process, periodeIdx) {
-            if (addMode) {
-                addSelection = { process, periodeIdx };
-                const disponibles = equipe.filter(p => !currentPlanning.absents.includes(p));
-                const select = document.getElementById('personToAdd');
-                select.innerHTML = '<option value="">-- Sélectionnez --</option>';
-                disponibles.forEach(p => {
-                    select.innerHTML += `<option value="${p}">${p}</option>`;
-                });
-                document.getElementById('addInfo').textContent = `Ajouter à ${process} (Période ${periodeIdx + 1})`;
-                document.getElementById('addModal').classList.add('active');
-            }
-        }
-
-        function closeAddModal() {
-            document.getElementById('addModal').classList.remove('active');
-            addSelection = null;
-        }
-
-        function executeAdd() {
-            if (!addSelection) return;
-
-            const personToAdd = document.getElementById('personToAdd').value;
-            if (!personToAdd) {
-                alert('⚠️ Sélectionnez une personne !');
-                return;
-            }
-
-            const planning = currentPlanning.planning;
-            const targetAssignments = planning[addSelection.periodeIdx].assignments[addSelection.process];
-
-            if (!targetAssignments.includes(personToAdd)) {
-                targetAssignments.push(personToAdd);
-                alert(`✅ ${personToAdd} ajouté !`);
-            } else {
-                alert(`⚠️ ${personToAdd} déjà présent !`);
-            }
-
-            closeAddModal();
-            afficherResultats(currentPlanning.planning, currentPlanning.absents, currentPlanning.planQuotidien, currentPlanning.wipCS, currentPlanning.wipVareo, currentPlanning.wipFinalize, currentPlanning.backlogPrisma, currentPlanning.staffing, currentPlanning.details);
-            addMode = false;
-        }
-
-        function selectPersonForAction(personne, process, periodeIdx) {
-            if (deleteMode) {
-                const planning = currentPlanning.planning;
-                const assignments = planning[periodeIdx].assignments[process];
-                const idx = assignments.indexOf(personne);
-                if (idx !== -1) {
-                    assignments.splice(idx, 1);
-                    alert(`✅ ${personne} supprimé !`);
-                    afficherResultats(currentPlanning.planning, currentPlanning.absents, currentPlanning.planQuotidien, currentPlanning.wipCS, currentPlanning.wipVareo, currentPlanning.wipFinalize, currentPlanning.backlogPrisma, currentPlanning.staffing, currentPlanning.details);
-                }
-                deleteMode = false;
-            } else if (swapMode) {
-                selectPersonForSwap(personne, process, periodeIdx);
-            } else if (moveMode) {
-                selectPersonForMove(personne, process, periodeIdx);
-            }
-        }
-
-        function selectPersonForSwap(personne, process, periodeIdx) {
-            if (!swapSelection.first) {
-                swapSelection.first = { personne, process, periodeIdx };
-                event.target.classList.add('person-selected');
-                alert(`✅ 1ère sélection : ${personne}`);
-            } else if (!swapSelection.second) {
-                swapSelection.second = { personne, process, periodeIdx };
-                event.target.classList.add('person-selected');
-
-                const first = swapSelection.first;
-                const second = swapSelection.second;
-
-                const planning = currentPlanning.planning;
-                const firstAssignments = planning[first.periodeIdx].assignments[first.process];
-                const secondAssignments = planning[second.periodeIdx].assignments[second.process];
-
-                const firstIdx = firstAssignments.indexOf(first.personne);
-                const secondIdx = secondAssignments.indexOf(second.personne);
-
-                if (firstIdx !== -1 && secondIdx !== -1) {
-                    firstAssignments[firstIdx] = second.personne;
-                    secondAssignments[secondIdx] = first.personne;
-
-                    alert(`✅ Swap : ${first.personne} ↔️ ${second.personne}`);
-
-                    afficherResultats(currentPlanning.planning, currentPlanning.absents, currentPlanning.planQuotidien, currentPlanning.wipCS, currentPlanning.wipVareo, currentPlanning.wipFinalize, currentPlanning.backlogPrisma, currentPlanning.staffing, currentPlanning.details);
+                // Couleur de fond selon le type
+                if (assignment.type === 'direct') {
+                    tr.style.background = '#e3f2fd';
+                } else {
+                    tr.style.background = '#fff3cd';
                 }
 
-                swapSelection = { first: null, second: null };
-                swapMode = false;
+                var tdProcess = document.createElement('td');
+                tdProcess.textContent = assignment.process;
+                tdProcess.style.fontWeight = 'bold';
+
+                var tdStaffing = document.createElement('td');
+                tdStaffing.textContent = assignment.staffing;
+
+                var tdPeriode1 = document.createElement('td');
+                tdPeriode1.textContent = assignment.periode1;
+
+                var tdPeriode2 = document.createElement('td');
+                tdPeriode2.textContent = assignment.periode2;
+
+                var tdPeriode3 = document.createElement('td');
+                tdPeriode3.textContent = assignment.periode3;
+
+                tr.appendChild(tdProcess);
+                tr.appendChild(tdStaffing);
+                tr.appendChild(tdPeriode1);
+                tr.appendChild(tdPeriode2);
+                tr.appendChild(tdPeriode3);
+
+                planningBody.appendChild(tr);
             }
         }
 
-        function selectPersonForMove(personne, process, periodeIdx) {
-            moveSelection = { personne, process, periodeIdx };
-            document.getElementById('moveInfo').textContent = `Déplacer ${personne} depuis ${process}`;
-            document.getElementById('moveModal').classList.add('active');
-        }
-
-        function closeMoveModal() {
-            document.getElementById('moveModal').classList.remove('active');
-            moveSelection = null;
-        }
-
-        function executeMove() {
-            if (!moveSelection) return;
-
-            const targetProcess = document.getElementById('targetProcess').value;
-            const targetPeriode = parseInt(document.getElementById('targetPeriode').value);
-
-            if (!targetProcess) {
-                alert('⚠️ Sélectionnez un poste !');
-                return;
-            }
-
-            const planning = currentPlanning.planning;
-            const sourceAssignments = planning[moveSelection.periodeIdx].assignments[moveSelection.process];
-            const targetAssignments = planning[targetPeriode].assignments[targetProcess];
-
-            const sourceIdx = sourceAssignments.indexOf(moveSelection.personne);
-            if (sourceIdx !== -1) {
-                sourceAssignments.splice(sourceIdx, 1);
-            }
-
-            if (!targetAssignments.includes(moveSelection.personne)) {
-                targetAssignments.push(moveSelection.personne);
-            }
-
-            alert(`✅ ${moveSelection.personne} déplacé !`);
-
-            closeMoveModal();
-            afficherResultats(currentPlanning.planning, currentPlanning.absents, currentPlanning.planQuotidien, currentPlanning.wipCS, currentPlanning.wipVareo, currentPlanning.wipFinalize, currentPlanning.backlogPrisma, currentPlanning.staffing, currentPlanning.details);
-
-            moveMode = false;
-        }
-
-        function savePlanning() {
-            if (!currentPlanning) {
-                alert('⚠️ Aucun planning à sauvegarder !');
-                return;
-            }
-            weekHistory[currentPlanning.jour] = currentPlanning;
-            localStorage.setItem('weekHistory_night', JSON.stringify(weekHistory));
-            alert(`✅ Planning du ${currentPlanning.jour} sauvegardé !`);
-        }
-
+        // ========================================
+        // RÉINITIALISATION DU FORMULAIRE
+        // ========================================
         function resetForm() {
-            document.getElementById('planQuotidien').value = '';
-            document.getElementById('backlogPrisma').value = '';
-            document.getElementById('wipCS').value = '0';
-            document.getElementById('wipVareo').value = '0';
-            document.getElementById('wipFinalize').value = '0';
-            document.getElementById('livresFinalises').value = '0';
-            document.getElementById('livresPrinted').value = '0';
-            document.getElementById('bufferFinalize').value = '0';
-            document.getElementById('planSOP').value = '';
-            equipe.forEach(personne => {
-                const checkbox = document.getElementById(`absent_${personne}`);
-                if (checkbox) checkbox.checked = false;
-            });
-            document.getElementById('results').style.display = 'none';
-            currentPlanning = null;
-            updateDashboardAAS();
-            updateVolumeFait();
-        }
+            if (confirm('⚠️ Êtes-vous sûr de vouloir réinitialiser toutes les données ?')) {
+                document.getElementById('planSOP').value = '';
+                document.getElementById('volumeFait').value = '';
+                document.getElementById('wipCS').value = '';
+                document.getElementById('wipVareo').value = '';
+                document.getElementById('wipFinalize').value = '';
+                document.getElementById('jour').value = '';
 
-        function exportPDF() {
-            alert('📄 Fonction Export PDF en développement !');
-        }
+                // Décocher toutes les absences
+                var checkboxes = document.querySelectorAll('.absence-item input[type="checkbox"]');
+                for (var i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].checked = false;
+                }
 
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initAll);
-        } else {
-            initAll();
-        }
+                absences = [];
 
-        function initAll() {
-            console.log('Initializing Night Shift staffing...');
+                // Réinitialiser le dashboard
+                var dashboard = document.getElementById('dashboard');
+                if (dashboard) dashboard.innerHTML = '';
 
-            if (!loadSkillMatrix()) {
-                console.error('Skill Matrix not found!');
-                return;
+                // Réinitialiser le planning
+                var planningBody = document.getElementById('planningBody');
+                if (planningBody) planningBody.innerHTML = '';
+
+                // Réinitialiser les printers
+                var printersGrid = document.getElementById('printersGrid');
+                if (printersGrid) printersGrid.innerHTML = '';
+
+                alert('✅ Formulaire réinitialisé !');
             }
-
-            initBWPrinters();
-            initAbsenceGrid();
-            updatePrintersCapacities();
-            updateDashboardAAS();
-            updateVolumeFait();
-            updateTempsEcoule();
-
-            setInterval(updateTempsEcoule, 60000);
-
-            document.getElementById('livresFinalises').addEventListener('input', updateVolumeFait);
-            document.getElementById('livresPrinted').addEventListener('input', updateVolumeFait);
-            document.getElementById('bufferFinalize').addEventListener('input', updateVolumeFait);
-            document.getElementById('planQuotidien').addEventListener('input', updateVolumeFait);
-            document.getElementById('planSOP').addEventListener('input', updateVolumeFait);
-            document.getElementById('ijProduction').addEventListener('input', updatePrintersCapacities);
-            document.getElementById('dashTPH').addEventListener('change', updateResteAFaire);
-
-            console.log('Night Shift staffing initialized!');
         }
     </script>
 </body>

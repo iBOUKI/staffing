@@ -43,6 +43,24 @@
             font-size: 1.5em;
         }
 
+        .instructions {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #FFC000;
+        }
+        .instructions h3 {
+            color: #FFC000;
+            margin-bottom: 10px;
+        }
+        .instructions code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
         .section {
             margin-bottom: 30px;
             padding: 25px;
@@ -152,24 +170,6 @@
         .back-link:hover {
             color: #764ba2;
         }
-
-        .instructions {
-            background: #fff3cd;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            border-left: 5px solid #FFC000;
-        }
-        .instructions h3 {
-            color: #FFC000;
-            margin-bottom: 10px;
-        }
-        .instructions code {
-            background: #f8f9fa;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-        }
     </style>
 </head>
 <body>
@@ -185,11 +185,11 @@
             <div class="instructions">
                 <h3>📝 Comment modifier les noms</h3>
                 <p style="color: #666; margin-top: 10px;">
-                    <strong>1.</strong> Ouvrez ce fichier avec Notepad<br>
-                    <strong>2.</strong> Cherchez (Ctrl+F) : <code>var equipeConfig</code><br>
-                    <strong>3.</strong> Modifiez les noms entre guillemets<br>
-                    <strong>4.</strong> Sauvegardez (Ctrl+S)<br>
-                    <strong>5.</strong> Rechargez la page (F5)
+                    <strong>1.</strong> Téléchargez ce fichier depuis GitHub<br>
+                    <strong>2.</strong> Ouvrez avec Notepad<br>
+                    <strong>3.</strong> Cherchez (Ctrl+F) : <code>&lt;textarea id="skill_CS"&gt;</code><br>
+                    <strong>4.</strong> Modifiez les noms (un par ligne)<br>
+                    <strong>5.</strong> Sauvegardez et re-uploadez sur GitHub
                 </p>
             </div>
 
@@ -205,32 +205,119 @@
                 <div class="skills-grid">
                     <div class="skill-card">
                         <h4>📄 CS (Customer Service)</h4>
-                        <textarea id="skill_CS" oninput="updateCount('CS')"></textarea>
-                        <div class="skill-count" id="count_CS">0 personne(s)</div>
+                        <textarea id="skill_CS" oninput="updateCount('CS')">Mariama
+Sophie
+Zola
+Ba
+Elodie
+Koumba
+Irene
+Ange
+Saidou
+Oussmane
+Abdoul
+Anouar
+Herve
+Diallo</textarea>
+                        <div class="skill-count" id="count_CS">14 personne(s)</div>
                     </div>
 
                     <div class="skill-card">
                         <h4>🔧 Vareo</h4>
-                        <textarea id="skill_Vareo" oninput="updateCount('Vareo')"></textarea>
-                        <div class="skill-count" id="count_Vareo">0 personne(s)</div>
+                        <textarea id="skill_Vareo" oninput="updateCount('Vareo')">Mariama
+Hadari
+Sylla
+Thibaud
+Laurent
+Elodie
+Sophie
+Koumba
+Martine
+Zola
+Saidou
+Shada
+Ba
+Oussmane
+Abdoul
+Irene
+Anouar
+Herve
+Diallo</textarea>
+                        <div class="skill-count" id="count_Vareo">19 personne(s)</div>
                     </div>
 
                     <div class="skill-card">
                         <h4>✅ Finalize</h4>
-                        <textarea id="skill_Finalize" oninput="updateCount('Finalize')"></textarea>
-                        <div class="skill-count" id="count_Finalize">0 personne(s)</div>
+                        <textarea id="skill_Finalize" oninput="updateCount('Finalize')">Mariama
+Hadari
+Sylla
+Thibaud
+Laurent
+Elodie
+Sophie
+Koumba
+Martine
+Zola
+Saidou
+Shada
+Ba
+Oussmane
+Abdoul
+Irene
+Anouar
+Herve
+Diallo</textarea>
+                        <div class="skill-count" id="count_Finalize">19 personne(s)</div>
                     </div>
 
                     <div class="skill-card">
                         <h4>🎨 Lamination</h4>
-                        <textarea id="skill_Lamination" oninput="updateCount('Lamination')"></textarea>
-                        <div class="skill-count" id="count_Lamination">0 personne(s)</div>
+                        <textarea id="skill_Lamination" oninput="updateCount('Lamination')">Mariama
+Hadari
+Sylla
+Thibaud
+Laurent
+Elodie
+Sophie
+Koumba
+Martine
+Zola
+Saidou
+Shada
+Ba
+Oussmane
+Abdoul
+Irene
+Ange
+Anouar
+Herve
+Diallo</textarea>
+                        <div class="skill-count" id="count_Lamination">20 personne(s)</div>
                     </div>
 
                     <div class="skill-card">
                         <h4>📦 WS (Warehouse/Shipping)</h4>
-                        <textarea id="skill_WS" oninput="updateCount('WS')"></textarea>
-                        <div class="skill-count" id="count_WS">0 personne(s)</div>
+                        <textarea id="skill_WS" oninput="updateCount('WS')">Mariama
+Hadari
+Sylla
+Thibaud
+Laurent
+Elodie
+Sophie
+Koumba
+Martine
+Zola
+Saidou
+Shada
+Ba
+Oussmane
+Abdoul
+Irene
+Ange
+Anouar
+Herve
+Diallo</textarea>
+                        <div class="skill-count" id="count_WS">20 personne(s)</div>
                     </div>
                 </div>
             </div>
@@ -242,26 +329,47 @@
                 <div class="skills-grid">
                     <div class="skill-card">
                         <h4>🔵 IX</h4>
-                        <textarea id="skill_IX" oninput="updateCount('IX')"></textarea>
-                        <div class="skill-count" id="count_IX">0 personne(s)</div>
+                        <textarea id="skill_IX" oninput="updateCount('IX')">Mariama
+Sophie
+Martine</textarea>
+                        <div class="skill-count" id="count_IX">3 personne(s)</div>
                     </div>
 
                     <div class="skill-card">
                         <h4>🖨️ IJ (Inkjet)</h4>
-                        <textarea id="skill_IJ" oninput="updateCount('IJ')"></textarea>
-                        <div class="skill-count" id="count_IJ">0 personne(s)</div>
+                        <textarea id="skill_IJ" oninput="updateCount('IJ')">Hadari
+Sylla
+Shada</textarea>
+                        <div class="skill-count" id="count_IJ">3 personne(s)</div>
                     </div>
 
                     <div class="skill-card">
                         <h4>🔧 PS (Problem Solve)</h4>
-                        <textarea id="skill_PS" oninput="updateCount('PS')"></textarea>
-                        <div class="skill-count" id="count_PS">0 personne(s)</div>
+                        <textarea id="skill_PS" oninput="updateCount('PS')">Sophie
+Thibaud
+Laurent</textarea>
+                        <div class="skill-count" id="count_PS">3 personne(s)</div>
                     </div>
 
                     <div class="skill-card">
                         <h4>✔️ QC (Quality Control)</h4>
-                        <textarea id="skill_QC" oninput="updateCount('QC')"></textarea>
-                        <div class="skill-count" id="count_QC">0 personne(s)</div>
+                        <textarea id="skill_QC" oninput="updateCount('QC')">Zola
+Mariama
+Elodie
+Sophie
+Koumba
+Martine
+Saidou
+Shada
+Ba
+Oussmane
+Abdoul
+Irene
+Ange
+Anouar
+Herve
+Diallo</textarea>
+                        <div class="skill-count" id="count_QC">16 personne(s)</div>
                     </div>
                 </div>
             </div>
@@ -274,45 +382,7 @@
     </div>
 
     <script>
-        // ========================================
-        // CONFIGURATION DE L'ÉQUIPE - MODIFIABLE
-        // ========================================
-        var equipeConfig = {
-            CS: ["Mariama", "Hadari", "Sylla", "Thibaud", "Laurent", "Elodie", "Sophie", "Koumba", "Martine", "Zola", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Anouar", "Herve", "Diallo"],
-            Vareo: ["Mariama", "Hadari", "Sylla", "Thibaud", "Laurent", "Elodie", "Sophie", "Koumba", "Martine", "Zola", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Anouar", "Herve", "Diallo"],
-            Finalize: ["Mariama", "Hadari", "Sylla", "Thibaud", "Laurent", "Elodie", "Sophie", "Koumba", "Martine", "Zola", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Anouar", "Herve", "Diallo"],
-            Lamination: ["Mariama", "Hadari", "Sylla", "Thibaud", "Laurent", "Elodie", "Sophie", "Koumba", "Martine", "Zola", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Ange", "Anouar", "Herve", "Diallo"],
-            WS: ["Mariama", "Hadari", "Sylla", "Thibaud", "Laurent", "Elodie", "Sophie", "Koumba", "Martine", "Zola", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Ange", "Anouar", "Herve", "Diallo"],
-            IX: ["Mariama", "Sophie", "Martine"],
-            IJ: ["Hadari", "Sylla", "Shada"],
-            PS: ["Sophie", "Thibaud", "Laurent"],
-            QC: ["Zola", "Mariama", "Elodie", "Sophie", "Koumba", "Martine", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Ange", "Anouar", "Herve", "Diallo"]
-        };
-
         var skills = ['CS', 'Vareo', 'Finalize', 'Lamination', 'WS', 'IX', 'IJ', 'PS', 'QC'];
-
-        // ========================================
-        // CHARGEMENT AUTOMATIQUE AU DÉMARRAGE
-        // ========================================
-        window.onload = function() {
-            loadEquipeConfig();
-        };
-
-        function loadEquipeConfig() {
-            for (var i = 0; i < skills.length; i++) {
-                var skill = skills[i];
-                var textarea = document.getElementById('skill_' + skill);
-                if (!textarea) continue;
-
-                if (equipeConfig[skill] && equipeConfig[skill].length > 0) {
-                    textarea.value = equipeConfig[skill].join('
-');
-                } else {
-                    textarea.value = '';
-                }
-                updateCount(skill);
-            }
-        }
 
         function updateCount(skill) {
             var textarea = document.getElementById('skill_' + skill);
@@ -369,10 +439,16 @@
 
         function resetForm() {
             if (confirm('⚠️ Êtes-vous sûr de vouloir réinitialiser toutes les données ?')) {
-                loadEquipeConfig();
-                alert('✅ Formulaire réinitialisé avec la configuration par défaut !');
+                location.reload();
             }
         }
+
+        // Initialisation au chargement
+        window.onload = function() {
+            for (var i = 0; i < skills.length; i++) {
+                updateCount(skills[i]);
+            }
+        };
     </script>
 </body>
 </html>

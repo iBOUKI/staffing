@@ -1,328 +1,43 @@
-<!INDEX html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staffing Multi-Shift - ORY4 POD </title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
-        .header p { font-size: 1.1em; opacity: 0.9; }
-        .content { padding: 40px; }
+<script>
+    // ============================
+    // Navigation sécurisée
+    // ============================
+    function goToShift(shift) {
+        const allowed = ["night"]; // shifts disponibles aujourd'hui
 
-        .intro {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .intro h2 {
-            color: #667eea;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-        }
-        .intro p {
-            color: #666;
-            font-size: 1.1em;
-            line-height: 1.6;
+        if (!allowed.includes(shift)) {
+            alert("⚠️ Ce shift n'est pas encore disponible.");
+            return;
         }
 
-        .shifts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
+        window.location.href = `staffing_${shift}.html`;
+    }
+
+    function goToSkillMatrix(shift) {
+        const allowed = ["night"]; // skill matrix disponibles aujourd'hui
+
+        if (!allowed.includes(shift)) {
+            alert("⚠️ La Skill Matrix de ce shift n'est pas encore disponible.");
+            return;
         }
 
-        .shift-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-            border: 3px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
+        window.location.href = `skill_matrix_${shift}.html`;
+    }
 
-        .shift-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        }
+    // ============================
+    // Animation d'apparition
+    // ============================
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.shift-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.5s ease';
 
-        .shift-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
-            border-color: #667eea;
-        }
-
-        .shift-card.early::before { background: linear-gradient(90deg, #f093fb 0%, #f5576c 100%); }
-        .shift-card.late::before { background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); }
-        .shift-card.night::before { background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%); }
-        .shift-card.sd::before { background: linear-gradient(90deg, #fa709a 0%, #fee140 100%); }
-        .shift-card.sdn::before { background: linear-gradient(90deg, #30cfd0 0%, #330867 100%); }
-
-        .shift-icon {
-            font-size: 3.5em;
-            margin-bottom: 15px;
-        }
-
-        .shift-name {
-            font-size: 1.6em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .shift-hours {
-            font-size: 1.1em;
-            color: #667eea;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .shift-details {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            text-align: left;
-        }
-
-        .shift-details p {
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .shift-details p strong {
-            color: #333;
-            min-width: 80px;
-        }
-
-        .btn-shift {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 15px;
-            width: 100%;
-        }
-
-        .btn-shift:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .footer {
-            text-align: center;
-            padding: 30px;
-            background: #f8f9fa;
-            color: #666;
-            font-size: 0.9em;
-        }
-
-        .admin-section {
-            margin-top: 40px;
-            padding: 25px;
-            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
-            border-radius: 15px;
-            border-left: 5px solid #FFC000;
-        }
-
-        .admin-section h3 {
-            color: #FFC000;
-            margin-bottom: 15px;
-            font-size: 1.4em;
-        }
-
-        .admin-buttons {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .btn-admin {
-            background: linear-gradient(135deg, #FFC000 0%, #FF8C00 100%);
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 10px;
-            font-size: 0.95em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-admin:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 192, 0, 0.4);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>🌙 Staffing Multi-Shift</h1>
-            <p>ORY4 POD  - Système de planification automatique par shift</p>
-        </div>
-
-        <div class="content">
-            <div class="intro">
-                <h2>Sélectionnez votre shift</h2>
-                <p>Choisissez le shift pour accéder à la skill matrix et au staffing automatique</p>
-            </div>
-
-            <div class="shifts-grid">
-                <!-- EARLY SHIFT -->
-                <div class="shift-card early" onclick="goToShift('early')">
-                    <div class="shift-icon">🌅</div>
-                    <div class="shift-name">EARLY</div>
-                    <div class="shift-hours">5h00 - 13h20</div>
-                    <div class="shift-details">
-                        <p><strong>Durée :</strong> 8h20</p>
-                        <p><strong>Pause :</strong> 9h00-9h30 (30min)</p>
-                        <p><strong>Effectif :</strong> 7h50</p>
-                        <p><strong>Périodes :</strong> 3</p>
-                    </div>
-                    <button class="btn-shift">Accéder au shift</button>
-                </div>
-
-                <!-- LATE SHIFT -->
-                <div class="shift-card late" onclick="goToShift('late')">
-                    <div class="shift-icon">☀️</div>
-                    <div class="shift-name">LATE</div>
-                    <div class="shift-hours">13h20 - 20h50</div>
-                    <div class="shift-details">
-                        <p><strong>Durée :</strong> 7h30</p>
-                        <p><strong>Pause :</strong> 17h00-17h30 (30min)</p>
-                        <p><strong>Effectif :</strong> 7h00</p>
-                        <p><strong>Périodes :</strong> 3</p>
-                    </div>
-                    <button class="btn-shift">Accéder au shift</button>
-                </div>
-
-                <!-- NIGHT SHIFT -->
-                <div class="shift-card night" onclick="goToShift('night')">
-                    <div class="shift-icon">🌙</div>
-                    <div class="shift-name">NIGHT</div>
-                    <div class="shift-hours">21h00 - 5h00</div>
-                    <div class="shift-details">
-                        <p><strong>Durée :</strong> 8h00</p>
-                        <p><strong>Pause :</strong> 23h40-00h10 + 2h40-3h10</p>
-                        <p><strong>Effectif :</strong> 6h50</p>
-                        <p><strong>Périodes :</strong> 3</p>
-                    </div>
-                    <button class="btn-shift">Accéder au shift</button>
-                </div>
-
-                <!-- SD - SATURDAY DAY -->
-                <div class="shift-card sd" onclick="goToShift('sd')">
-                    <div class="shift-icon">📅</div>
-                    <div class="shift-name">SD</div>
-                    <div class="shift-hours">6h35 - 19h35</div>
-                    <div class="shift-details">
-                        <p><strong>Durée :</strong> 13h00</p>
-                        <p><strong>Pauses :</strong> 3 pauses (1h total)</p>
-                        <p><strong>Effectif :</strong> 12h00</p>
-                        <p><strong>Périodes :</strong> 4</p>
-                    </div>
-                    <button class="btn-shift">Accéder au shift</button>
-                </div>
-
-                <!-- SDN - SUNDAY NIGHT -->
-                <div class="shift-card sdn" onclick="goToShift('sdn')">
-                    <div class="shift-icon">🌃</div>
-                    <div class="shift-name">SDN</div>
-                    <div class="shift-hours">20h00 - 6h00</div>
-                    <div class="shift-details">
-                        <p><strong>Durée :</strong> 10h00</p>
-                        <p><strong>Pauses :</strong> 2 pauses (1h total)</p>
-                        <p><strong>Effectif :</strong> 9h00</p>
-                        <p><strong>Périodes :</strong> 3</p>
-                    </div>
-                    <button class="btn-shift">Accéder au shift</button>
-                </div>
-            </div>
-
-            <!-- Admin Section -->
-            <div class="admin-section">
-                <h3>⚙️ Administration</h3>
-                <p style="color: #666; margin-bottom: 15px;">Gérez les skill matrix et les équipes par shift</p>
-                <div class="admin-buttons">
-                    <button class="btn-admin" onclick="goToSkillMatrix('early')">📋 Skill Matrix EARLY</button>
-                    <button class="btn-admin" onclick="goToSkillMatrix('late')">📋 Skill Matrix LATE</button>
-                    <button class="btn-admin" onclick="goToSkillMatrix('night')">📋 Skill Matrix NIGHT</button>
-                    <button class="btn-admin" onclick="goToSkillMatrix('sd')">📋 Skill Matrix SD</button>
-                    <button class="btn-admin" onclick="goToSkillMatrix('sdn')">📋 Skill Matrix SDN</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer">
-            <p>© 2026 ORY4 POD  - Staffing Multi-Shift v1.0 | Développé par Issam</p>
-        </div>
-    </div>
-
-    <script>
-        function goToShift(shift) {
-            window.location.href = `staffing_${shift}.html`;
-        }
-
-        function goToSkillMatrix(shift) {
-            window.location.href = `skill_matrix_${shift}.html`;
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.shift-card');
-            cards.forEach((card, index) => {
-                setTimeout(() => {
-                    card.style.opacity = '0';
-                    card.style.transform = 'translateY(30px)';
-                    card.style.transition = 'all 0.5s ease';
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, 50);
-                }, index * 100);
-            });
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 120);
         });
-    </script>
-</body>
-</html>
+    });
+</script>

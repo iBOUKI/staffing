@@ -1,66 +1,230 @@
 <script>
-/* 1. Données initiales */
-const initialFormations = {
-    CS: ["Mariama", "Sophie", "Zola", "Ba", "Elodie", "Koumba", "Irene", "Ange", "Saidou", "Oussmane", "Abdoul", "Anouar", "Herve", "Diallo"],
-    Vareo: ["Mariama", "Hadari", "Sylla", "Thibaud", "Laurent", "Elodie", "Sophie", "Koumba", "Martine", "Zola", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Anouar", "Herve", "Diallo"],
-    Finalize: ["Mariama", "Hadari", "Sylla", "Thibaud", "Laurent", "Elodie", "Sophie", "Koumba", "Martine", "Zola", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Anouar", "Herve", "Diallo"],
-    Lamination: ["Mariama", "Hadari", "Sylla", "Thibaud", "Laurent", "Elodie", "Sophie", "Koumba", "Martine", "Zola", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Ange", "Anouar", "Herve", "Diallo"],
-    WS: ["Mariama", "Hadari", "Sylla", "Thibaud", "Laurent", "Elodie", "Sophie", "Koumba", "Martine", "Zola", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Ange", "Anouar", "Herve", "Diallo"],
-    IX: ["Mariama", "Sophie", "Martine"],
-    IJ: ["Hadari", "Sylla", "Shada"],
-    PS: ["Sophie", "Thibaud", "Laurent"],
-    QC: ["Zola", "Mariama", "Elodie", "Sophie", "Koumba", "Martine", "Saidou", "Shada", "Ba", "Oussmane", "Abdoul", "Irene", "Ange", "Anouar", "Herve", "Diallo"]
-};
+// ===============================
+// 1. Charger les formations
+// ===============================
+let equipeData = {};
+let absences = [];
+const skills = ["CS","Vareo","Finalize","Lamination","WS","IX","IJ","PS","QC"];
 
-/* 2. Variables globales */
-let formations = {};
-let teamData = [];
-
-/* 3. Charger les formations */
-function loadFormationsFromObject(obj) {
-    formations = JSON.parse(JSON.stringify(obj));
-    teamData = [...new Set(Object.values(formations).flat())];
-    renderAllSkillTextareas();
+function loadFormations() {
+    const saved = localStorage.getItem("formationsNight");
+    if (!saved) {
+        alert("Aucune Skill Matrix trouvée. Retour.");
+        window.location.href = "skill_matrix_night.html";
+        return;
+    }
+    equipeData = JSON.parse(saved);
 }
 
-/* 4. Remplir les textarea + compteurs */
-function renderAllSkillTextareas() {
-    for (const skill in formations) {
-        const textarea = document.getElementById(`skill_${skill}`);
-        const counter = document.getElementById(`count_${skill}`);
+// ===============================
+// 2. Générer la grille des absences
+// ===============================
+function generateAbsenceGrid() {
+    const grid = document.getElementById("absenceGrid");
+    grid.innerHTML = "";
 
-        if (textarea) textarea.value = formations[skill].join("\n");
-        if (counter) counter.textContent = `${formations[skill].length} personne(s)`;
+    let allNames = [...new Set(Object.values(equipeData).flat())].sort();
+
+    allNames.forEach(name => {
+        const div = document.createElement("div");
+        div.className = "absence-item";
+
+        const cb = document.createElement("input");
+        cb.type = "checkbox";
+        cb.id = "abs_" + name;
+        cb.onchange = updateAbsences;
+
+        const label = document.createElement("label");
+        label.textContent = name;
+        label.htmlFor = cb.id;
+
+        div.appendChild(cb);
+        div.appendChild(label);
+        grid.appendChild(div);
+    });
+}
+
+function updateAbsences() {
+    absences = [];
+    document.querySelectorAll(".absence-item input").forEach(cb => {
+        if (cb.checked) absences.push(cb.id.replace("abs_", ""));
+    });
+}
+
+// ===============================
+// 3. Générer les printers
+// ===============================
+function generatePrinters() {
+    const grid = document.getElementById("printersGrid");
+    grid.innerHTML = "";
+
+    for (let i = 1; i <= 11; i++) {
+        const div = document.createElement("div");
+        div.className = "printer-item";
+
+        const label = document.createElement("label");
+        label.textContent = "Printer " + i;
+
+        const select = document.createElement("select");
+        ["OK","KO","Maintenance","Décommissionné"].forEach(opt => {
+            const o = document.createElement("option");
+            o.value = opt;
+            o.textContent = opt;
+            select.appendChild(o);
+        });
+
+        div.appendChild(label);
+        div.appendChild(select);
+        grid.appendChild(div);
     }
 }
 
-/* 5. Quand on modifie un textarea */
-function updateCount(skill) {
-    const textarea = document.getElementById(`skill_${skill}`);
-    const counter = document.getElementById(`count_${skill}`);
-    if (!textarea) return;
+// ===============================
+// 4. Calcul du staffing
+// ===============================
+function calculateStaffing() {
+    const planSOP = +document.getElementById("planSOP").value || 0;
+    const volumeFait = +document.getElementById("volumeFait").value || 0;
+    const wipCS = +document.getElementById("wipCS").value || 0;
+    const wipVareo = +document.getElementById("wipVareo").value || 0;
+    const wipFinalize = +document.getElementById("wipFinalize").value || 0;
 
-    const names = textarea.value
-        .split("\n")
-        .map(n => n.trim())
-        .filter(n => n !== "");
+    const resteAFaire = planSOP - volumeFait;
+    const tempsEffectif = 7.33;
 
-    formations[skill] = names;
-    if (counter) counter.textContent = `${names.length} personne(s)`;
+    const staffCS = Math.max(1, Math.ceil(wipCS / (220 * tempsEffectif)));
+    const staffVareo = Math.max(1, Math.ceil(wipVareo / (350 * tempsEffectif)));
+    const staffFinalize = Math.max(1, Math.ceil(wipFinalize / (345 * tempsEffectif)));
+
+    const staff = {
+        CS: staffCS,
+        Vareo: staffVareo,
+        Finalize: staffFinalize,
+        Lamination: 1,
+        WS: 1,
+        IX: 1,
+        IJ: 2,
+        PS: 1,
+        QC: 1
+    };
+
+    const totalEquipe = [...new Set(Object.values(equipeData).flat())].length;
+    const totalDispo = totalEquipe - absences.length;
+
+    return {
+        staff,
+        resteAFaire,
+        tempsEffectif,
+        totalEquipe,
+        totalDispo,
+        totalAbsences: absences.length,
+        tph: resteAFaire > 0 ? Math.round(resteAFaire / tempsEffectif) : 0
+    };
 }
 
-/* 6. Réinitialiser */
+// ===============================
+// 5. Dashboard
+// ===============================
+function updateDashboard() {
+    const s = calculateStaffing();
+    document.getElementById("dashboard").innerHTML = `
+        <div class="stat-card"><h3>👥 AAS</h3><p>${s.totalDispo}/${s.totalAbsences}</p></div>
+        <div class="stat-card"><h3>📦 RAF</h3><p>${s.resteAFaire}</p></div>
+        <div class="stat-card"><h3>⏱️ TPH</h3><p>${s.tph}</p></div>
+        <div class="stat-card"><h3>🕐 Temps</h3><p>${s.tempsEffectif}h</p></div>
+    `;
+}
+
+// ===============================
+// 6. Assignation automatique
+// ===============================
+function assignPeopleToPosts() {
+    const s = calculateStaffing();
+    const planning = [];
+
+    for (const skill of skills) {
+        const staffing = s.staff[skill] || 0;
+        const available = (equipeData[skill] || []).filter(n => !absences.includes(n));
+
+        let p1 = [], p2 = [], p3 = [];
+
+        if (skill === "QC") {
+            p1 = available.slice(0, staffing);
+            p2 = ["-"];
+            p3 = ["-"];
+        } else {
+            const cycle = [];
+            while (cycle.length < staffing * 3) {
+                cycle.push(...available);
+                if (available.length === 0) break;
+            }
+            p1 = cycle.slice(0, staffing);
+            p2 = cycle.slice(staffing, staffing * 2);
+            p3 = cycle.slice(staffing * 2, staffing * 3);
+        }
+
+        planning.push({
+            process: skill,
+            staffing,
+            p1: p1.join(", ") || "-",
+            p2: p2.join(", ") || "-",
+            p3: p3.join(", ") || "-"
+        });
+    }
+
+    return planning;
+}
+
+// ===============================
+// 7. Affichage du planning
+// ===============================
+function displayPlanning() {
+    const body = document.getElementById("planningBody");
+    body.innerHTML = "";
+
+    assignPeopleToPosts().forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td><b>${row.process}</b></td>
+            <td>${row.staffing}</td>
+            <td>${row.p1}</td>
+            <td>${row.p2}</td>
+            <td>${row.p3}</td>
+        `;
+        body.appendChild(tr);
+    });
+}
+
+// ===============================
+// 8. Génération complète
+// ===============================
+function generatePlanning() {
+    updateAbsences();
+    updateDashboard();
+    generatePrinters();
+    displayPlanning();
+}
+
+// ===============================
+// 9. Reset
+// ===============================
 function resetForm() {
-    loadFormationsFromObject(initialFormations);
+    if (!confirm("Réinitialiser ?")) return;
+
+    document.querySelectorAll("input").forEach(i => i.value = "");
+    document.querySelectorAll(".absence-item input").forEach(cb => cb.checked = false);
+
+    absences = [];
+    document.getElementById("dashboard").innerHTML = "";
+    document.getElementById("planningBody").innerHTML = "";
+    document.getElementById("printersGrid").innerHTML = "";
 }
 
-/* 7. Aller au staffing NIGHT */
-function goToStaffing() {
-    window.location.href = "staffing_night.html";
-}
-
-/* 8. Init */
+// ===============================
+// 10. Init
+// ===============================
 window.onload = () => {
-    loadFormationsFromObject(initialFormations);
+    loadFormations();
+    generateAbsenceGrid();
 };
 </script>

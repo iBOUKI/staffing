@@ -1,4 +1,481 @@
-<script>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staffing Night Shift</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            padding: 20px;
+            min-height: 100vh;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+                        0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .header p {
+            font-size: 1em;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-section {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .input-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-field label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: white;
+            font-size: 0.95em;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-field input {
+            padding: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            font-size: 1em;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .input-field input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+        }
+
+        .absence-section {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .absence-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .absence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .absence-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .absence-item:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .absence-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .absence-item label {
+            cursor: pointer;
+            font-size: 0.95em;
+            color: white;
+            font-weight: 500;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-card h3 {
+            color: white;
+            font-size: 1em;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-card p {
+            font-size: 2em;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .planning-section {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .planning-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .planning-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .planning-table th {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            color: #333;
+            padding: 14px;
+            text-align: left;
+            font-size: 0.95em;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .planning-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9em;
+            color: white;
+            font-weight: 500;
+        }
+
+        .planning-table tr:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .planning-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .printers-section {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .printers-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            font-weight: 600;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .printers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+        }
+
+        .printer-item {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .printer-item:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .printer-item label {
+            font-weight: 600;
+            font-size: 0.95em;
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .printer-item select {
+            padding: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            font-size: 0.9em;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            color: #333;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: white;
+            padding: 14px 35px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 14px;
+            font-size: 1.05em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(240, 147, 251, 0.4);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(240, 147, 251, 0.5);
+        }
+
+        .btn-success {
+            background: rgba(67, 233, 123, 0.4);
+        }
+
+        .btn-success:hover {
+            background: rgba(67, 233, 123, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌙 Staffing Night Shift</h1>
+            <p>Planning automatique | 21h00 - 5h00 | 3 périodes</p>
+        </div>
+
+        <div class="content">
+            <a href="skill_matrix_night.html" class="back-link">← Retour à la Skill Matrix</a>
+
+            <div class="input-section">
+                <h3>📊 Données de Production</h3>
+                <div class="input-grid">
+                    <div class="input-field">
+                        <label>Plan S&OP</label>
+                        <input type="number" id="planSOP" placeholder="Ex: 5884">
+                    </div>
+                    <div class="input-field">
+                        <label>Volume FAIT</label>
+                        <input type="number" id="volumeFait" placeholder="Ex: 2100">
+                    </div>
+                    <div class="input-field">
+                        <label>WIP CS</label>
+                        <input type="number" id="wipCS" placeholder="Ex: 500">
+                    </div>
+                    <div class="input-field">
+                        <label>WIP Vareo</label>
+                        <input type="number" id="wipVareo" placeholder="Ex: 1500">
+                    </div>
+                    <div class="input-field">
+                        <label>WIP Finalize</label>
+                        <input type="number" id="wipFinalize" placeholder="Ex: 700">
+                    </div>
+                    <div class="input-field">
+                        <label>Jour (1-7)</label>
+                        <input type="number" id="jour" min="1" max="7" placeholder="Ex: 3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="absence-section">
+                <h3>⚠️ Gestion des Absences</h3>
+                <div class="absence-grid" id="absenceGrid">
+                    <!-- Généré dynamiquement par JavaScript -->
+                </div>
+            </div>
+
+            <div class="dashboard" id="dashboard">
+                <!-- Généré dynamiquement par JavaScript -->
+            </div>
+
+            <div class="planning-section">
+                <h3>📋 Planning Automatique - 3 Périodes</h3>
+                <table class="planning-table">
+                    <thead>
+                        <tr>
+                            <th>Process</th>
+                            <th>Staffing</th>
+                            <th>Période 1<br>21h00 - 23h30</th>
+                            <th>Période 2<br>00h10 - 02h40</th>
+                            <th>Période 3<br>03h10 - 05h00</th>
+                        </tr>
+                    </thead>
+                    <tbody id="planningBody">
+                        <!-- Généré dynamiquement par JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="printers-section">
+                <h3>🖨️ Printers B&W (11 printers)</h3>
+                <div class="printers-grid" id="printersGrid">
+                    <!-- Généré dynamiquement par JavaScript -->
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button class="btn btn-success" onclick="generatePlanning()">🚀 Générer le Planning</button>
+                <button class="btn btn-secondary" onclick="resetForm()">🔄 Réinitialiser</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
 // ===============================
 // 1. Charger les formations
 // ===============================
@@ -227,4 +704,6 @@ window.onload = () => {
     loadFormations();
     generateAbsenceGrid();
 };
-</script>
+    </script>
+</body>
+</html>

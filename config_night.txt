@@ -1,0 +1,10 @@
+CS:Mariama,Hadari,Sylla,Thibaud,Laurent,Elodie,Ange,Sophie,koumba,Martine, Zola,Saidou,Shada,Ba,Oussmane,Abdoul,Irene,Anouar,Herve,Diallo
+Vareo:Mariama,Hadari,Sylla,Thibaud,Laurent,Elodie,Sophie,koumba,Martine, Zola,Saidou,Shada,Ba,Oussmane,Abdoul,Irene,Anouar,Herve,Diallo
+Finalize:Mariama,Hadari,Sylla,Thibaud,Laurent,Elodie,Ange,Sophie,koumba,Martine, Zola,Saidou,Shada,Ba,Oussmane,Abdoul,Irene,Anouar,Herve,Diallo
+Lamination:Mariama,Hadari,Sylla,Thibaud,Laurent,Elodie,Ange,Sophie,koumba,Martine, Zola,Saidou,Shada,Ba,Oussmane,Abdoul,Irene,Anouar,Herve,Diallo
+WS:Hadari,Sylla,Thibaud,Laurent,Elodie,Ange, Zola,Saidou,Ba,Oussmane,Abdoul,Irene,Anouar,Herve,Diallo
+IX:Mariama,Sophie,Martine, irene, Abdoul, koumba
+IJ:Hadari,Sylla,Shada, ba, laurent
+PS:Sophie,Thibaud,Laurent, shada, ba , martine, kezza, hadari
+QC:Zola,Mariama,Elodie, koumba, sophie
+

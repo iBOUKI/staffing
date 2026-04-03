@@ -1,234 +1,456 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staffing System - Accueil</title>
+    <meta charset="UTF-8" />
+    <title>Staffing Multi-Shift</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-gradient-start: #050816;
+            --bg-gradient-end: #141b3f;
+            --glass-bg: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.25);
+            --glass-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+            --accent-blue: #4ea8ff;
+            --accent-purple: #a855ff;
+            --accent-yellow: #facc15;
+            --accent-red: #f97373;
+            --text-soft: rgba(255, 255, 255, 0.75);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            padding: 20px;
+            margin: 0;
             min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                "Segoe UI", Roboto, sans-serif;
+            background: radial-gradient(circle at top left, #1f2937 0, transparent 50%),
+                        radial-gradient(circle at bottom right, #0f172a 0, transparent 55%),
+                        linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            color: #fff;
+            padding: 32px 16px 40px;
             display: flex;
-            align-items: center;
             justify-content: center;
         }
 
-        .container {
-            max-width: 1200px;
+        .page {
             width: 100%;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(30px) saturate(180%);
-            -webkit-backdrop-filter: blur(30px) saturate(180%);
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
-                        0 0 0 1px rgba(255, 255, 255, 0.3) inset;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 40px;
+            max-width: 1200px;
         }
+
+        /* HEADER */
 
         .header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .header h1 {
-            font-size: 3em;
-            color: white;
-            margin-bottom: 15px;
-            font-weight: 700;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .header p {
-            font-size: 1.2em;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 400;
-        }
-
-        .shifts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .shift-card {
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .shift-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.45);
-        }
-
-        .shift-card h2 {
-            font-size: 1.8em;
-            color: white;
-            margin-bottom: 15px;
-            font-weight: 600;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .shift-card p {
-            font-size: 1em;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .shift-buttons {
             display: flex;
-            gap: 10px;
             flex-direction: column;
+            gap: 8px;
+            margin-bottom: 32px;
         }
 
-        .btn {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 12px 25px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            font-size: 1em;
+        .header-title-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 20%, #ffffff 0, #e5e7eb 20%, #0f172a 80%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            font-size: 20px;
+        }
+
+        .header-title {
+            font-size: 26px;
             font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+
+        .header-subtitle {
+            font-size: 14px;
+            color: var(--text-soft);
+        }
+
+        /* SECTION TITLES */
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            font-size: 13px;
+            color: var(--text-soft);
+            margin-bottom: 20px;
+        }
+
+        /* GRID SHIFTS */
+
+        .shift-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .glass-card {
+            position: relative;
+            padding: 18px 18px 16px;
+            border-radius: 18px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top left,
+                        rgba(255, 255, 255, 0.25),
+                        transparent 55%);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .glass-card-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .shift-label-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .shift-name {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+        }
+
+        .shift-tag {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            color: var(--text-soft);
+        }
+
+        .shift-time {
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: #e5e7eb;
+        }
+
+        .shift-meta {
+            font-size: 12px;
+            color: var(--text-soft);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .shift-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+            color: #0b1120;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.35);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
         }
 
-        .btn:hover {
-            background: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        .shift-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 30px rgba(56, 189, 248, 0.45);
+            filter: brightness(1.05);
         }
 
-        .btn-primary {
-            background: rgba(67, 233, 123, 0.4);
+        .shift-button span.icon {
+            font-size: 14px;
         }
 
-        .btn-primary:hover {
-            background: rgba(67, 233, 123, 0.5);
+        /* ADMIN SECTION */
+
+        .admin-section {
+            margin-top: 10px;
         }
 
-        .btn-secondary {
-            background: rgba(102, 126, 234, 0.4);
+        .admin-card {
+            padding: 18px 18px 16px;
+            border-radius: 18px;
+            background: rgba(250, 204, 21, 0.12);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(250, 204, 21, 0.4);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
         }
 
-        .btn-secondary:hover {
-            background: rgba(102, 126, 234, 0.5);
+        .admin-title-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
         }
+
+        .admin-pill {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(250, 204, 21, 0.7);
+            color: #facc15;
+        }
+
+        .admin-text {
+            font-size: 13px;
+            color: var(--text-soft);
+            margin-bottom: 14px;
+        }
+
+        .admin-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .admin-btn {
+            padding: 7px 14px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            color: #0b1120;
+            background: linear-gradient(135deg, #facc15, #f97316);
+            box-shadow: 0 10px 25px rgba(250, 204, 21, 0.35);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 30px rgba(250, 204, 21, 0.45);
+            filter: brightness(1.05);
+        }
+
+        /* FOOTER */
 
         .footer {
+            margin-top: 28px;
+            font-size: 11px;
+            color: var(--text-soft);
             text-align: center;
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .footer p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.95em;
+        .footer span.brand {
+            color: #e5e7eb;
+            font-weight: 500;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 20px 10px 30px;
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🌟 Staffing System</h1>
-            <p>Gestion automatique du planning par shift</p>
-        </div>
+<div class="page">
 
-        <div class="shifts-grid">
-            <div class="shift-card">
-                <h2>🌙 Night Shift</h2>
-                <p>21h00 - 5h00 | 8 heures | 3 périodes</p>
-                <div class="shift-buttons">
-                    <button class="btn btn-primary" onclick="goToSkillMatrix('night')">📋 Skill Matrix</button>
-                    <button class="btn btn-secondary" onclick="goToShift('night')">🚀 Staffing</button>
-                </div>
-            </div>
-
-            <div class="shift-card">
-                <h2>🌅 Early Shift</h2>
-                <p>5h00 - 13h20 | 8 heures | 3 périodes</p>
-                <div class="shift-buttons">
-                    <button class="btn btn-primary" onclick="goToSkillMatrix('early')">📋 Skill Matrix</button>
-                    <button class="btn btn-secondary" onclick="goToShift('early')">🚀 Staffing</button>
-                </div>
-            </div>
-
-            <div class="shift-card">
-                <h2>☀️ Day Shift</h2>
-                <p>13h20 - 21h00 | 8 heures | 3 périodes</p>
-                <div class="shift-buttons">
-                    <button class="btn btn-primary" onclick="goToSkillMatrix('day')">📋 Skill Matrix</button>
-                    <button class="btn btn-secondary" onclick="goToShift('day')">🚀 Staffing</button>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-title-row">
+            <div class="header-icon">🌙</div>
+            <div>
+                <div class="header-title">Staffing Multi-Shift</div>
+                <div class="header-subtitle">
+                    ORY4 POD – Système de planification automatique par shift
                 </div>
             </div>
         </div>
+    </header>
 
-        <div class="footer">
-            <p>© 2026 Staffing System | Powered by Liquid Glass Design 🍎</p>
+    <!-- SECTION SHIFTS -->
+    <section>
+        <div class="section-title">Sélectionnez votre shift</div>
+        <div class="section-subtitle">
+            Choisissez un shift pour accéder à la Skill Matrix et au staffing automatique.
         </div>
-    </div>
 
-    <script>
-    // ============================
-    // Navigation sécurisée
-    // ============================
+        <div class="shift-grid">
+            <!-- EARLY -->
+            <article class="glass-card">
+                <div class="glass-card-inner">
+                    <div class="shift-label-row">
+                        <div class="shift-name">EARLY</div>
+                        <div class="shift-tag">Production – Matin</div>
+                    </div>
+                    <div class="shift-time">🕒 5h00 – 13h20</div>
+                    <div class="shift-meta">
+                        Durée : 8h20<br />
+                        Pause : 9h00–9h30 (30 min)<br />
+                                            </div>
+                    <button class="shift-button" onclick="goToShift('early')">
+                        <span class="icon">➡️</span>
+                        <span>Accéder au shift</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- LATE -->
+            <article class="glass-card">
+                <div class="glass-card-inner">
+                    <div class="shift-label-row">
+                        <div class="shift-name">LATE</div>
+                        <div class="shift-tag">Production – Après-midi</div>
+                    </div>
+                    <div class="shift-time">🕒 13h20 – 20h50</div>
+                    <div class="shift-meta">
+                        Durée : 7h30<br />
+                        Pause : 17h00–17h30 (30 min)<br />
+                                           </div>
+                    <button class="shift-button" onclick="goToShift('late')">
+                        <span class="icon">➡️</span>
+                        <span>Accéder au shift</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- NIGHT -->
+            <article class="glass-card">
+                <div class="glass-card-inner">
+                    <div class="shift-label-row">
+                        <div class="shift-name">NIGHT</div>
+                        <div class="shift-tag">Production – Nuit</div>
+                    </div>
+                    <div class="shift-time">🕒 21h00 – 5h00</div>
+                    <div class="shift-meta">
+                        Durée : 8h00<br />
+                        Pauses : 23h40–0h10 & 2h40–3h10 (1h total)<br />
+                                           </div>
+                    <button class="shift-button" onclick="goToShift('night')">
+                        <span class="icon">➡️</span>
+                        <span>Accéder au shift</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- SD -->
+            <article class="glass-card">
+                <div class="glass-card-inner">
+                    <div class="shift-label-row">
+                        <div class="shift-name">SD</div>
+                        <div class="shift-tag">SD – Jour</div>
+                    </div>
+                    <div class="shift-time">🕒 6h35 – 19h35</div>
+                    <div class="shift-meta">
+                        Durée : 13h00<br />
+                        Pauses : 3 pauses (1h total)<br />
+                                            </div>
+                    <button class="shift-button" onclick="goToShift('sd')">
+                        <span class="icon">➡️</span>
+                        <span>Accéder au shift</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- SDN -->
+            <article class="glass-card">
+                <div class="glass-card-inner">
+                    <div class="shift-label-row">
+                        <div class="shift-name">SDN</div>
+                        <div class="shift-tag">SD – Nuit</div>
+                    </div>
+                    <div class="shift-time">🕒 20h00 – 6h00</div>
+                    <div class="shift-meta">
+                        Durée : 10h00<br />
+                        Pauses : 23h35–0h05 & 2h35–3h05 (1h total)<br />
+                                           </div>
+                    <button class="shift-button" onclick="goToShift('sdn')">
+                        <span class="icon">➡️</span>
+                        <span>Accéder au shift</span>
+                    </button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ADMINISTRATION -->
+    <section class="admin-section">
+        <div class="admin-card">
+            <div class="admin-title-row">
+                <div class="admin-pill">START HERE </div>
+                <div class="section-title" style="margin: 0;">
+                    Gestion des Skill Matrix & équipes
+                </div>
+            </div>
+            <div class="admin-text">
+                Accédez aux Skill Matrix par shift pour modifier les équipes, les compétences
+                et les configurations de staffing.
+            </div>
+            <div class="admin-buttons">
+                <button class="admin-btn" onclick="goToSkillMatrix('early')">
+                    Skill Matrix EARLY
+                </button>
+                <button class="admin-btn" onclick="goToSkillMatrix('late')">
+                    Skill Matrix LATE
+                </button>
+                <button class="admin-btn" onclick="goToSkillMatrix('night')">
+                    Skill Matrix NIGHT
+                </button>
+                <button class="admin-btn" onclick="goToSkillMatrix('sd')">
+                    Skill Matrix SD
+                </button>
+                <button class="admin-btn" onclick="goToSkillMatrix('sdn')">
+                    Skill Matrix SDN
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        © 2026 <span class="brand">ORY4 POD</span> – Staffing Multi-Shift v1.0 |
+        Développé par Issam BOUKAOUI 
+    </footer>
+
+</div>
+
+<script>
     function goToShift(shift) {
-        const allowed = ["night"]; // shifts disponibles aujourd'hui
-
-        if (!allowed.includes(shift)) {
-            alert("⚠️ Ce shift n'est pas encore disponible.");
-            return;
-        }
-
-        window.location.href = `staffing_${shift}.html`;
+        // Exemple : staffing_night.html, staffing_early.html, etc.
+        window.location.href = "staffing_" + shift + ".html";
     }
 
     function goToSkillMatrix(shift) {
-        const allowed = ["night"]; // skill matrix disponibles aujourd'hui
-
-        if (!allowed.includes(shift)) {
-            alert("⚠️ La Skill Matrix de ce shift n'est pas encore disponible.");
-            return;
-        }
-
-        window.location.href = `skill_matrix_${shift}.html`;
+        // Exemple : skill_matrix_night.html, skill_matrix_early.html, etc.
+        window.location.href = "skill_matrix_" + shift + ".html";
     }
-
-    // ============================
-    // Animation d'apparition
-    // ============================
-    document.addEventListener('DOMContentLoaded', function() {
-        const cards = document.querySelectorAll('.shift-card');
-        cards.forEach((card, index) => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'all 0.5s ease';
-
-            setTimeout(() => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, index * 120);
-        });
-    });
-    </script>
+</script>
 </body>
 </html>

@@ -2,708 +2,391 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <title>Skill Matrix Night – Liquid Glass</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staffing Night Shift</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            padding: 20px;
-            min-height: 100vh;
-            font-size: 14px;
-        }
+<style>
+/* ——————————————————————————————— */
+/* BASE */
+/* ——————————————————————————————— */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:30px;
+    background:radial-gradient(circle at top,#1e293b 0,#020617 55%,#000 100%);
+    color:#e5e7eb;
+    transition:0.4s ease;
+}
 
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(30px) saturate(180%);
-            -webkit-backdrop-filter: blur(30px) saturate(180%);
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
-                        0 0 0 1px rgba(255, 255, 255, 0.3) inset;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
+/* MODE JOUR */
+body.day{
+    background:radial-gradient(circle at top,#e0f2fe 0,#ffffff 60%,#e2e8f0 100%);
+    color:#1e293b;
+}
 
-        .header {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.2) 100%);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        }
+/* ——————————————————————————————— */
+/* LIQUID GLASS */
+/* ——————————————————————————————— */
+.glass-shell{
+    width:100%;
+    max-width:1400px;
+    border-radius:26px;
+    padding:1px;
+    background:linear-gradient(135deg,rgba(148,163,253,.9),rgba(45,212,191,.9));
+    box-shadow:0 24px 80px rgba(15,23,42,.85);
+}
+.glass-inner{
+    border-radius:24px;
+    background:linear-gradient(145deg,rgba(15,23,42,.92),rgba(15,23,42,.75));
+    backdrop-filter:blur(26px) saturate(160%);
+    padding:26px 26px 30px;
+}
+body.day .glass-inner{
+    background:rgba(255,255,255,0.65);
+    color:#1e293b;
+}
 
-        .header h1 {
-            font-size: 2em;
-            margin-bottom: 8px;
-            font-weight: 600;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
+/* ——————————————————————————————— */
+/* HEADER */
+/* ——————————————————————————————— */
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:20px;
+    margin-bottom:24px;
+}
+.header-main h1{
+    font-size:1.9rem;
+    font-weight:650;
+    background:linear-gradient(120deg,#e5e7eb,#a5b4fc,#22c55e);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+.header-main p{
+    margin-top:6px;
+    font-size:.9rem;
+    color:#9ca3af;
+}
 
-        .header p {
-            font-size: 1em;
-            opacity: 0.95;
-            font-weight: 400;
-        }
+/* ——————————————————————————————— */
+/* BOUTON RETOUR */
+/* ——————————————————————————————— */
+.back-link{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 12px;
+    border-radius:999px;
+    border:1px solid rgba(148,163,253,.4);
+    background:linear-gradient(135deg,rgba(15,23,42,.9),rgba(15,23,42,.7));
+    color:#c7d2fe;
+    text-decoration:none;
+    font-size:.85rem;
+    transition:.2s;
+    margin-bottom:15px;
+}
+.back-link:hover{
+    transform:translateY(-1px);
+    box-shadow:0 10px 30px rgba(15,23,42,.8);
+}
 
-        .content {
-            padding: 25px;
-        }
+/* ——————————————————————————————— */
+/* MODE JOUR BOUTON */
+/* ——————————————————————————————— */
+.theme-btn{
+    padding:8px 14px;
+    border-radius:999px;
+    background:linear-gradient(135deg,#facc15,#f97316);
+    border:none;
+    cursor:pointer;
+    font-weight:600;
+    color:#1e293b;
+    margin-bottom:20px;
+}
 
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-        .back-link:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
+/* ——————————————————————————————— */
+/* CHARGEMENT CONFIG */
+/* ——————————————————————————————— */
+.load-options{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:14px;
+    margin-top:12px;
+}
+.subcard{
+    border-radius:16px;
+    padding:14px;
+    background:linear-gradient(145deg,rgba(15,23,42,.96),rgba(15,23,42,.85));
+    border:1px solid rgba(148,163,253,.35);
+}
+body.day .subcard{
+    background:white;
+    border-color:#cbd5e1;
+}
+textarea{
+    width:100%;
+    margin-top:10px;
+    border-radius:14px;
+    border:1px solid rgba(148,163,253,.45);
+    background:rgba(15,23,42,.96);
+    color:#e5e7eb;
+    padding:10px;
+    min-height:120px;
+}
+body.day textarea{
+    background:white;
+    color:#1e293b;
+}
 
-        .input-section {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 25px;
-            border-radius: 18px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
+/* ——————————————————————————————— */
+/* COMPÉTENCES */
+/* ——————————————————————————————— */
+.skills-grid{
+    margin-top:14px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:12px;
+}
+.skill-card{
+    border-radius:16px;
+    padding:12px;
+    background:linear-gradient(145deg,rgba(15,23,42,.96),rgba(15,23,42,.88));
+    border:1px solid rgba(148,163,253,.35);
+}
+body.day .skill-card{
+    background:white;
+    border-color:#cbd5e1;
+}
+.skill-count{
+    margin-top:6px;
+    font-size:.75rem;
+    color:#9ca3af;
+    text-align:right;
+}
 
-        .input-section h3 {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 1.4em;
-            font-weight: 600;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .input-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .input-field {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .input-field label {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: white;
-            font-size: 0.95em;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        .input-field input {
-            padding: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 12px;
-            font-size: 1em;
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
-            color: #333;
-            transition: all 0.3s ease;
-        }
-
-        .input-field input:focus {
-            outline: none;
-            border-color: rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
-        }
-
-        .absence-section {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 25px;
-            border-radius: 18px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .absence-section h3 {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 1.4em;
-            font-weight: 600;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .absence-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 12px;
-        }
-
-        .absence-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .absence-item:hover {
-            background: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-        }
-
-        .absence-item input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            accent-color: #667eea;
-        }
-
-        .absence-item label {
-            cursor: pointer;
-            font-size: 0.95em;
-            color: white;
-            font-weight: 500;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 20px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .stat-card h3 {
-            color: white;
-            font-size: 1em;
-            margin-bottom: 10px;
-            font-weight: 600;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        .stat-card p {
-            font-size: 2em;
-            font-weight: 700;
-            color: white;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .planning-section {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 25px;
-            border-radius: 18px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .planning-section h3 {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 1.4em;
-            font-weight: 600;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .planning-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .planning-table th {
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            color: #333;
-            padding: 14px;
-            text-align: left;
-            font-size: 0.95em;
-            font-weight: 600;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .planning-table td {
-            padding: 12px 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 0.9em;
-            color: white;
-            font-weight: 500;
-        }
-
-        .planning-table tr:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .planning-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .printers-section {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 25px;
-            border-radius: 18px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .printers-section h3 {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 1.4em;
-            font-weight: 600;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .printers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 12px;
-        }
-
-        .printer-item {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .printer-item:hover {
-            background: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-        }
-
-        .printer-item label {
-            font-weight: 600;
-            font-size: 0.95em;
-            color: white;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        .printer-item select {
-            padding: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            font-size: 0.9em;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(5px);
-            color: #333;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            color: white;
-            padding: 14px 35px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 14px;
-            font-size: 1.05em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn:hover {
-            background: rgba(255, 255, 255, 0.5);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-secondary {
-            background: rgba(240, 147, 251, 0.4);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(240, 147, 251, 0.5);
-        }
-
-        .btn-success {
-            background: rgba(67, 233, 123, 0.4);
-        }
-
-        .btn-success:hover {
-            background: rgba(67, 233, 123, 0.5);
-        }
-    </style>
+/* ——————————————————————————————— */
+/* BOUTONS */
+/* ——————————————————————————————— */
+.buttons{
+    margin-top:22px;
+    display:flex;
+    gap:10px;
+    justify-content:flex-end;
+}
+.btn{
+    border:none;
+    border-radius:999px;
+    padding:9px 18px;
+    font-size:.85rem;
+    font-weight:500;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    color:#0b1120;
+    background:linear-gradient(135deg,#a5b4fc,#22c55e);
+}
+.btn-secondary{
+    background:linear-gradient(135deg,#f97316,#fb7185);
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🌙 Staffing Night Shift</h1>
-            <p>Planning automatique | 21h00 - 5h00 | 3 périodes</p>
+
+<div class="glass-shell">
+<div class="glass-inner">
+
+    <div class="header">
+        <div class="header-main">
+            <h1>🌙 Skill Matrix – Night Shift</hh1>
+            <p>Configuration des compétences</p>
         </div>
+    </div>
 
-        <div class="content">
-            <a href="skill_matrix_night.html" class="back-link">← Retour à la Skill Matrix</a>
+    <a href="index.html" class="back-link">← Retour Accueil</a>
+    <button class="theme-btn" onclick="toggleDayMode()">☀️ Mode Jour</button>
 
-            <div class="input-section">
-                <h3>📊 Données de Production</h3>
-                <div class="input-grid">
-                    <div class="input-field">
-                        <label>Plan S&OP</label>
-                        <input type="number" id="planSOP" placeholder="Ex: 5884">
-                    </div>
-                    <div class="input-field">
-                        <label>Volume FAIT</label>
-                        <input type="number" id="volumeFait" placeholder="Ex: 2100">
-                    </div>
-                    <div class="input-field">
-                        <label>WIP CS</label>
-                        <input type="number" id="wipCS" placeholder="Ex: 500">
-                    </div>
-                    <div class="input-field">
-                        <label>WIP Vareo</label>
-                        <input type="number" id="wipVareo" placeholder="Ex: 1500">
-                    </div>
-                    <div class="input-field">
-                        <label>WIP Finalize</label>
-                        <input type="number" id="wipFinalize" placeholder="Ex: 700">
-                    </div>
-                    <div class="input-field">
-                        <label>Jour (1-7)</label>
-                        <input type="number" id="jour" min="1" max="7" placeholder="Ex: 3">
-                    </div>
-                </div>
+    <div class="card">
+        <h3>📁 Charger la configuration</h3>
+
+        <div class="load-options">
+            <div class="subcard">
+                <h4>📋 Copier / Coller</h4>
+                <textarea id="configText"></textarea>
+                <button class="btn" onclick="loadFromText()" style="margin-top:10px;width:100%;">Charger</button>
             </div>
 
-            <div class="absence-section">
-                <h3>⚠️ Gestion des Absences</h3>
-                <div class="absence-grid" id="absenceGrid">
-                    <!-- Généré dynamiquement par JavaScript -->
-                </div>
-            </div>
-
-            <div class="dashboard" id="dashboard">
-                <!-- Généré dynamiquement par JavaScript -->
-            </div>
-
-            <div class="planning-section">
-                <h3>📋 Planning Automatique - 3 Périodes</h3>
-                <table class="planning-table">
-                    <thead>
-                        <tr>
-                            <th>Process</th>
-                            <th>Staffing</th>
-                            <th>Période 1<br>21h00 - 23h30</th>
-                            <th>Période 2<br>00h10 - 02h40</th>
-                            <th>Période 3<br>03h10 - 05h00</th>
-                        </tr>
-                    </thead>
-                    <tbody id="planningBody">
-                        <!-- Généré dynamiquement par JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="printers-section">
-                <h3>🖨️ Printers B&W (11 printers)</h3>
-                <div class="printers-grid" id="printersGrid">
-                    <!-- Généré dynamiquement par JavaScript -->
-                </div>
-            </div>
-
-            <div class="buttons">
-                <button class="btn btn-success" onclick="generatePlanning()">🚀 Générer le Planning</button>
-                <button class="btn btn-secondary" onclick="resetForm()">🔄 Réinitialiser</button>
+            <div class="subcard">
+                <h4>📁 Fichier</h4>
+                <input type="file" id="configFile" accept=".txt" onchange="loadFromFile()">
             </div>
         </div>
     </div>
 
-    <script>
-// ===============================
-// 1. Charger les formations
-// ===============================
-let equipeData = {};
-let absences = [];
-const skills = ["CS","Vareo","Finalize","Lamination","WS","IX","IJ","PS","QC"];
+    <h3 class="section-title">🔧 Compétences</h3>
 
-function loadFormations() {
-    const saved = localStorage.getItem("formationsNight");
-    if (!saved) {
-        alert("Aucune Skill Matrix trouvée. Retour.");
-        window.location.href = "skill_matrix_night.html";
-        return;
-    }
-    equipeData = JSON.parse(saved);
+    <div class="skills-grid">
+        <div class="skill-card">
+            <h4>📄 CS</h4>
+            <textarea id="skill_CS" oninput="updateCount('CS')"></textarea>
+            <div class="skill-count" id="count_CS">0 personne(s)</div>
+        </div>
+
+        <div class="skill-card">
+            <h4>🔧 Vareo</h4>
+            <textarea id="skill_Vareo" oninput="updateCount('Vareo')"></textarea>
+            <div class="skill-count" id="count_Vareo">0 personne(s)</div>
+        </div>
+
+        <div class="skill-card">
+            <h4>✅ Finalize</h4>
+            <textarea id="skill_Finalize" oninput="updateCount('Finalize')"></textarea>
+            <div class="skill-count" id="count_Finalize">0 personne(s)</div>
+        </div>
+
+        <div class="skill-card">
+            <h4>🎨 Lamination</h4>
+            <textarea id="skill_Lamination" oninput="updateCount('Lamination')"></textarea>
+            <div class="skill-count" id="count_Lamination">0 personne(s)</div>
+        </div>
+
+        <div class="skill-card">
+            <h4>📦 WS</h4>
+            <textarea id="skill_WS" oninput="updateCount('WS')"></textarea>
+            <div class="skill-count" id="count_WS">0 personne(s)</div>
+        </div>
+
+        <div class="skill-card">
+            <h4>🔵 IX</h4>
+            <textarea id="skill_IX" oninput="updateCount('IX')"></textarea>
+            <div class="skill-count" id="count_IX">0 personne(s)</div>
+        </div>
+
+        <div class="skill-card">
+            <h4>🖨️ IJ</h4>
+            <textarea id="skill_IJ" oninput="updateCount('IJ')"></textarea>
+            <div class="skill-count" id="count_IJ">0 personne(s)</div>
+        </div>
+
+        <div class="skill-card">
+            <h4>🔧 PS</h4>
+            <textarea id="skill_PS" oninput="updateCount('PS')"></textarea>
+            <div class="skill-count" id="count_PS">0 personne(s)</div>
+        </div>
+
+        <div class="skill-card">
+            <h4>✔️ QC</h4>
+            <textarea id="skill_QC" oninput="updateCount('QC')"></textarea>
+            <div class="skill-count" id="count_QC">0 personne(s)</div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button class="btn" onclick="goToStaffing()">🚀 Aller au staffing nuit</button>
+        <button class="btn btn-secondary" onclick="resetForm()">🔄 Réinitialiser</button>
+    </div>
+
+</div>
+</div>
+
+<script>
+/* MODE JOUR */
+function toggleDayMode(){
+    document.body.classList.toggle("day");
 }
 
-// ===============================
-// 2. Générer la grille des absences
-// ===============================
-function generateAbsenceGrid() {
-    const grid = document.getElementById("absenceGrid");
-    grid.innerHTML = "";
+const skills=['CS','Vareo','Finalize','Lamination','WS','IX','IJ','PS','QC'];
 
-    let allNames = [...new Set(Object.values(equipeData).flat())].sort();
+function updateCount(skill){
+    const ta=document.getElementById('skill_'+skill);
+    const count=document.getElementById('count_'+skill);
+    if(!ta||!count)return;
+    const lines=ta.value.trim().split('\n').filter(l=>l.trim()!=='');
+    count.textContent=lines.length+' personne(s)';
+}
 
-    allNames.forEach(name => {
-        const div = document.createElement("div");
-        div.className = "absence-item";
-
-        const cb = document.createElement("input");
-        cb.type = "checkbox";
-        cb.id = "abs_" + name;
-        cb.onchange = updateAbsences;
-
-        const label = document.createElement("label");
-        label.textContent = name;
-        label.htmlFor = cb.id;
-
-        div.appendChild(cb);
-        div.appendChild(label);
-        grid.appendChild(div);
+function parseConfigData(text){
+    const data={};
+    const lines=text.trim().split('\n');
+    lines.forEach(line=>{
+        line=line.trim();
+        if(!line)return;
+        const parts=line.split(':');
+        if(parts.length!==2)return;
+        const skill=parts[0].trim();
+        const names=parts[1].trim().split(',').map(n=>n.trim()).filter(n=>n!=='');
+        if(skills.includes(skill))data[skill]=names;
     });
+    return data;
 }
 
-function updateAbsences() {
-    absences = [];
-    document.querySelectorAll(".absence-item input").forEach(cb => {
-        if (cb.checked) absences.push(cb.id.replace("abs_", ""));
+function loadDataIntoFields(data){
+    let ok=false;
+    skills.forEach(skill=>{
+        const ta=document.getElementById('skill_'+skill);
+        if(!ta)return;
+        if(data[skill]){
+            ta.value=data[skill].join('\n');
+            ok=true;
+        }else ta.value='';
+        updateCount(skill);
     });
+    return ok;
 }
 
-// ===============================
-// 3. Générer les printers
-// ===============================
-function generatePrinters() {
-    const grid = document.getElementById("printersGrid");
-    grid.innerHTML = "";
-
-    for (let i = 1; i <= 11; i++) {
-        const div = document.createElement("div");
-        div.className = "printer-item";
-
-        const label = document.createElement("label");
-        label.textContent = "Printer " + i;
-
-        const select = document.createElement("select");
-        ["OK","KO","Maintenance","Décommissionné"].forEach(opt => {
-            const o = document.createElement("option");
-            o.value = opt;
-            o.textContent = opt;
-            select.appendChild(o);
-        });
-
-        div.appendChild(label);
-        div.appendChild(select);
-        grid.appendChild(div);
-    }
+function loadFromText(){
+    const text=document.getElementById('configText').value.trim();
+    if(!text)return;
+    const data=parseConfigData(text);
+    loadDataIntoFields(data);
 }
 
-// ===============================
-// 4. Calcul du staffing
-// ===============================
-function calculateStaffing() {
-    const planSOP = +document.getElementById("planSOP").value || 0;
-    const volumeFait = +document.getElementById("volumeFait").value || 0;
-    const wipCS = +document.getElementById("wipCS").value || 0;
-    const wipVareo = +document.getElementById("wipVareo").value || 0;
-    const wipFinalize = +document.getElementById("wipFinalize").value || 0;
-
-    const resteAFaire = planSOP - volumeFait;
-    const tempsEffectif = 7.33;
-
-    const staffCS = Math.max(1, Math.ceil(wipCS / (220 * tempsEffectif)));
-    const staffVareo = Math.max(1, Math.ceil(wipVareo / (350 * tempsEffectif)));
-    const staffFinalize = Math.max(1, Math.ceil(wipFinalize / (345 * tempsEffectif)));
-
-    const staff = {
-        CS: staffCS,
-        Vareo: staffVareo,
-        Finalize: staffFinalize,
-        Lamination: 1,
-        WS: 1,
-        IX: 1,
-        IJ: 2,
-        PS: 1,
-        QC: 1
+function loadFromFile(){
+    const input=document.getElementById('configFile');
+    if(!input.files.length)return;
+    const reader=new FileReader();
+    reader.onload=e=>{
+        const data=parseConfigData(e.target.result);
+        loadDataIntoFields(data);
     };
-
-    const totalEquipe = [...new Set(Object.values(equipeData).flat())].length;
-    const totalDispo = totalEquipe - absences.length;
-
-    return {
-        staff,
-        resteAFaire,
-        tempsEffectif,
-        totalEquipe,
-        totalDispo,
-        totalAbsences: absences.length,
-        tph: resteAFaire > 0 ? Math.round(resteAFaire / tempsEffectif) : 0
-    };
+    reader.readAsText(input.files[0]);
 }
 
-// ===============================
-// 5. Dashboard
-// ===============================
-function updateDashboard() {
-    const s = calculateStaffing();
-    document.getElementById("dashboard").innerHTML = `
-        <div class="stat-card"><h3>👥 AAS</h3><p>${s.totalDispo}/${s.totalAbsences}</p></div>
-        <div class="stat-card"><h3>📦 RAF</h3><p>${s.resteAFaire}</p></div>
-        <div class="stat-card"><h3>⏱️ TPH</h3><p>${s.tph}</p></div>
-        <div class="stat-card"><h3>🕐 Temps</h3><p>${s.tempsEffectif}h</p></div>
-    `;
-}
-
-// ===============================
-// 6. Assignation automatique
-// ===============================
-function assignPeopleToPosts() {
-    const s = calculateStaffing();
-    const planning = [];
-
-    for (const skill of skills) {
-        const staffing = s.staff[skill] || 0;
-        const available = (equipeData[skill] || []).filter(n => !absences.includes(n));
-
-        let p1 = [], p2 = [], p3 = [];
-
-        if (skill === "QC") {
-            p1 = available.slice(0, staffing);
-            p2 = ["-"];
-            p3 = ["-"];
-        } else {
-            const cycle = [];
-            while (cycle.length < staffing * 3) {
-                cycle.push(...available);
-                if (available.length === 0) break;
-            }
-            p1 = cycle.slice(0, staffing);
-            p2 = cycle.slice(staffing, staffing * 2);
-            p3 = cycle.slice(staffing * 2, staffing * 3);
+function goToStaffing(){
+    const payload={};
+    let ok=false;
+    skills.forEach(skill=>{
+        const ta=document.getElementById('skill_'+skill);
+        if(!ta)return;
+        const names=ta.value.trim().split('\n').map(n=>n.trim()).filter(n=>n!=='');
+        if(names.length){
+            payload[skill]=names.join(',');
+            ok=true;
         }
-
-        planning.push({
-            process: skill,
-            staffing,
-            p1: p1.join(", ") || "-",
-            p2: p2.join(", ") || "-",
-            p3: p3.join(", ") || "-"
-        });
-    }
-
-    return planning;
-}
-
-// ===============================
-// 7. Affichage du planning
-// ===============================
-function displayPlanning() {
-    const body = document.getElementById("planningBody");
-    body.innerHTML = "";
-
-    assignPeopleToPosts().forEach(row => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-            <td><b>${row.process}</b></td>
-            <td>${row.staffing}</td>
-            <td>${row.p1}</td>
-            <td>${row.p2}</td>
-            <td>${row.p3}</td>
-        `;
-        body.appendChild(tr);
     });
+    if(!ok)return;
+    const params=Object.keys(payload).map(k=>k+'='+encodeURIComponent(payload[k])).join('&');
+    window.location.href='staffing_night.html?'+params;
 }
 
-// ===============================
-// 8. Génération complète
-// ===============================
-function generatePlanning() {
-    updateAbsences();
-    updateDashboard();
-    generatePrinters();
-    displayPlanning();
+function resetForm(){
+    skills.forEach(skill=>{
+        const ta=document.getElementById('skill_'+skill);
+        if(ta){
+            ta.value='';
+            updateCount(skill);
+        }
+    });
+    document.getElementById('configText').value='';
+    document.getElementById('configFile').value='';
 }
+</script>
 
-// ===============================
-// 9. Reset
-// ===============================
-function resetForm() {
-    if (!confirm("Réinitialiser ?")) return;
-
-    document.querySelectorAll("input").forEach(i => i.value = "");
-    document.querySelectorAll(".absence-item input").forEach(cb => cb.checked = false);
-
-    absences = [];
-    document.getElementById("dashboard").innerHTML = "";
-    document.getElementById("planningBody").innerHTML = "";
-    document.getElementById("printersGrid").innerHTML = "";
-}
-
-// ===============================
-// 10. Init
-// ===============================
-window.onload = () => {
-    loadFormations();
-    generateAbsenceGrid();
-};
-    </script>
 </body>
 </html>

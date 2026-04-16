@@ -1784,23 +1784,19 @@ updateVolumeFait();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    initTheme();
-    loadTeamFromURL();
-
-    // ✅ TEST : Afficher le nombre de personnes chargées
-    setTimeout(() => {
-        alert(`✅ Équipe chargée : ${equipe.length} personnes
-Noms : ${equipe.join(', ')}`);
-        initAbsenceGrid();
-        updateDashboardAAS();
-    }, 500);
-
-    updateVolumeFait();
-    updateTempsEcoule();
-    loadHistory();
-    setInterval(updateTempsEcoule, 60000);
-    document.getElementById('livresFinalises').addEventListener('input', updateVolumeFait);
-    document.getElementById('livresPrinted').addEventListener('input', updateVolumeFait);
-    document.getElementById('bufferFinalize').addEventListener('input', updateVolumeFait);
-    document.getElementById('planQuotidien').addEventListener('input', updateVolumeFait);
+initTheme();
+loadTeamFromURL();
+initAbsenceGrid();
+updateDashboardAAS();
+updateVolumeFait();
+updateTempsEcoule();
+loadHistory();
+setInterval(updateTempsEcoule, 60000);
+document.getElementById('livresFinalises').addEventListener('input', updateVolumeFait);
+document.getElementById('livresPrinted').addEventListener('input', updateVolumeFait);
+document.getElementById('bufferFinalize').addEventListener('input', updateVolumeFait);
+document.getElementById('planQuotidien').addEventListener('input', updateVolumeFait);
 });
+</script>
+</body>
+</html>
